@@ -10,7 +10,7 @@ public class Abonnement {
 	
 
 	
-dgzfbjhhdbzfcjzdf
+
 	
 	//constructeur
 	public Abonnement(int id_abo, Date date_deb, Date date_fin, Client cl, Revue revue) {

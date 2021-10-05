@@ -1,12 +1,10 @@
 package dao.listmemoire;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.AbonnementDAO;
-import dao.mysql.MYSQLAbonnementDAO;
 import modele.metier.Abonnement;
-import modele.metier.Periodicite;
 
 public class ListeMemoireAbonnementDAO implements AbonnementDAO {
 
@@ -23,8 +21,11 @@ private List<Abonnement> donnees;
 	}
 	
 	private ListeMemoireAbonnementDAO() {
-	 this.donnees = new ArrayList<Abonnement>();
+		this.donnees = new ArrayList<Abonnement>();
 	
+		this.donnees.add(new Abonnement(1, null, null, null, null));
+		this.donnees.add(new Abonnement(2, null, null, null, null));
+
 	}
 	
 	

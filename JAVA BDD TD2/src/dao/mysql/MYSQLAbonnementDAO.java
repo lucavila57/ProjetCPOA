@@ -1,9 +1,12 @@
 package dao.mysql;
-
+//verifier getbyid, create update et delete
 import modele.metier.Abonnement;
+import modele.metier.Periodicite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import connexion.Connexion;
@@ -28,21 +31,39 @@ public class MYSQLAbonnementDAO implements AbonnementDAO{
 	@Override
 	public Abonnement getById(int id_abo) throws Exception {
 		// TODO Auto-generated method stub
+		Abonnement abo = null;
+		try {
+			Connection laConnexion = Connexion.creeConnexion();
+			PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
+			requete.setInt(1, id_abo);
+			ResultSet res = requete.executeQuery();
+			if (res.next()) {
+				abo = new Abonnement(res.getInt(1), null, null, null, null);
+			} 
+
+			Connexion.fermeture(laConnexion, requete, res);
+		} catch (SQLException sqle) {
+			System.out.println("pb dans insert" + sqle.getMessage());
+		}
+		return abo;
 		
-		return null;
+		
 	}
 
 	@Override
 	public boolean create(Abonnement objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Periodicite (id) values(?)",
-                Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement req = laConnexion.prepareStatement("insert into Periodicite (libelle) values(?)",
+				Statement.RETURN_GENERATED_KEYS);
 
-        req.setInt(1, objet.getId_abo());
-        int res = req.executeUpdate();
-		
-		return false;
+		req.setInt(1, objet.getId_abo());
+		int res = req.executeUpdate();
+		ResultSet re = req.getGeneratedKeys();
+		if (re.next()) {
+			objet.setId_abo(re.getInt(1));
+		} 
+		return res==1;
 	}
 
 	@Override
@@ -50,22 +71,28 @@ public class MYSQLAbonnementDAO implements AbonnementDAO{
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("update Periodicite set id=?");
-
 	        req.setInt(1, objet.getId_abo());
-	        int res=req.executeUpdate();
-		
-		return false;
+			int res = req.executeUpdate();
+			ResultSet re = req.getGeneratedKeys();
+			if (re.next()) {
+				objet.setId_abo(re.getInt(1));
+			} 
+			return res==1;
+	       
 	}
 
 	@Override
 	public boolean delete(Abonnement objet) throws Exception {
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
-	        PreparedStatement requete = laConnexion.prepareStatement("delete from Periodicite where id=?");
-	            requete.setInt(1, objet.getId_abo());
-	            int res= requete.executeUpdate();
-	
-		return false;
-	}
+	        PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
+	        req.setInt(1, objet.getId_abo());
+			int res = req.executeUpdate();
+			ResultSet re = req.getGeneratedKeys();
+			if (re.next()) {
+				objet.setId_abo(re.getInt(1));
+			} 
+			return res==1;
 
+}
 }

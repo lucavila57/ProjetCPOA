@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import connexion.Connexion;
 import dao.RevueDAO;
@@ -89,6 +90,13 @@ public class MYSQLRevueDAO implements RevueDAO{
 				objet.setId_revue(re.getInt(1));
 			} 
 			return res==1;
+	}
+
+
+	@Override
+	public ArrayList<Revue> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 } 

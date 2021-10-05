@@ -70,20 +70,28 @@ public class MYSQLPeriodiciteDAO implements PeriodiciteDAO {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set libelle=? where libelle=?");
 
-		req.setInt(1, objet.getId());
+		req.setString(1, objet.getLibelle());
 		int res = req.executeUpdate();
-		return false;
+		ResultSet re = req.getGeneratedKeys();
+		if (re.next()) {
+			objet.setId(re.getInt(1));
+		} 
+		return res==1;
 	}
-
+	
 	@Override
 	public boolean delete(Periodicite objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement("delete from Periodicite where id=?");
-		requete.setInt(1, objet.getId());
-		int res = requete.executeUpdate();
-
-		return false;
+		PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
+		req.setString(1, objet.getLibelle());
+		int res = req.executeUpdate();
+		ResultSet re = req.getGeneratedKeys();
+		if (re.next()) {
+			objet.setId(re.getInt(1));
+		} 
+		return res==1;
 	}
-
 }
+
+

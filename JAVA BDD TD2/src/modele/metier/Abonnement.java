@@ -7,7 +7,6 @@ public class Abonnement {
 	private Date date_fin;
 	private Client cl;
 	private Revue revue;
-		
 
 	
 	//constructeur

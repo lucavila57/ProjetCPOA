@@ -35,7 +35,7 @@ private List<Client> donnees;
 	
 	@Override
 	public Client getById(int id) throws Exception {
-		int idx = this.donnees.indexOf(new Client(id, "hugo", null, null, null, null, null, null));
+		int idx = this.donnees.indexOf(new Client(id, null, null, null, null, null, null, null));
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 		} else {

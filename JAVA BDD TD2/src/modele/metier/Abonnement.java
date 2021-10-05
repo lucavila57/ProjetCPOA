@@ -7,11 +7,9 @@ public class Abonnement {
 	private Date date_fin;
 	private Client cl;
 	private Revue revue;
-	
 
 	
 
-	
 	//constructeur
 	public Abonnement(int id_abo, Date date_deb, Date date_fin, Client cl, Revue revue) {
 		super();
@@ -87,5 +85,4 @@ public class Abonnement {
 		return true;
 	}
 
-	
 }

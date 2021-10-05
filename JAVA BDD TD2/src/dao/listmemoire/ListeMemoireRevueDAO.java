@@ -1,4 +1,5 @@
 package dao.listmemoire;
+import modele.metier.Periodicite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,17 @@ public static ListeMemoireRevueDAO Instance;
 
 		this.donnees = new ArrayList<Revue>();
 		
+		this.donnees.add(new Revue(1,"Les miserables", "Livre des miserables", 5, "neuf",null));
+		this.donnees.add(new Revue(2,"Dora", "Livre de Dora l'exploratrice ", 3, "bon etat", null));
+
+		
 	}
 	
 
 	@Override
 	public Revue getById(int id) throws Exception {
 		@SuppressWarnings("null")
-		int idx = this.donnees.indexOf(new Revue(id, "test", null, (Float) null, null, null));
+		int idx = this.donnees.indexOf(new Revue(id, null, null, (Float) null, null, null));
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 		} else {

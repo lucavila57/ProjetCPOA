@@ -91,9 +91,8 @@ public static ClientDAO getInstance() {
 	}
 
 	@Override
-	public List<Client> getByNom() {
+	public List<Client> getByNom(String name) {
 		// TODO Auto-generated method stub
-		// a faire 
 		return null;
 	}
 	

@@ -84,10 +84,14 @@ private List<Client> donnees;
 	}
 
 	@Override
-	public List<Client> getByNom() {
-
-		// TODO Auto-generated method stub
-		return (ArrayList<Client>) this.donnees;
+	public List<Client> getByNom(String name) {
+		@SuppressWarnings("null")
+		int idx = this.donnees.indexOf(new Client((Integer) null, name, null, null, null, null, null, null));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucun objet ne possède ce nom");
+		} else {	
+			return (ArrayList<Client>) this.donnees;
+	}
+	}
 	}
 
-}

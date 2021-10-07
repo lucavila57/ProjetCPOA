@@ -12,6 +12,7 @@ import connexion.Connexion;
 import dao.ClientDAO;
 import modele.metier.Abonnement;
 import modele.metier.Client;
+import modele.metier.Revue;
 
 public class MYSQLClientDAO implements ClientDAO{
 
@@ -65,6 +66,13 @@ public static ClientDAO getInstance() {
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
 			objet.setId_cl(re.getInt(1));
+			objet.setNom(re.getString(2));
+			objet.setPrenom(re.getString(3));
+			objet.setNo_rue(re.getString(4));
+			objet.setVoie(re.getString(5));
+			objet.setCode_postal(re.getString(6));
+			objet.setVille(re.getString(7));
+			objet.setPays(re.getString(8));
 		} 
 		return res==1;
 	}
@@ -87,6 +95,13 @@ public static ClientDAO getInstance() {
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
 				objet.setId_cl(re.getInt(1));
+				objet.setNom(re.getString(2));
+				objet.setPrenom(re.getString(3));
+				objet.setNo_rue(re.getString(4));
+				objet.setVoie(re.getString(5));
+				objet.setCode_postal(re.getString(6));
+				objet.setVille(re.getString(7));
+				objet.setPays(re.getString(8));
 			} 
 			return res==1;
 	}
@@ -106,23 +121,29 @@ public static ClientDAO getInstance() {
 	}
 
 	@Override
-	public List<Client> getByNom(String name) throws Exception{
+	public List<Client> getByNom(Client client) throws Exception{
 		// TODO Auto-generated method stub
 		ArrayList<Client> resultat = new ArrayList<Client>();
+		try {
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("select * from client where nom = ?");
-	    	req.setString(1, name);
+	    	req.setString(1, client.getNom());
 			ResultSet res = req.executeQuery();
 			if (res.next()) {
-				name = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
+				client = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
 			} 
 
 			Connexion.fermeture(laConnexion, req, res);
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
-		return name;
+		return client;
 		
+	}
+	@Override
+	public ArrayList<Client> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

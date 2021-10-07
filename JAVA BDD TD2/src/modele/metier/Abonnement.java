@@ -1,5 +1,6 @@
 package modele.metier;
 import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
 public class Abonnement {
 	private int id_abo;
@@ -13,7 +14,9 @@ public class Abonnement {
 	//constructeur
 	public Abonnement(int id_abo, Date date_deb, Date date_fin, Client cl, Revue revue) {
 		super();
+		
 		this.id_abo = id_abo;
+		
 		this.date_deb = date_deb;
 		this.date_fin = date_fin;
 		this.cl = cl;

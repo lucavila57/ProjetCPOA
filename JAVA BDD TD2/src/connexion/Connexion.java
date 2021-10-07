@@ -6,19 +6,18 @@ public class Connexion {
 
 	public static Connection creeConnexion() {
 
-		String url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/reina7u_java";
-		String login = "reina7u_appli";
-		url += "?serverTimezone=Europe/Paris";
-		String pwd = "32015391";
-		Connection maConnexion = null;
-		try {
-			maConnexion = DriverManager.getConnection(url, login, pwd);
-		} catch (SQLException sqle) {
-			System.out.println("Erreur connexion" + sqle.getMessage());
+			String url = "jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/reina7u_java";
+			String login = "reina7u_appli";
+			url += "?serverTimezone=Europe/Paris";
+			String pwd = "32015391";
+			Connection maConnexion = null;
+			try {
+				maConnexion = DriverManager.getConnection(url, login, pwd);
+			} catch (SQLException sqle) {
+				System.out.println("Erreur connexion" + sqle.getMessage());
+			}
+			return maConnexion;
 		}
-		return maConnexion;
-	}
-
 	public void uneRequete() {
 		try {
 			Connection laConnexion = creeConnexion();

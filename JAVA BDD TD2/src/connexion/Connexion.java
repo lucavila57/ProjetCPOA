@@ -42,9 +42,14 @@ public class Connexion {
 		}
 	}
 
-	public static void fermeture(Connection laConnexion, PreparedStatement req, ResultSet res) {
-		// TODO Auto-generated method stub
+	public static void fermeture(Connection laConnexion, PreparedStatement req, ResultSet res) throws SQLException {
 		
+		if(res != null)
+			res.close();
+		if(req != null)
+			req.close();
+		if(laConnexion != null)
+			laConnexion.close();
 	}
 
 }

@@ -31,11 +31,11 @@ public static ClientDAO getInstance() {
 		Client cl = null;
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
-			PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
+			PreparedStatement requete = laConnexion.prepareStatement("select * from Client where id_client = ? ");
 			requete.setInt(1, id_cl);
 			ResultSet res = requete.executeQuery();
 			if (res.next()) {
-				cl = new Client(res.getInt(1), res.getString(2),  res.getString(3),  res.getString(4),  res.getString(5),  res.getString(6),  res.getString(7),  res.getString(8));
+				cl = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
 			} 
 
 			Connexion.fermeture(laConnexion, requete, res);
@@ -49,10 +49,17 @@ public static ClientDAO getInstance() {
 	public boolean create(Client objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Periodicite (id) values(?)",
+        PreparedStatement req = laConnexion.prepareStatement("insert into Client(id_client,nom,prenom,no_rue,voie,code_postal, ville,pays) values(?,?,?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
         req.setInt(1, objet.getId_cl());
+        req.setString(2, objet.getNom());
+		req.setString(3, objet.getPrenom());
+		req.setString(4, objet.getNo_rue());
+		req.setString(5, objet.getVoie());
+		req.setString(6, objet.getCode_postal());
+		req.setString(7, objet.getVille());
+		req.setString(8, objet.getPays());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
@@ -65,9 +72,16 @@ public static ClientDAO getInstance() {
 	public boolean update(Client objet) throws Exception {
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
-	        PreparedStatement req= laConnexion.prepareStatement("update Periodicite set id=?");
+	        PreparedStatement req= laConnexion.prepareStatement("Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
 
 	        req.setInt(1, objet.getId_cl());
+	        req.setString(2, objet.getNom());
+			req.setString(3, objet.getPrenom());
+			req.setString(4, objet.getNo_rue());
+			req.setString(5, objet.getVoie());
+			req.setString(6, objet.getCode_postal());
+			req.setString(7, objet.getVille());
+			req.setString(8, objet.getPays());
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
@@ -80,7 +94,7 @@ public static ClientDAO getInstance() {
 	public boolean delete(Client objet) throws Exception {
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
-	        PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
+	        PreparedStatement req = laConnexion.prepareStatement("delete from Client where id_client=?");
 	        req.setInt(1, objet.getId_cl());
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();

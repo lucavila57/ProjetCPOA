@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import connexion.Connexion;
@@ -105,9 +106,23 @@ public static ClientDAO getInstance() {
 	}
 
 	@Override
-	public List<Client> getByNom(String name) {
+	public List<Client> getByNom(String name) throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Client> resultat = new ArrayList<Client>();
+		 Connection laConnexion = Connexion.creeConnexion();
+	        PreparedStatement req= laConnexion.prepareStatement("select * from client where nom = ?");
+	    	req.setString(1, name);
+			ResultSet res = req.executeQuery();
+			if (res.next()) {
+				name = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
+			} 
+
+			Connexion.fermeture(laConnexion, req, res);
+		} catch (SQLException sqle) {
+			System.out.println("pb dans insert" + sqle.getMessage());
+		}
+		return name;
+		
 	}
 	
 }

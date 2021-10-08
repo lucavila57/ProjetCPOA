@@ -4,6 +4,9 @@ public class NormalisationVille {
 	
 	public static String NormalVille(String args) {
 		
+		String [] tab = {" lès ", "-lès ", " lès-", " le ", "-le ", " le-",
+						" sous ", "-sous ", " sous-", " sur ", "-sur ", " sur-"," à ", "-à ", " à-",
+						" aux ", "-aux ", " aux-"};
 		String maj = args;
 		if(maj.equalsIgnoreCase(args))
 		{
@@ -11,10 +14,18 @@ public class NormalisationVille {
 		      arr[0] = Character.toUpperCase(arr[0]);
 		  return new String(arr);
 		}
-		else if ((maj.contains("lès")) || (maj.contains("aux") || (maj.contains("le") || (maj.contains("sous") || (maj.contains("sur") || (maj.contains("à") || (maj.contains("la"))))))))
+		
+		
+		for ( int i=0; i<tab.length; i++ ) 
 		{
-			
+			if(maj.contains(tab[i]))
+			{
+		        String mots[] = maj.split(" ");
+		        
+				return null;
+			}
 		}
+			
 		return null;
 	}
 

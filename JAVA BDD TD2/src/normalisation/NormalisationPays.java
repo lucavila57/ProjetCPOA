@@ -22,7 +22,7 @@ public static String NormalPays(String args) {
 		return sui;
 	}
 	else 
-		return args;
+		return arg1;
 	
 }
 }

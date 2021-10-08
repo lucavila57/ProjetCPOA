@@ -1,6 +1,7 @@
 package dao.mysql;
 // verifier getbyid et create update delete 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -137,7 +138,7 @@ public static ClientDAO getInstance() {
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
-		return null;
+		return resultat;
 		
 	}
 	@Override

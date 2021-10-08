@@ -137,7 +137,7 @@ public static ClientDAO getInstance() {
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
-		return client;
+		return null;
 		
 	}
 	@Override

@@ -18,7 +18,7 @@ public class NormalisationCodePostal {
 		{
 			if (args.startsWith(args.substring(0,1)) == args.startsWith(args.substring(0,1).toUpperCase()));
 				{
-			       args.substring(2);
+			       
 				}
 				return args;
 	}

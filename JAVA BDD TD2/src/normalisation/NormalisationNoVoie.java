@@ -2,7 +2,7 @@ package normalisation;
 
 public class NormalisationNoVoie {
 
-	public static String NormalPays(String args) {
+	public static String NormalNum(String args) {
 		
 		String num;
 		String fin;

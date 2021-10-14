@@ -12,14 +12,14 @@ public class NormalNoVoieTest {
 		@Test
 		public void TestNormalNoVoieVirgule() {
 
-			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalPays("3 rue des alouettes"));
+			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3 rue des alouettes"));
 
 		
 	}
 		@Test
 		public void TestNormalNoVoieOk() {
 			
-			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalPays("3, rue des alouettes"));
+			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3, rue des alouettes"));
 
 			
 		}

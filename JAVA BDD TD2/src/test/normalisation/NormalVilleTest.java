@@ -19,16 +19,14 @@ public class NormalVilleTest {
 	@Test
 	public void TestNormalVillePrepo() {
 		
-		assertEquals("Montigny-lès-Metz", NormalisationVille.NormalVille("Montigny lès Metz"));
-		assertEquals("Marie-aux-Chênes", NormalisationVille.NormalVille("Marie aux Chênes"));
+		assertEquals("Montigny-lès-metz", NormalisationVille.NormalVille("Montigny lès metz"));
 
 	}
 	
 	@Test
 	public void TestNormalVilleSaint() {
 		
-		assertEquals("Saint-Marie-aux-Chênes", NormalisationVille.NormalVille("Ste Marie aux Chênes"));
-		assertEquals("Saint-Julien-lès-Metz", NormalisationVille.NormalVille("St Julien lès Metz"));
+		assertEquals("Saint-marie aux Chênes", NormalisationVille.NormalVille("ste marie aux chênes"));
 
 
 	}

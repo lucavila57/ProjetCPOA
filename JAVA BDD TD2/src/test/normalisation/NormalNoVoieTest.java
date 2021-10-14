@@ -9,9 +9,19 @@ import normalisation.*;
 
 public class NormalNoVoieTest {
 	
-	public void TestNormalNoVoie()
-	{
+		@Test
+		public void TestNormalNoVoieVirgule() {
+
+			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalPays("3 rue des alouettes"));
+
 		
 	}
+		@Test
+		public void TestNormalNoVoieOk() {
+			
+			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalPays("3, rue des alouettes"));
+
+			
+		}
 
 }

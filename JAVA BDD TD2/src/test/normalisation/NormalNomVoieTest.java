@@ -12,7 +12,7 @@ public class NormalNomVoieTest {
 	@Test
 	public void TestNormalNomVoieBoulevard() {
 
-		assertEquals("boul Marange", NormalisationNomVoie.NormalNomVoie("boulevard Marange"));
+		assertEquals("boul Marange", NormalisationNomVoie.VoieNormaliseboulevard("boulevard Marange"));
 
 
 
@@ -21,29 +21,26 @@ public class NormalNomVoieTest {
 
 	public void TestNormalNomVoieAvenue() {
 
-		assertEquals("av Marange", NormalisationNomVoie.NormalNomVoie("avenue Marange"));
+		assertEquals("av Marange", NormalisationNomVoie.VoieNormaliseavenue("avenue Marange"));
 
 	
 }
 	
 	public void TestNormalNomVoieFaubourg() {
 
-		assertEquals("fg. Marange", NormalisationNomVoie.NormalNomVoie("faubourg Marange"));
+		assertEquals("fg. Marange", NormalisationNomVoie.VoieNormalisefaubourg("faubourg Marange"));
 
 	
 }
 	
 	public void TestNormalNomVoiePlace() {
 
-		assertEquals("pl. Marange", NormalisationNomVoie.NormalNomVoie("place Marange"));
+		assertEquals("pl. Marange", NormalisationNomVoie.VoieNormaliseplace("place Marange"));
 
 	
 }
 	
-	public void TestNormalNomVoieOk() {
-
-		assertEquals("boulevard Marange", NormalisationNomVoie.NormalNomVoie("boulevard Marange"));
-
 	
-}
+	
+
 	}

@@ -2,29 +2,52 @@ package normalisation;
 
 public class NormalisationNomVoie {
 	
-	public static String  NormalNomVoie(String args) {
-	
-	String [] boul = {"boul ", "boul.", "bd ", "bd." };
-	String [] av  = {"av ", "av."};
-	String [] faub = {"faub.", "faub ", "fg ", "fg."};
-	String [] place = {"pl.", "pl "};
-	String maj = args;
-	String boule;
-	
-	for(int i=0; i<boul.length; i++)
+	public static String VoieNormaliseboulevard(String args)
 	{
-		if(maj.contains(boul[i]))
+		if (args.contains("bd ")|| args.contains(" bd ")|| args.contains("boul ")|| args.contains(" boul ")|| args.contains("boul. ")|| args.contains(" boul. "))
 		{
-			args.replace(boul[i], "boulevard ");
-
-				return args;
-
-
+		args = args.replace("bd ", "boulevard ");
+		args = args.replace(" bd ", " boulevard ");
+		args = args.replace("boul ", "boulevard ");
+		args = args.replace(" boul ", " boulevard ");
+		args = args.replace("boul. ", "boulevard ");
+		args = args.replace(" boul. ", " boulevard ");
+		
 		}
-		else return args;
-	}
-	return args;
-	
-	}
 
+		
+		return args;
+	}
+	
+	public static String VoieNormaliseavenue(String args)
+	{
+		if (args.contains("av. ")|| args.contains(" av. "))
+		{
+		args = args.replace("av. ", "avenue ");
+		args = args.replace(" av. ", " avenue ");
+		}
+		return args;
+	}
+	
+	public static String VoieNormalisefaubourg(String args)
+	{
+		if (args.contains("faub. ")|| args.contains(" faub. ")||args.contains("fg ")|| args.contains(" fg "))
+		{
+		args = args.replace("faub. ", "faubourg ");
+		args = args.replace(" faub. ", " faubourg ");
+		args = args.replace("fg ", "faubourg ");
+		args = args.replace(" fg ", " faubourg ");
+		}
+		return args;
+	}
+	
+	public static String VoieNormaliseplace(String args)
+	{
+		if (args.contains("pl. ")|| args.contains(" pl. "))
+		{
+			args = args.replace("pl. ", "place ");
+			args = args.replace(" pl. ", " place ");
+		}
+		return args;
+	}
 }

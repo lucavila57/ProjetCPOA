@@ -51,26 +51,26 @@ public static ClientDAO getInstance() {
 	public boolean create(Client objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Client(id_client,nom,prenom,no_rue,voie,code_postal, ville,pays) values(?,?,?,?,?,?,?,?)",
+        PreparedStatement req = laConnexion.prepareStatement("insert into Client(id_client,nom,prenom,no_rue,voie,code_postal,ville,pays) values(?,?,?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
-        req.setInt(1, objet.getId_cl());
+        req.setInt(1, objet.getIdCl());
         req.setString(2, objet.getNom());
 		req.setString(3, objet.getPrenom());
-		req.setString(4, objet.getNo_rue());
+		req.setString(4, objet.getNoRue());
 		req.setString(5, objet.getVoie());
-		req.setString(6, objet.getCode_postal());
+		req.setString(6, objet.getCodePostal());
 		req.setString(7, objet.getVille());
 		req.setString(8, objet.getPays());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId_cl(re.getInt(1));
+			objet.setIdCl(re.getInt(1));
 			objet.setNom(re.getString(2));
 			objet.setPrenom(re.getString(3));
-			objet.setNo_rue(re.getString(4));
+			objet.setNoRue(re.getString(4));
 			objet.setVoie(re.getString(5));
-			objet.setCode_postal(re.getString(6));
+			objet.setCodePostal(re.getString(6));
 			objet.setVille(re.getString(7));
 			objet.setPays(re.getString(8));
 		} 
@@ -83,23 +83,23 @@ public static ClientDAO getInstance() {
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
 
-	        req.setInt(1, objet.getId_cl());
+	        req.setInt(1, objet.getIdCl());
 	        req.setString(2, objet.getNom());
 			req.setString(3, objet.getPrenom());
-			req.setString(4, objet.getNo_rue());
+			req.setString(4, objet.getNoRue());
 			req.setString(5, objet.getVoie());
-			req.setString(6, objet.getCode_postal());
+			req.setString(6, objet.getCodePostal());
 			req.setString(7, objet.getVille());
 			req.setString(8, objet.getPays());
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
-				objet.setId_cl(re.getInt(1));
+				objet.setIdCl(re.getInt(1));
 				objet.setNom(re.getString(2));
 				objet.setPrenom(re.getString(3));
-				objet.setNo_rue(re.getString(4));
+				objet.setNoRue(re.getString(4));
 				objet.setVoie(re.getString(5));
-				objet.setCode_postal(re.getString(6));
+				objet.setCodePostal(re.getString(6));
 				objet.setVille(re.getString(7));
 				objet.setPays(re.getString(8));
 			} 
@@ -111,11 +111,11 @@ public static ClientDAO getInstance() {
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req = laConnexion.prepareStatement("delete from Client where id_client=?");
-	        req.setInt(1, objet.getId_cl());
+	        req.setInt(1, objet.getIdCl());
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
-				objet.setId_cl(re.getInt(1));
+				objet.setIdCl(re.getInt(1));
 			} 
 			return res==1;
 	}

@@ -46,11 +46,11 @@ private List<Client> donnees;
 	
 	@Override
 	public boolean create(Client objet) throws Exception {
-		objet.setId_cl(3);
+		objet.setIdCl(3);
 		// Ne fonctionne que si l'objet métier est bien fait...
 		while (this.donnees.contains(objet)) {
 
-			objet.setId_cl(objet.getId_cl() + 1);
+			objet.setIdCl(objet.getIdCl() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 		

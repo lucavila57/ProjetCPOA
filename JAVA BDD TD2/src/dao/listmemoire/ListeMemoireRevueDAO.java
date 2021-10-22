@@ -47,10 +47,10 @@ public static ListeMemoireRevueDAO Instance;
 
 	@Override
 	public boolean create(Revue objet) throws Exception {
-		objet.setId_revue(3);
+		objet.setIdRevue(3);
 		while (this.donnees.contains(objet)) {
 
-			objet.setId_revue(objet.getId_revue() + 1);
+			objet.setIdRevue(objet.getIdRevue() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 		

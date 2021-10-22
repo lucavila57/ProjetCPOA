@@ -53,19 +53,19 @@ public class MYSQLRevueDAO implements RevueDAO{
         PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_numero,visuel) values(?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
-        req.setInt(1, objet.getId_revue());
+        req.setInt(1, objet.getIdRevue());
         req.setString(2, objet.getTitre());
 		req.setString(3, objet.getDescription());
-		req.setDouble(4, objet.getTarif_numero());
+		req.setDouble(4, objet.getTarifNumero());
 		req.setString(5, objet.getVisuel());
 		
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId_revue(re.getInt(1));
+			objet.setIdRevue(re.getInt(1));
 			objet.setTitre(re.getString(2));
 			objet.setDescription(re.getString(3));
-			objet.setTarif_numero(re.getInt(4));
+			objet.setTarifNumero(re.getInt(4));
 			objet.setVisuel(re.getString(5));
 		} 
 		return res==1;
@@ -77,19 +77,19 @@ public class MYSQLRevueDAO implements RevueDAO{
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("Update Revue set titre=?, description=?, tarif_numero=?,visuel=? where id_revue=?");
 
-	        req.setInt(1, objet.getId_revue());
+	        req.setInt(1, objet.getIdRevue());
 	        req.setString(2, objet.getTitre());
 			req.setString(3, objet.getDescription());
-			req.setDouble(4, objet.getTarif_numero());
+			req.setDouble(4, objet.getTarifNumero());
 			req.setString(5, objet.getVisuel());
 			
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
-				objet.setId_revue(re.getInt(1));
+				objet.setIdRevue(re.getInt(1));
 				objet.setTitre(re.getString(2));
 				objet.setDescription(re.getString(3));
-				objet.setTarif_numero(re.getInt(4));
+				objet.setTarifNumero(re.getInt(4));
 				objet.setVisuel(re.getString(5));
 			} 
 			return res==1;
@@ -100,11 +100,11 @@ public class MYSQLRevueDAO implements RevueDAO{
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
 	        PreparedStatement req = laConnexion.prepareStatement("delete from Revue where id_revue=?");
-	        req.setInt(1, objet.getId_revue());
+	        req.setInt(1, objet.getIdRevue());
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
-				objet.setId_revue(re.getInt(1));
+				objet.setIdRevue(re.getInt(1));
 			} 
 			return res==1;
 	}

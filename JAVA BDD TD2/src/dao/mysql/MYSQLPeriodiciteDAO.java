@@ -69,9 +69,9 @@ public class MYSQLPeriodiciteDAO implements PeriodiciteDAO {
 	public boolean update(Periodicite objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set libelle=? where libelle=?");
+		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set id=? where id=?");
 
-		req.setString(1, objet.getLibelle());
+		req.setInt(1, objet.getId());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {

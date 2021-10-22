@@ -1,14 +1,14 @@
 package dao;
 
 import dao.listmemoire.ListeMemoireDAOFactory;
-import dao.mysql.MYSQLFactoryDAO;
+import dao.mysql.MySQLDAOFactory;
 
 public abstract class DAOFactory {
 	public static DAOFactory getDAOFactory(Persistance cible) {
 		DAOFactory daoF = null;
 		switch (cible) {
 		case MYSQL:
-			daoF = new MYSQLFactoryDAO();
+			daoF = new MySQLDAOFactory();
 			break;
 		case LISTE_MEMOIRE:
 			daoF = new ListeMemoireDAOFactory();

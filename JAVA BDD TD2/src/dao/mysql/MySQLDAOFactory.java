@@ -6,7 +6,7 @@ import dao.DAOFactory;
 import dao.PeriodiciteDAO;
 import dao.RevueDAO;
 
-public class MYSQLFactoryDAO extends DAOFactory{
+public class MySQLDAOFactory extends DAOFactory{
 
 	@Override
 	public AbonnementDAO getAbonnementDAO() {

@@ -3,46 +3,51 @@ import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 
 public class Abonnement {
-	private int id_abo;
-	private Date date_deb;
-	private Date date_fin;
+	private int idAbo;
+	private Date dateDeb;
+	private Date dateFin;
 	private Client cl;
 	private Revue revue;
 
 	
 
 	//constructeur
-	public Abonnement(int id_abo, Date date_deb, Date date_fin, Client cl, Revue revue) {
+	public Abonnement(int idAbo, Date dateDeb, Date dateFin, Client cl, Revue revue) {
 		super();
 		
-		this.id_abo = id_abo;
+		this.setIdAbo(idAbo);
 		
-		this.date_deb = date_deb;
-		this.date_fin = date_fin;
-		this.cl = cl;
-		this.revue = revue;
+		this.setDateDeb(dateDeb);
+		this.setDateFin(dateFin);
+		this.setCl(cl);
+		this.setRevue(revue);
 	}
+	//constructeur sans id
+	public Abonnement(Date dateDeb, Date dateFin, Client cl, Revue revue) {
+		this(-1, dateDeb, dateFin, cl, revue);
+	}
+	
 
 	// Getter and Setter
 
 	
-	public int getId_abo() {
-		return id_abo;
+	public int getIdAbo() {
+		return idAbo;
 	}
-	public void setId_abo(int id_abo) {
-		this.id_abo = id_abo;
+	public void setIdAbo(int idAbo) {
+		this.idAbo = idAbo;
 	}
-	public Date getDate_deb() {
-		return date_deb;
+	public Date getDateDeb() {
+		return dateDeb;
 	}
-	public void setDate_deb(Date date_deb) {
-		this.date_deb = date_deb;
+	public void setDateDeb(Date dateDeb) {
+		this.dateDeb = dateDeb;
 	}
-	public Date getDate_fin() {
-		return date_fin;
+	public Date getDateFin() {
+		return dateFin;
 	}
-	public void setDate_fin(Date date_fin) {
-		this.date_fin = date_fin;
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
 	}
 	public Client getCl() {
 		return cl;
@@ -58,18 +63,10 @@ public class Abonnement {
 	}
 	@Override
 	public String toString() {
-		return "Abonnement [id_abo=" + id_abo + ", date_deb=" + date_deb + ", date_fin=" + date_fin + ", cl=" + cl
+		return "Abonnement [idAbo=" + idAbo + ", dateDeb=" + dateDeb + ", dateFin=" + dateFin + ", cl=" + cl
 				+ ", revue=" + revue + "]";
 	}
 	//fin getter setter
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cl == null) ? 0 : cl.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -1,6 +1,8 @@
 package main;
 
 import java.sql.SQLException;
+import java.util.Hashtable;
+
 import dao.mysql.*;
 import dao.*;
 import dao.listmemoire.*;

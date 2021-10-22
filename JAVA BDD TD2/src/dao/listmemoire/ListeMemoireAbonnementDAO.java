@@ -47,9 +47,9 @@ private List<Abonnement> donnees;
 
 	@Override
 	public boolean create(Abonnement objet) throws Exception {
-		objet.setId_abo(3);
+		objet.setIdAbo(3);
 		while (this.donnees.contains(objet)) {
-			objet.setId_abo(objet.getId_abo() + 1);
+			objet.setIdAbo(objet.getIdAbo() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 		return ok;
@@ -77,12 +77,6 @@ private List<Abonnement> donnees;
 			supprime = this.donnees.remove(idx);
 		}
 		return objet.equals(supprime);
-	}
-
-	public ArrayList<Abonnement> findall() {
-		
-		//TODO
-		return (ArrayList<Abonnement>) this.donnees;
 	}
 
 	@Override

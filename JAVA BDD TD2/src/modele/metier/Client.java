@@ -1,36 +1,43 @@
 package modele.metier;
 
 public class Client {
-	private int id_cl;
+	private int idCl;
 	private String nom;
 	private String prenom;
-	private String no_rue;
+	private String noRue;
 	private String voie;
-	private String code_postal;
+	private String codePostal;
 	private String ville;
 	private String pays;
 	
 	
 	//constructeur
-	public Client(int id_cl, String nom, String prenom, String no_rue, String voie, String code_postal, String ville,
+	public Client(int idCl, String nom, String prenom, String noRue, String voie, String codePostal, String ville,
 			String pays) {
 		super();
-		this.id_cl = id_cl;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.no_rue = no_rue;
-		this.voie = voie;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.pays = pays;
+		this.setIdCl(idCl);
+		this.setNom(nom);
+		this.setPrenom(prenom);
+		this.setNoRue(noRue);
+		this.setVoie(voie);
+		this.setCodePostal(codePostal);
+		this.setVille(ville);
+		this.setPays(pays);
 	}
+	
+	//constructeur sans id
+	public Client(String nom, String prenom, String noRue, String voie, String codePostal, String ville,
+			String pays) {
+		this(-1, nom, prenom, noRue, voie, codePostal, ville, pays);
+	}
+	
 
 	//debut getter setter
-	public int getId_cl() {
-		return id_cl;
+	public int getIdCl() {
+		return idCl;
 	}
-	public void setId_cl(int id_cl) {
-		this.id_cl = id_cl;
+	public void setIdCl(int idCl) {
+		this.idCl = idCl;
 	}
 	public String getNom() {
 		return nom;
@@ -44,11 +51,11 @@ public class Client {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getNo_rue() {
-		return no_rue;
+	public String getNoRue() {
+		return noRue;
 	}
-	public void setNo_rue(String no_rue) {
-		this.no_rue = no_rue;
+	public void setNoRue(String noRue) {
+		this.noRue = noRue;
 	}
 	public String getVoie() {
 		return voie;
@@ -56,11 +63,11 @@ public class Client {
 	public void setVoie(String voie) {
 		this.voie = voie;
 	}
-	public String getCode_postal() {
-		return code_postal;
+	public String getCodePostal() {
+		return codePostal;
 	}
-	public void setCode_postal(String code_postal) {
-		this.code_postal = code_postal;
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 	public String getVille() {
 		return ville;
@@ -77,25 +84,10 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [id_cl=" + id_cl + ", nom=" + nom + ", prenom=" + prenom + ", no_rue=" + no_rue + ", voie="
-				+ voie + ", code_postal=" + code_postal + ", ville=" + ville + ", pays=" + pays + "]";
+		return "Client [idCl=" + idCl + ", nom=" + nom + ", prenom=" + prenom + ", noRue=" + noRue + ", voie="
+				+ voie + ", codePostal=" + codePostal + ", ville=" + ville + ", pays=" + pays + "]";
 	}
 	//fin getter setter
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((code_postal == null) ? 0 : code_postal.hashCode());
-		result = prime * result + id_cl;
-		result = prime * result + ((no_rue == null) ? 0 : no_rue.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((pays == null) ? 0 : pays.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
-		result = prime * result + ((voie == null) ? 0 : voie.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -106,7 +98,7 @@ public class Client {
 		if (getClass() != obj.getClass())
 			return false;
 		Client other = (Client) obj;
-		if (id_cl != other.id_cl)
+		if (idCl != other.idCl)
 			return false;
 		
 		return true;

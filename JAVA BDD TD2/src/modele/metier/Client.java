@@ -1,5 +1,8 @@
 package modele.metier;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Client {
 	private int idCl;
 	private String nom;
@@ -34,22 +37,60 @@ public class Client {
 
 	//debut getter setter
 	public int getIdCl() {
+
+
 		return idCl;
 	}
+	
 	public void setIdCl(int idCl) {
 		this.idCl = idCl;
 	}
+	
 	public String getNom() {
 		return nom;
 	}
+	
 	public void setNom(String nom) {
-		this.nom = nom;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherNom = pattern.matcher(this.getNom());
+
+        if(this.getNom()==null) {
+            throw new IllegalArgumentException("Nom ne peut etre null");
+        }
+        else if("".equals(this.getNom())) {
+            throw new IllegalArgumentException("Nom non valide");
+        }
+        else if(!matcherNom.find()) {
+            throw new IllegalArgumentException("Nom non valide");
+        }
+        else {
+            this.nom = nom;
+        }
+		
 	}
+	
+	
 	public String getPrenom() {
 		return prenom;
 	}
+	
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherPrenom = pattern.matcher(this.getPrenom());
+
+        if(this.getPrenom()==null) {
+            throw new IllegalArgumentException("Prenom ne peut etre null");
+        }
+        else if("".equals(this.getPrenom())) {
+            throw new IllegalArgumentException("Prenom non valide");
+        }
+        else if(!matcherPrenom.find()) {
+            throw new IllegalArgumentException("Prenom non valide");
+        }
+        else {
+        	this.prenom = prenom;
+        }
+		
 	}
 	public String getNoRue() {
 		return noRue;
@@ -72,15 +113,44 @@ public class Client {
 	public String getVille() {
 		return ville;
 	}
+	
 	public void setVille(String ville) {
-		this.ville = ville;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherVille = pattern.matcher(this.getVille());
+
+        if(this.getVille()==null) {
+            throw new IllegalArgumentException("Ville ne peut etre null");
+        }
+        else if("".equals(this.getVille())) {
+            throw new IllegalArgumentException("Ville non valide");
+        }
+        else if(!matcherVille.find()) {
+            throw new IllegalArgumentException("Ville non valide");
+        }
+        else {
+            this.ville = ville;
+        }
 	}
+	
 	public String getPays() {
 		return pays;
 	}
 	public void setPays(String pays) {
-		this.pays = pays;
-	}
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherPays = pattern.matcher(this.getPays());
+
+        if(this.getPays()==null) {
+            throw new IllegalArgumentException("Pays ne peut etre null");
+        }
+        else if("".equals(this.getPays())) {
+            throw new IllegalArgumentException("Pays non valide");
+        }
+        else if(!matcherPays.find()) {
+            throw new IllegalArgumentException("Pays non valide");
+        }
+        else {
+            this.pays = pays;
+        }	}
 
 	@Override
 	public String toString() {

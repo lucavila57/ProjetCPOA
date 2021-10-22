@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import connexion.Connexion;
 import dao.RevueDAO;
 import modele.metier.Client;
 import modele.metier.Revue;

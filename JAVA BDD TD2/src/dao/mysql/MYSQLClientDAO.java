@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import connexion.Connexion;
 import dao.ClientDAO;
 import modele.metier.Abonnement;
 import modele.metier.Client;

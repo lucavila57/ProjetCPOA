@@ -3,7 +3,6 @@ package main;
 import java.sql.SQLException;
 import dao.mysql.*;
 import dao.*;
-import connexion.Connexion;
 import dao.listmemoire.*;
 import modele.metier.*;
 

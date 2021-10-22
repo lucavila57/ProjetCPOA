@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import connexion.Connexion;
 import dao.AbonnementDAO;
 
 public class MYSQLAbonnementDAO implements AbonnementDAO {

@@ -14,17 +14,17 @@ import java.util.ArrayList;
 
 import dao.AbonnementDAO;
 
-public class MYSQLAbonnementDAO implements AbonnementDAO {
+public class MySQLDAOAbonnement implements AbonnementDAO {
 
 	public static AbonnementDAO Instance;
 
-	private MYSQLAbonnementDAO() {
+	private MySQLDAOAbonnement() {
 	}
 
 	public static AbonnementDAO getInstance() {
 
 		if (Instance == null) {
-			Instance = new MYSQLAbonnementDAO();
+			Instance = new MySQLDAOAbonnement();
 		}
 		return Instance;
 
@@ -60,16 +60,15 @@ public class MYSQLAbonnementDAO implements AbonnementDAO {
 				Statement.RETURN_GENERATED_KEYS);
 
 		req.setInt(1, objet.getIdAbo());
+		req.setDate(2, java.sql.Date.valueOf(objet.getDateDeb()));
+		req.setDate(3, java.sql.Date.valueOf(objet.getDateFin()));
+		req.setInt(4, objet.getCl().getIdCl());
+		req.setInt(5, objet.getRevue().getIdRevue());
 
-		req.setDate(4, objet.getDateDeb());
-		req.setDate(5, objet.getDateFin());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
 			objet.setIdAbo(re.getInt(1));
-			objet.setDateDeb(re.getDate(4));
-			objet.setDateFin(re.getDate(5));
-
 		}
 		return res == 1;
 	}
@@ -81,14 +80,15 @@ public class MYSQLAbonnementDAO implements AbonnementDAO {
 		PreparedStatement req = laConnexion
 				.prepareStatement("Update Abonnement set id_abo=?, date_deb=?, date_fin=?, id_client=?, id_revue=? where id_abo=?");
 		req.setInt(1, objet.getIdAbo());
-		req.setDate(4, objet.getDateDeb());
-		req.setDate(5, objet.getDateFin());
+		req.setDate(2, java.sql.Date.valueOf(objet.getDateDeb()));
+		req.setDate(3, java.sql.Date.valueOf(objet.getDateFin()));
+		req.setInt(4, objet.getCl().getIdCl());
+		req.setInt(5, objet.getRevue().getIdRevue());
+
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
 			objet.setIdAbo(re.getInt(1));
-			objet.setDateDeb(re.getDate(4));
-			objet.setDateFin(re.getDate(5));
 		}
 		return res == 1;
 

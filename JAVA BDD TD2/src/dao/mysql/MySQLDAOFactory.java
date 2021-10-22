@@ -11,25 +11,25 @@ public class MySQLDAOFactory extends DAOFactory{
 	@Override
 	public AbonnementDAO getAbonnementDAO() {
 		// TODO Auto-generated method stub
-		return MYSQLAbonnementDAO.getInstance();
+		return MySQLDAOAbonnement.getInstance();
 	}
 
 	@Override
 	public ClientDAO getClientDAO() {
 		// TODO Auto-generated method stub
-		return MYSQLClientDAO.getInstance();
+		return MySQLDAOClient.getInstance();
 	}
 
 	@Override
 	public RevueDAO getRevueDAO() {
 		// TODO Auto-generated method stub
-		return MYSQLRevueDAO.getInstance();
+		return MySQLDAORevue.getInstance();
 	}
 
 	@Override
 	public PeriodiciteDAO getPeriodiciteDAO() {
 		// TODO Auto-generated method stub
-		return MYSQLPeriodiciteDAO.getInstance();
+		return MySQLDAOPeriodicite.getInstance();
 	}
 	
 }

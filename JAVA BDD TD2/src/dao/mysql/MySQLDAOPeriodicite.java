@@ -12,17 +12,17 @@ import dao.PeriodiciteDAO;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
 
-public class MYSQLPeriodiciteDAO implements PeriodiciteDAO {
+public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 
 	public static PeriodiciteDAO Instance;
 
-	private MYSQLPeriodiciteDAO() {
+	private MySQLDAOPeriodicite() {
 	}
 
 	public static PeriodiciteDAO getInstance() {
 
 		if (Instance == null) {
-			Instance = new MYSQLPeriodiciteDAO();
+			Instance = new MySQLDAOPeriodicite();
 		}
 		return Instance;
 

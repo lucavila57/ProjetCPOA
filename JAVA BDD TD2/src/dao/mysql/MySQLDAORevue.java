@@ -12,28 +12,28 @@ import dao.RevueDAO;
 import modele.metier.Client;
 import modele.metier.Revue;
 
-public class MYSQLRevueDAO implements RevueDAO{
+public class MySQLDAORevue implements RevueDAO{
 
-	public static MYSQLRevueDAO Instance;
+	public static MySQLDAORevue Instance;
 	
-	private MYSQLRevueDAO() {}
+	private MySQLDAORevue() {}
 
 	
-	public static MYSQLRevueDAO getInstance() {
+	public static MySQLDAORevue getInstance() {
 		
 		if (Instance==null) {
-			Instance = new MYSQLRevueDAO();
+			Instance = new MySQLDAORevue();
 		}
 		return Instance;
 	}
 	@Override
-	public Revue getById(int id_revue) throws Exception {
+	public Revue getById(int idRevue) throws Exception {
 		// TODO Auto-generated method stub
 		Revue rev = null;
 		try {
 			Connection laConnexion = Connexion.creeConnexion();
 			PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
-			requete.setInt(1, id_revue);
+			requete.setInt(1, idRevue);
 			ResultSet res = requete.executeQuery();
 			if (res.next()) {
 				rev = new Revue(res.getInt(1), res.getString(2), res.getString(3),res.getFloat(4),res.getString(5), null);
@@ -50,7 +50,7 @@ public class MYSQLRevueDAO implements RevueDAO{
 	public boolean create(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_numero,visuel) values(?,?,?,?,?)",
+        PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_umero,visuel, periodicite) values(?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
         req.setInt(1, objet.getIdRevue());
@@ -58,15 +58,12 @@ public class MYSQLRevueDAO implements RevueDAO{
 		req.setString(3, objet.getDescription());
 		req.setDouble(4, objet.getTarifNumero());
 		req.setString(5, objet.getVisuel());
+		req.setInt(6, objet.getPerio().getId());
 		
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
 			objet.setIdRevue(re.getInt(1));
-			objet.setTitre(re.getString(2));
-			objet.setDescription(re.getString(3));
-			objet.setTarifNumero(re.getInt(4));
-			objet.setVisuel(re.getString(5));
 		} 
 		return res==1;
 	}
@@ -75,22 +72,19 @@ public class MYSQLRevueDAO implements RevueDAO{
 	public boolean update(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
 		 Connection laConnexion = Connexion.creeConnexion();
-	        PreparedStatement req= laConnexion.prepareStatement("Update Revue set titre=?, description=?, tarif_numero=?,visuel=? where id_revue=?");
+	        PreparedStatement req= laConnexion.prepareStatement("Update Revue set id_revue=?, titre=?, description=?, tarif_numero=?,visuel=?, periodicite=? where id_revue=?");
 
 	        req.setInt(1, objet.getIdRevue());
 	        req.setString(2, objet.getTitre());
 			req.setString(3, objet.getDescription());
 			req.setDouble(4, objet.getTarifNumero());
 			req.setString(5, objet.getVisuel());
+			req.setInt(6, objet.getPerio().getId());
 			
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();
 			if (re.next()) {
 				objet.setIdRevue(re.getInt(1));
-				objet.setTitre(re.getString(2));
-				objet.setDescription(re.getString(3));
-				objet.setTarifNumero(re.getInt(4));
-				objet.setVisuel(re.getString(5));
 			} 
 			return res==1;
 	}

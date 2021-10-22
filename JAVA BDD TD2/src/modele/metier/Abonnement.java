@@ -1,30 +1,29 @@
 package modele.metier;
-import java.sql.Date;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Abonnement {
 	private int idAbo;
-	private Date dateDeb;
-	private Date dateFin;
-	private Client cl;
-	private Revue revue;
+	private LocalDate dateDeb;
+	private LocalDate dateFin;
+	private Client Cl;
+	private Revue Revue;
 
 	
 
 	//constructeur
-	public Abonnement(int idAbo, Date dateDeb, Date dateFin, Client cl, Revue revue) {
+	public Abonnement(int idAbo, LocalDate dateDeb, LocalDate dateFin, Client Cl, Revue Revue) {
 		super();
 		
 		this.setIdAbo(idAbo);
 		
 		this.setDateDeb(dateDeb);
 		this.setDateFin(dateFin);
-		this.setCl(cl);
-		this.setRevue(revue);
+		this.setCl(Cl);
+		this.setRevue(Revue);
 	}
 	//constructeur sans id
-	public Abonnement(Date dateDeb, Date dateFin, Client cl, Revue revue) {
-		this(-1, dateDeb, dateFin, cl, revue);
+	public Abonnement(LocalDate dateDeb, LocalDate dateFin, Client Cl, Revue Revue) {
+		this(-1, dateDeb, dateFin, Cl, Revue);
 	}
 	
 
@@ -37,37 +36,38 @@ public class Abonnement {
 	public void setIdAbo(int idAbo) {
 		this.idAbo = idAbo;
 	}
-	public Date getDateDeb() {
+	public LocalDate getDateDeb() {
 		return dateDeb;
 	}
-	public void setDateDeb(Date dateDeb) {
+	public void setDateDeb(LocalDate dateDeb) {
 		this.dateDeb = dateDeb;
 	}
-	public Date getDateFin() {
+	public LocalDate getDateFin() {
 		return dateFin;
 	}
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
 	}
 	public Client getCl() {
-		return cl;
+		return Cl;
 	}
 	public void setCl(Client cl) {
-		this.cl = cl;
+		this.Cl = cl;
 	}
 	public Revue getRevue() {
-		return revue;
+		return Revue;
 	}
-	public void setRevue(Revue revue) {
-		this.revue = revue;
+	public void setRevue(Revue Revue) {
+		this.Revue = Revue;
 	}
 	@Override
 	public String toString() {
-		return "Abonnement [idAbo=" + idAbo + ", dateDeb=" + dateDeb + ", dateFin=" + dateFin + ", cl=" + cl
-				+ ", revue=" + revue + "]";
+		return "Abonnement [idAbo=" + idAbo + ", dateDeb=" + dateDeb + ", dateFin=" + dateFin + ", Cl=" + Cl
+				+ ", Revue=" + Revue + "]";
 	}
 	//fin getter setter
-
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -77,12 +77,33 @@ public class Abonnement {
 		if (getClass() != obj.getClass())
 			return false;
 		Abonnement other = (Abonnement) obj;
-		if (cl == null) {
-			if (other.cl != null)
+		if (Cl == null) {
+			if (other.Cl != null)
 				return false;
-		} else if (!cl.equals(other.cl))
+		} else if (!Cl.equals(other.Cl))
+			return false;
+		if (Revue == null) {
+			if (other.Revue != null)
+				return false;
+		} else if (!Revue.equals(other.Revue))
+			return false;
+		if (dateDeb == null) {
+			if (other.dateDeb != null)
+				return false;
+		} else if (!dateDeb.equals(other.dateDeb))
+			return false;
+		if (dateFin == null) {
+			if (other.dateFin != null)
+				return false;
+		} else if (!dateFin.equals(other.dateFin))
+			return false;
+		if (idAbo != other.idAbo)
 			return false;
 		return true;
 	}
+	
+	
+
+
 
 }

@@ -41,17 +41,17 @@ public class Main {
 	Connexion.creeConnexion();
 	System.out.println("Voici la liste des Periodicites du MY SQL : ");
 	Periodicite perio3 = new Periodicite(1,"Mensuelle");
-	MYSQLPeriodiciteDAO.getInstance().create(perio3);
-	System.out.println(MYSQLPeriodiciteDAO.getInstance().getById(1));
+	MySQLDAOPeriodicite.getInstance().create(perio3);
+	System.out.println(MySQLDAOPeriodicite.getInstance().getById(1));
 
 	
 	System.out.println("Je modifie un objet periodicite et je l'affiche : ");
 	Periodicite perio4 = new Periodicite(1,"Tous les jours");
-	MYSQLPeriodiciteDAO.getInstance().update(perio4);
-	System.out.println(MYSQLPeriodiciteDAO.getInstance().getById(1));
+	MySQLDAOPeriodicite.getInstance().update(perio4);
+	System.out.println(MySQLDAOPeriodicite.getInstance().getById(1));
 
 	System.out.println("Je supprime un objet periodicite : ");
-	MYSQLPeriodiciteDAO.getInstance().delete(perio4);
+	MySQLDAOPeriodicite.getInstance().delete(perio4);
 	//System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(3));//affiche une erreur car l'id 3 est supprimer
 	System.out.println("Aucun objet ne possede l'ID 3 donc l'objet a bien etait supprime  ");
 

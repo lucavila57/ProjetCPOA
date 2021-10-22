@@ -14,16 +14,16 @@ import modele.metier.Abonnement;
 import modele.metier.Client;
 import modele.metier.Revue;
 
-public class MYSQLClientDAO implements ClientDAO{
+public class MySQLDAOClient implements ClientDAO{
 
 	public static ClientDAO Instance;
 
-	private MYSQLClientDAO() {}
+	private MySQLDAOClient() {}
 	
 public static ClientDAO getInstance() {
 		
 		if(Instance==null) {
-			Instance = new MYSQLClientDAO();
+			Instance = new MySQLDAOClient();
 		}
 		return Instance;
 		

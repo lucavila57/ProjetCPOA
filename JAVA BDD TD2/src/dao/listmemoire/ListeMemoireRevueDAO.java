@@ -27,8 +27,8 @@ public static ListeMemoireRevueDAO Instance;
 
 		this.donnees = new ArrayList<Revue>();
 		
-		this.donnees.add(new Revue(1,"Les miserables", "Livre des miserables", 5, "neuf",null));
-		this.donnees.add(new Revue(2,"Dora", "Livre de Dora l'exploratrice ", 3, "bon etat", null));
+		this.donnees.add(new Revue(1,"Les miserables", "Livre des miserables", 5, "neuf",0));
+		this.donnees.add(new Revue(2,"Dora", "Livre de Dora l'exploratrice ", 3, "bon etat", 0));
 
 		
 	}
@@ -37,7 +37,7 @@ public static ListeMemoireRevueDAO Instance;
 	@Override
 	public Revue getById(int id) throws Exception {
 		@SuppressWarnings("null")
-		int idx = this.donnees.indexOf(new Revue(id, null, null, (Float) null, null, null));
+		int idx = this.donnees.indexOf(new Revue(id, "Test", "Test",  0, "Test", 0));
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 		} else {

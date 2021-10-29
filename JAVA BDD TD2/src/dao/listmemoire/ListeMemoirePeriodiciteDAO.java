@@ -35,10 +35,10 @@ public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 	@Override
 	public boolean create(Periodicite objet) {
 
-		objet.setId(3);
+		objet.setId_Perio(3);
 		while (this.donnees.contains(objet)) {
 
-			objet.setId(objet.getId() + 1);
+			objet.setId_Perio(objet.getId_Perio() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 		

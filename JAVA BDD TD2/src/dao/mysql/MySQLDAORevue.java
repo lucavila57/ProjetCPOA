@@ -2,6 +2,7 @@ package dao.mysql;
 //verifier getbyid , create update et delete 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.RevueDAO;
-import modele.metier.Client;
+import modele.metier.Periodicite;
 import modele.metier.Revue;
 
 public class MySQLDAORevue implements RevueDAO{
@@ -36,7 +37,7 @@ public class MySQLDAORevue implements RevueDAO{
 			requete.setInt(1, idRevue);
 			ResultSet res = requete.executeQuery();
 			if (res.next()) {
-				rev = new Revue(res.getInt(1), res.getString(2), res.getString(3),res.getFloat(4),res.getString(5), null);
+				rev = new Revue(idRevue, res.getString(2), res.getString(3),res.getDouble(4),res.getString(5), res.getInt(6));
 			} 
 
 			Connexion.fermeture(laConnexion, requete, res);
@@ -50,7 +51,7 @@ public class MySQLDAORevue implements RevueDAO{
 	public boolean create(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_umero,visuel, periodicite) values(?,?,?,?,?,?)",
+        PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_numero,visuel, periodicite) values(?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
         req.setInt(1, objet.getIdRevue());
@@ -58,7 +59,7 @@ public class MySQLDAORevue implements RevueDAO{
 		req.setString(3, objet.getDescription());
 		req.setDouble(4, objet.getTarifNumero());
 		req.setString(5, objet.getVisuel());
-		req.setInt(6, objet.getPerio().getId());
+		req.setInt(6, objet.getId_Perio());
 		
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
@@ -79,7 +80,7 @@ public class MySQLDAORevue implements RevueDAO{
 			req.setString(3, objet.getDescription());
 			req.setDouble(4, objet.getTarifNumero());
 			req.setString(5, objet.getVisuel());
-			req.setInt(6, objet.getPerio().getId());
+			req.setInt(6, objet.getId_Perio());
 			
 			int res = req.executeUpdate();
 			ResultSet re = req.getGeneratedKeys();

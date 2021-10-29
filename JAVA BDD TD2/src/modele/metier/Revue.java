@@ -4,24 +4,30 @@ public class Revue {
 	private int idRevue;
 	private String titre;
 	private String description;
-	private float tarifNumero;
+	private double tarifNumero;
 	private String visuel;
-	private Periodicite perio;
+	private int id_perio;
 	
 	//constructeur
-	public Revue(int idRevue, String titre, String description, float tarifNumero, String visuel, Periodicite perio) {
+	public Revue(int idRevue, String titre, String description, double tarifNumero, String visuel, int id_perio) {
 		super();
 		this.setIdRevue(idRevue);
 		this.setTitre(titre);
 		this.setDescription(description);
 		this.setTarifNumero(tarifNumero);
 		this.setVisuel(visuel);
-		this.setPerio(perio);
+		this.setId_Perio(id_perio);
 	}
 	
 	//constructeur sans id
-	public Revue(String titre, String description, float tarifNumero, String visuel, Periodicite perio) {
-		this(-1,titre,description, tarifNumero, visuel, perio);
+	public Revue(String titre, String description, double tarifNumero, String visuel, int id_perio) {
+		super();
+		this.idRevue = -1;
+		this.titre = titre;
+		this.description = description;
+		this.tarifNumero = tarifNumero;
+		this.visuel = visuel;
+		this.id_perio = id_perio;
 	}
 	
 	//debut getter setter
@@ -43,10 +49,10 @@ public class Revue {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public float getTarifNumero() {
+	public double getTarifNumero() {
 		return tarifNumero;
 	}
-	public void setTarifNumero(float tarifNumero) {
+	public void setTarifNumero(double tarifNumero) {
 		this.tarifNumero = tarifNumero;
 	}
 	public String getVisuel() {
@@ -55,17 +61,17 @@ public class Revue {
 	public void setVisuel(String visuel) {
 		this.visuel = visuel;
 	}
-	public Periodicite getPerio() {
-		return perio;
+	public int getId_Perio() {
+		return id_perio;
 	}
-	public void setPerio(Periodicite perio) {
-		this.perio = perio;
+	public void setId_Perio(int id_perio) {
+		this.id_perio = id_perio;
 	}
 
 	@Override
 	public String toString() {
 		return "Revue [idRevue=" + idRevue + ", titre=" + titre + ", description=" + description + ", tarifNumero="
-				+ tarifNumero + ", visuel=" + visuel + ", perio=" + perio + "]";
+				+ tarifNumero + ", visuel=" + visuel + ", id_perio=" + id_perio + "]";
 	}
 
 	@Override

@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class Periodicite {
 
-		private int id;
+		private int id_perio;
 		private String libelle;
 		
 		//Constructeur
-		public Periodicite(int id, String libelle) {
+		public Periodicite(int id_perio, String libelle) {
 			super();
-			this.setId(id);;
+			this.setId_Perio(id_perio);;
 			this.setLibelle(libelle);;
 		}
 		
@@ -22,11 +22,11 @@ public class Periodicite {
 		
 
 		// Getter and Setter
-		public int getId() {
-			return id;
+		public int getId_Perio() {
+			return id_perio;
 		}
-		public void setId(int id) {
-			this.id = id;
+		public void setId_Perio(int id_perio) {
+			this.id_perio = id_perio;
 		}
 		public String getLibelle() {
 			return libelle;
@@ -54,7 +54,7 @@ public class Periodicite {
 		//toString
 		@Override
 		public String toString() {
-			return "Periodicite [id=" + id + ", libelle=" + libelle + "]";
+			return "Periodicite [id=" + id_perio + ", libelle=" + libelle + "]";
 		}
 
 
@@ -67,7 +67,7 @@ public class Periodicite {
 			if (getClass() != obj.getClass())
 				return false;
 			Periodicite other = (Periodicite) obj;
-			if (id != other.id)
+			if (id_perio != other.id_perio)
 				return false;
 			return true;
 		}

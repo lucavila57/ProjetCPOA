@@ -1,6 +1,7 @@
 package dao.mysql;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +61,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId(re.getInt(1));
+			objet.setId_Perio(re.getInt(1));
 		}
 		return res == 1;
 	}
@@ -71,11 +72,11 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set id=? where id=?");
 
-		req.setInt(1, objet.getId());
+		req.setInt(1, objet.getId_Perio());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId(re.getInt(1));
+			objet.setId_Perio(re.getInt(1));
 			objet.setLibelle(re.getString(2));
 		}
 		return res == 1;
@@ -90,7 +91,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId(re.getInt(1));
+			objet.setId_Perio(re.getInt(1));
 		}
 		return res == 1;
 	}

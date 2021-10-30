@@ -102,7 +102,22 @@ public class Client {
 		return voie;
 	}
 	public void setVoie(String voie) {
-		this.voie = voie;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherVoie = pattern.matcher(this.getVoie());
+
+        if(this.getVoie()==null) {
+            throw new IllegalArgumentException("Voie ne peut etre null");
+        }
+        else if("".equals(this.getVoie())) {
+            throw new IllegalArgumentException("Voie non valide");
+        }
+        else if(!matcherVoie.find()) {
+            throw new IllegalArgumentException("Voie non valide");
+        }
+        else {	
+        	this.voie = voie;
+
+        }
 	}
 	public String getCodePostal() {
 		return codePostal;

@@ -1,5 +1,8 @@
 package modele.metier;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Revue {
 	private int idRevue;
 	private String titre;
@@ -41,13 +44,43 @@ public class Revue {
 		return titre;
 	}
 	public void setTitre(String titre) {
-		this.titre = titre;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherTitre = pattern.matcher(this.getTitre());
+
+        if(this.getTitre()==null) {
+            throw new IllegalArgumentException("Titre ne peut etre null");
+        }
+        else if("".equals(this.getTitre())) {
+            throw new IllegalArgumentException("Titre non valide");
+        }
+        else if(!matcherTitre.find()) {
+            throw new IllegalArgumentException("Titre non valide");
+        }
+        else {	
+        	this.titre = titre;
+
+        }
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherDescription = pattern.matcher(this.getDescription());
+
+        if(this.getDescription()==null) {
+            throw new IllegalArgumentException("Description ne peut etre null");
+        }
+        else if("".equals(this.getDescription())) {
+            throw new IllegalArgumentException("Description non valide");
+        }
+        else if(!matcherDescription.find()) {
+            throw new IllegalArgumentException("Description non valide");
+        }
+        else {	
+        	this.description = description;
+
+        }
 	}
 	public double getTarifNumero() {
 		return tarifNumero;
@@ -59,7 +92,23 @@ public class Revue {
 		return visuel;
 	}
 	public void setVisuel(String visuel) {
-		this.visuel = visuel;
+		Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
+        Matcher matcherVisuel = pattern.matcher(this.getVisuel());
+
+        if(this.getVisuel()==null) {
+            throw new IllegalArgumentException("Visuel ne peut etre null");
+        }
+        else if("".equals(this.getVisuel())) {
+            throw new IllegalArgumentException("Visuel non valide");
+        }
+        else if(!matcherVisuel.find()) {
+            throw new IllegalArgumentException("Visuel non valide");
+        }
+        else {	
+        	this.visuel = visuel;
+
+        }
+
 	}
 	public int getId_Perio() {
 		return id_perio;

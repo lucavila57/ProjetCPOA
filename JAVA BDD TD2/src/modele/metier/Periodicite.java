@@ -27,19 +27,10 @@ public class Periodicite {
 		}
 		
 		public void setIdPerio(int idPerio) {
-			 if(this.getIdPerio()==null) {
-		            throw new IllegalArgumentException("Libelle ne peut etre null");
-		        }
-		        else if("".equals(this.getLibelle())) {
-		            throw new IllegalArgumentException("Libelle non valide");
-		        }
-		        else if(!matcherLibelle.find()) {
-		            throw new IllegalArgumentException("Libelle non valide");
-		        }
-		        else {	
+			 
 		        	this.idPerio = idPerio;
 
-		        }
+		     
 			}
 		
 		public String getLibelle() {

@@ -61,7 +61,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId_Perio(re.getInt(1));
+			objet.setIdPerio(re.getInt(1));
 		}
 		return res == 1;
 	}
@@ -72,11 +72,11 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		Connection laConnexion = Connexion.creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set id=? where id=?");
 
-		req.setInt(1, objet.getId_Perio());
+		req.setInt(1, objet.getIdPerio());
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId_Perio(re.getInt(1));
+			objet.setIdPerio(re.getInt(1));
 			objet.setLibelle(re.getString(2));
 		}
 		return res == 1;
@@ -91,7 +91,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
 		if (re.next()) {
-			objet.setId_Perio(re.getInt(1));
+			objet.setIdPerio(re.getInt(1));
 		}
 		return res == 1;
 	}

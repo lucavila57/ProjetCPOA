@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class Periodicite {
 
-		private int id_perio;
+		private int idPerio;
 		private String libelle;
 		
 		//Constructeur
-		public Periodicite(int id_perio, String libelle) {
+		public Periodicite(int idPerio, String libelle) {
 			super();
-			this.setId_Perio(id_perio);;
+			this.setIdPerio(idPerio);;
 			this.setLibelle(libelle);;
 		}
 		
@@ -22,12 +22,26 @@ public class Periodicite {
 		
 
 		// Getter and Setter
-		public int getId_Perio() {
-			return id_perio;
+		public int getIdPerio() {
+			return idPerio;
 		}
-		public void setId_Perio(int id_perio) {
-			this.id_perio = id_perio;
-		}
+		
+		public void setIdPerio(int idPerio) {
+			 if(this.getIdPerio()==null) {
+		            throw new IllegalArgumentException("Libelle ne peut etre null");
+		        }
+		        else if("".equals(this.getLibelle())) {
+		            throw new IllegalArgumentException("Libelle non valide");
+		        }
+		        else if(!matcherLibelle.find()) {
+		            throw new IllegalArgumentException("Libelle non valide");
+		        }
+		        else {	
+		        	this.idPerio = idPerio;
+
+		        }
+			}
+		
 		public String getLibelle() {
 			return libelle;
 		}
@@ -54,7 +68,7 @@ public class Periodicite {
 		//toString
 		@Override
 		public String toString() {
-			return "Periodicite [id=" + id_perio + ", libelle=" + libelle + "]";
+			return "Periodicite [id=" + idPerio + ", libelle=" + libelle + "]";
 		}
 
 
@@ -67,7 +81,7 @@ public class Periodicite {
 			if (getClass() != obj.getClass())
 				return false;
 			Periodicite other = (Periodicite) obj;
-			if (id_perio != other.id_perio)
+			if (idPerio != other.idPerio)
 				return false;
 			return true;
 		}

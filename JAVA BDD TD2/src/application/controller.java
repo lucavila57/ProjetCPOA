@@ -79,7 +79,7 @@ public class controller implements Initializable {
 				
 				
 				
-		        daos.getRevueDAO().create(new Revue( titre, description, tarif, null, period.getId_Perio()));  
+		        daos.getRevueDAO().create(new Revue( titre, description, tarif, null, period.getIdPerio()));  
 			} 
 			catch (Exception e) {
 				lbl_recap.setTextFill(Color.web("red"));

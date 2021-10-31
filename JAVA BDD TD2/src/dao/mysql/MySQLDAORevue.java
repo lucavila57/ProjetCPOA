@@ -3,6 +3,7 @@ package dao.mysql;
 import java.sql.Connection;
 
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.RevueDAO;
-import modele.metier.Periodicite;
 import modele.metier.Revue;
+
 
 public class MySQLDAORevue implements RevueDAO{
 
@@ -32,7 +33,7 @@ public class MySQLDAORevue implements RevueDAO{
 		// TODO Auto-generated method stub
 		Revue rev = null;
 		try {
-			Connection laConnexion = Connexion.creeConnexion();
+			Connection laConnexion =  Connexion.getInstance().creeConnexion();
 			PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
 			requete.setInt(1, idRevue);
 			ResultSet res = requete.executeQuery();
@@ -40,7 +41,7 @@ public class MySQLDAORevue implements RevueDAO{
 				rev = new Revue(idRevue, res.getString(2), res.getString(3),res.getDouble(4),res.getString(5), res.getInt(6));
 			} 
 
-			Connexion.fermeture(laConnexion, requete, res);
+			
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
@@ -50,7 +51,7 @@ public class MySQLDAORevue implements RevueDAO{
 	@Override
 	public boolean create(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
         PreparedStatement req = laConnexion.prepareStatement("insert into Revue(id_revue,titre,description,tarif_numero,visuel, periodicite) values(?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
@@ -72,7 +73,7 @@ public class MySQLDAORevue implements RevueDAO{
 	@Override
 	public boolean update(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
-		 Connection laConnexion = Connexion.creeConnexion();
+		 Connection laConnexion =  Connexion.getInstance().creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("Update Revue set id_revue=?, titre=?, description=?, tarif_numero=?,visuel=?, periodicite=? where id_revue=?");
 
 	        req.setInt(1, objet.getIdRevue());
@@ -93,7 +94,7 @@ public class MySQLDAORevue implements RevueDAO{
 	@Override
 	public boolean delete(Revue objet) throws Exception {
 		// TODO Auto-generated method stub
-		 Connection laConnexion = Connexion.creeConnexion();
+		 Connection laConnexion =  Connexion.getInstance().creeConnexion();
 	        PreparedStatement req = laConnexion.prepareStatement("delete from Revue where id_revue=?");
 	        req.setInt(1, objet.getIdRevue());
 			int res = req.executeUpdate();

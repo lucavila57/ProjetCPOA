@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dao.AbonnementDAO;
+
 import dao.PeriodiciteDAO;
 import modele.metier.Periodicite;
-import modele.metier.Revue;
+
 
 public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 
@@ -34,7 +34,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		// TODO Auto-generated method stub
 		Periodicite perio = null;
 		try {
-			Connection laConnexion = Connexion.creeConnexion();
+			Connection laConnexion =  Connexion.getInstance().creeConnexion();
 			PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
 			requete.setInt(1, id);
 			ResultSet res = requete.executeQuery();
@@ -42,7 +42,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 				perio = new Periodicite(res.getInt(1), res.getString(2));
 			}
 
-			Connexion.fermeture(laConnexion, requete, res);
+			
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
@@ -53,7 +53,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 	@Override
 	public boolean create(Periodicite objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("insert into Periodicite (libelle) values(?)",
 				Statement.RETURN_GENERATED_KEYS);
 
@@ -69,7 +69,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 	@Override
 	public boolean update(Periodicite objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set id=? where id=?");
 
 		req.setInt(1, objet.getIdPerio());
@@ -85,7 +85,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 	@Override
 	public boolean delete(Periodicite objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
 		req.setString(1, objet.getLibelle());
 		int res = req.executeUpdate();

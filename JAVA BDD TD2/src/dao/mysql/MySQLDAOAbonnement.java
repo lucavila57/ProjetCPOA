@@ -2,8 +2,7 @@ package dao.mysql;
 
 //verifier getbyid, create update et delete
 import modele.metier.Abonnement;
-import modele.metier.Periodicite;
-import modele.metier.Revue;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +34,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		// TODO Auto-generated method stub
 		Abonnement abo = null;
 		try {
-			Connection laConnexion = Connexion.creeConnexion();
+			Connection laConnexion =  Connexion.getInstance().creeConnexion();
 			PreparedStatement requete = laConnexion.prepareStatement("select * from Abonnement where id=?");
 			requete.setInt(1, id_abo);
 			ResultSet res = requete.executeQuery();
@@ -43,7 +42,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 				abo = new Abonnement(res.getInt(1), null, null, null, null);
 			}
 
-			Connexion.fermeture(laConnexion, requete, res);
+			
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
@@ -54,7 +53,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	@Override
 	public boolean create(Abonnement objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement(
 				"insert into Abonnement(id_abo,date_debut,date_fin,id_client,id_revue) values(?,?,?,?,?)",
 				Statement.RETURN_GENERATED_KEYS);
@@ -76,7 +75,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	@Override
 	public boolean update(Abonnement objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion
 				.prepareStatement("Update Abonnement set id_abo=?, date_deb=?, date_fin=?, id_client=?, id_revue=? where id_abo=?");
 		req.setInt(1, objet.getIdAbo());
@@ -97,7 +96,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	@Override
 	public boolean delete(Abonnement objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("Delete from Abonnement where id_abo");
 		req.setInt(1, objet.getIdAbo());
 		int res = req.executeUpdate();

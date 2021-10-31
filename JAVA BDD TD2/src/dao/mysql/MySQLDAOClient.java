@@ -2,6 +2,7 @@ package dao.mysql;
 // verifier getbyid et create update delete 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ClientDAO;
-import modele.metier.Abonnement;
+
 import modele.metier.Client;
-import modele.metier.Revue;
+
 
 public class MySQLDAOClient implements ClientDAO{
 
@@ -32,7 +33,7 @@ public static ClientDAO getInstance() {
 	public Client getById(int id_cl) throws Exception {
 		Client cl = null;
 		try {
-			Connection laConnexion = Connexion.creeConnexion();
+			Connection laConnexion =  Connexion.getInstance().creeConnexion();
 			PreparedStatement requete = laConnexion.prepareStatement("select * from Client where id_client = ? ");
 			requete.setInt(1, id_cl);
 			ResultSet res = requete.executeQuery();
@@ -40,7 +41,7 @@ public static ClientDAO getInstance() {
 				cl = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
 			} 
 
-			Connexion.fermeture(laConnexion, requete, res);
+			
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}
@@ -50,7 +51,7 @@ public static ClientDAO getInstance() {
 	@Override
 	public boolean create(Client objet) throws Exception {
 		// TODO Auto-generated method stub
-		Connection laConnexion = Connexion.creeConnexion();
+		Connection laConnexion =  Connexion.getInstance().creeConnexion();
         PreparedStatement req = laConnexion.prepareStatement("insert into Client(id_client,nom,prenom,no_rue,voie,code_postal,ville,pays) values(?,?,?,?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
 
@@ -80,7 +81,7 @@ public static ClientDAO getInstance() {
 	@Override
 	public boolean update(Client objet) throws Exception {
 		// TODO Auto-generated method stub
-		 Connection laConnexion = Connexion.creeConnexion();
+		 Connection laConnexion =  Connexion.getInstance().creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
 
 	        req.setInt(1, objet.getIdCl());
@@ -109,7 +110,7 @@ public static ClientDAO getInstance() {
 	@Override
 	public boolean delete(Client objet) throws Exception {
 		// TODO Auto-generated method stub
-		 Connection laConnexion = Connexion.creeConnexion();
+		 Connection laConnexion =  Connexion.getInstance().creeConnexion();
 	        PreparedStatement req = laConnexion.prepareStatement("delete from Client where id_client=?");
 	        req.setInt(1, objet.getIdCl());
 			int res = req.executeUpdate();
@@ -125,7 +126,7 @@ public static ClientDAO getInstance() {
 		// TODO Auto-generated method stub
 		ArrayList<Client> resultat = new ArrayList<Client>();
 		try {
-		 Connection laConnexion = Connexion.creeConnexion();
+		 Connection laConnexion =  Connexion.getInstance().creeConnexion();
 	        PreparedStatement req= laConnexion.prepareStatement("select * from client where nom = ?");
 	    	req.setString(1, client.getNom());
 			ResultSet res = req.executeQuery();
@@ -133,7 +134,7 @@ public static ClientDAO getInstance() {
 				client = new Client(res.getInt(1), res.getString("nom"),res.getString("prenom"),res.getString("no_rue"),res.getString("voie"),res.getString("code_postal"),res.getString("ville"),res.getString("pays"));
 			} 
 
-			Connexion.fermeture(laConnexion, req, res);
+			
 		} catch (SQLException sqle) {
 			System.out.println("pb dans insert" + sqle.getMessage());
 		}

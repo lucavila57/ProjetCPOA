@@ -30,16 +30,17 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	}
 
 	@Override
-	public Abonnement getById(int id_abo) throws Exception {
+	public Abonnement getById(int idCl, int idRevue) throws Exception {
 		// TODO Auto-generated method stub
 		Abonnement abo = null;
 		try {
 			Connection laConnexion =  Connexion.getInstance().creeConnexion();
-			PreparedStatement requete = laConnexion.prepareStatement("select * from Abonnement where id=?");
-			requete.setInt(1, id_abo);
+			PreparedStatement requete = laConnexion.prepareStatement("select * from Abonnement where id_client = ? and id_revue = ?");
+			requete.setInt(1, idCl);
+			requete.setInt(2, idRevue);
 			ResultSet res = requete.executeQuery();
 			if (res.next()) {
-				abo = new Abonnement(res.getInt(1), null, null, null, null);
+				abo = new Abonnement( null, null, idCl, idCl);
 			}
 
 			
@@ -55,14 +56,12 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		// TODO Auto-generated method stub
 		Connection laConnexion =  Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement(
-				"insert into Abonnement(id_abo,date_debut,date_fin,id_client,id_revue) values(?,?,?,?,?)",
+				"insert into Abonnement(date_debut,date_fin,id_client,id_revue) values(?,?,?,?)",
 				Statement.RETURN_GENERATED_KEYS);
-
-		req.setInt(1, objet.getIdAbo());
-		req.setDate(2, java.sql.Date.valueOf(objet.getDateDeb()));
-		req.setDate(3, java.sql.Date.valueOf(objet.getDateFin()));
-		req.setInt(4, objet.getCl().getIdCl());
-		req.setInt(5, objet.getRevue().getIdRevue());
+		req.setDate(1, java.sql.Date.valueOf(objet.getDateDeb()));
+		req.setDate(2, java.sql.Date.valueOf(objet.getDateFin()));
+		req.setInt(3, objet.getIdCl());
+		req.setInt(4, objet.getIdRevue());
 
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
@@ -81,8 +80,8 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		req.setInt(1, objet.getIdAbo());
 		req.setDate(2, java.sql.Date.valueOf(objet.getDateDeb()));
 		req.setDate(3, java.sql.Date.valueOf(objet.getDateFin()));
-		req.setInt(4, objet.getCl().getIdCl());
-		req.setInt(5, objet.getRevue().getIdRevue());
+		req.setInt(4, objet.getIdCl());
+		req.setInt(5, objet.getIdRevue());
 
 		int res = req.executeUpdate();
 		ResultSet re = req.getGeneratedKeys();
@@ -109,7 +108,32 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	}
 	@Override
 	public ArrayList<Abonnement> findAll() {
+		ArrayList<Abonnement> listeAbonnement = new ArrayList<>();
+		try {
+			Connection laConnexion = Connexion.getInstance().creeConnexion();			
+
+			PreparedStatement requete = laConnexion.prepareStatement("select * from Abonnement");
+			
+			ResultSet res = requete.executeQuery();
 		
+			while (res.next()) {
+				listeAbonnement.add(new Abonnement(null,null,res.getInt("idCl"),res.getInt("idRevue")));
+				}
+			}
+			
+				
+			
+		catch(SQLException sqle){
+			System.out.println("Pb dans findAll " + sqle.getMessage());
+		}
+		
+		
+		return null;
+	}
+
+	@Override
+	public Abonnement getById(int id) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

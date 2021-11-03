@@ -1,7 +1,9 @@
 package dao.listmemoire;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 import dao.AbonnementDAO;
 import modele.metier.Abonnement;
@@ -22,9 +24,13 @@ private List<Abonnement> donnees;
 	
 	private ListeMemoireAbonnementDAO() {
 		this.donnees = new ArrayList<Abonnement>();
-	
-		this.donnees.add(new Abonnement(1, null, null, null, null));
-		this.donnees.add(new Abonnement(2, null, null, null, null));
+		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dateDeb1 = LocalDate.parse("13/09/2020",formatage) ;
+		LocalDate dateFin1 = LocalDate.parse("13/10/2020",formatage);
+		LocalDate dateDeb2 = LocalDate.parse("12/01/2021",formatage) ;
+		LocalDate dateFin2 = LocalDate.parse("12/03/2021",formatage);
+		this.donnees.add(new Abonnement(dateDeb1, dateFin1, 1, 2));
+		this.donnees.add(new Abonnement(dateDeb2,dateFin2, 2, 3));
 
 	}
 	
@@ -35,7 +41,8 @@ private List<Abonnement> donnees;
 
 	@Override
 	public Abonnement getById(int id) throws Exception {
-		int idx = this.donnees.indexOf(new Abonnement(id, null, null, null, null));
+		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		int idx = this.donnees.indexOf(new Abonnement(id, LocalDate.parse("13/10/2020",formatage), LocalDate.parse("13/11/2020",formatage), 1 ,1));
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
 			
@@ -84,5 +91,13 @@ private List<Abonnement> donnees;
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Abonnement getById(int idCl, int idRevue) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

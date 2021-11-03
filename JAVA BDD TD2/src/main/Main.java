@@ -38,7 +38,7 @@ public class Main {
 	System.out.println("====================================================================");
 	
 	Connexion laConnexion = new Connexion();
-	Connexion.creeConnexion();
+	//Connexion.creeConnexion();
 	System.out.println("Voici la liste des Periodicites du MY SQL : ");
 	Periodicite perio3 = new Periodicite(1,"Mensuelle");
 	MySQLDAOPeriodicite.getInstance().create(perio3);

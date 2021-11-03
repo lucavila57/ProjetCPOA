@@ -1,95 +1,94 @@
 package dao.listmemoire;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
 import dao.PeriodiciteDAO;
 import modele.metier.Periodicite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 
-	private static ListeMemoirePeriodiciteDAO instance;
+    private static ListeMemoirePeriodiciteDAO instance;
 
-	private List<Periodicite> donnees;
-
-
-	public static ListeMemoirePeriodiciteDAO getInstance() {
-
-		if (instance == null) {
-			instance = new ListeMemoirePeriodiciteDAO();
-		}
-
-		return instance;
-	}
-
-	private ListeMemoirePeriodiciteDAO() {
-
-		this.donnees = new ArrayList<Periodicite>();
-
-		this.donnees.add(new Periodicite(1, "Mensuel"));
-		this.donnees.add(new Periodicite(2, "Quotidien"));
-	}
+    private List<Periodicite> donnees;
 
 
-	@Override
-	public boolean create(Periodicite objet) {
+    public static ListeMemoirePeriodiciteDAO getInstance() {
 
-		objet.setIdPerio(3);
-		while (this.donnees.contains(objet)) {
+        if (instance == null) {
+            instance = new ListeMemoirePeriodiciteDAO();
+        }
 
-			objet.setIdPerio(objet.getIdPerio() + 1);
-		}
-		boolean ok = this.donnees.add(objet);
-		
-		return ok;
-	}
+        return instance;
+    }
 
-	@Override
-	public boolean update(Periodicite objet) {
-		
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-		} else {
-			
-			this.donnees.set(idx, objet);
-		}
-		
-		return true;
-	}
+    private ListeMemoirePeriodiciteDAO() {
 
-	@Override
-	public boolean delete(Periodicite objet) {
+        this.donnees = new ArrayList<Periodicite>();
 
-		Periodicite supprime;
-		
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
-		
-		return objet.equals(supprime);
-	}
+        this.donnees.add(new Periodicite(1, "Mensuel"));
+        this.donnees.add(new Periodicite(2, "Quotidien"));
+    }
 
-	@Override
-	public Periodicite getById(int id) {
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(new Periodicite(id, "test"));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-		} else {
-			return this.donnees.get(idx);
-		}
-	}
 
-	@Override
-	public ArrayList<Periodicite> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public boolean create(Periodicite objet) {
+
+        objet.setIdPerio(3);
+        while (this.donnees.contains(objet)) {
+
+            objet.setIdPerio(objet.getIdPerio() + 1);
+        }
+        boolean ok = this.donnees.add(objet);
+
+        return ok;
+    }
+
+    @Override
+    public boolean update(Periodicite objet) {
+
+        // Ne fonctionne que si l'objet métier est bien fait...
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+        } else {
+
+            this.donnees.set(idx, objet);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean delete(Periodicite objet) {
+
+        Periodicite supprime;
+
+        // Ne fonctionne que si l'objet métier est bien fait...
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+        } else {
+            supprime = this.donnees.remove(idx);
+        }
+
+        return objet.equals(supprime);
+    }
+
+    @Override
+    public Periodicite getById(int id) {
+        // Ne fonctionne que si l'objet métier est bien fait...
+        int idx = this.donnees.indexOf(new Periodicite(id, "test"));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+        } else {
+            return this.donnees.get(idx);
+        }
+    }
+
+    @Override
+    public ArrayList<Periodicite> findAll() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

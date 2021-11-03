@@ -1,27 +1,24 @@
 package test.normalisation;
 
-import static org.junit.Assert.assertEquals;
-
+import normalisation.NormalisationNomVoie;
 import org.junit.Test;
 
-import normalisation.NormalisationNomVoie;
+import static org.junit.Assert.assertEquals;
 
 public class NormalNomVoieTestPlace {
-	
-@Test
-	
-	public void TestNormalVoiePlaceDeb()
-	{
-		
-		assertEquals("place de la libération",NormalisationNomVoie.NormalVoiePlace("pl. de la libération"));
-	}
 
-	@Test
+    @Test
 
-	public void TestNormalVoiePlace()
-	{
-		
-		assertEquals("la place de la libération",NormalisationNomVoie.NormalVoiePlace("la pl. de la libération"));
-	}
+    public void TestNormalVoiePlaceDeb() {
+
+        assertEquals("place de la libï¿½ration", NormalisationNomVoie.NormalVoiePlace("pl. de la libï¿½ration"));
+    }
+
+    @Test
+
+    public void TestNormalVoiePlace() {
+
+        assertEquals("la place de la libï¿½ration", NormalisationNomVoie.NormalVoiePlace("la pl. de la libï¿½ration"));
+    }
 
 }

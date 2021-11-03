@@ -1,106 +1,103 @@
 package dao.listmemoire;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
-import dao.AbonnementDAO;
 import dao.ClientDAO;
 import modele.metier.Client;
 
-public class ListeMemoireClientDAO implements ClientDAO{
-	
-public static ListeMemoireClientDAO Instance;	
-private List<Client> donnees;
+import java.util.ArrayList;
+import java.util.List;
 
-	
-	public static ListeMemoireClientDAO getInstance() {
-		
-		if(Instance==null) {
-			Instance = new ListeMemoireClientDAO();
-		}
-		return Instance;
-	}
-	
-	private ListeMemoireClientDAO() {
+public class ListeMemoireClientDAO implements ClientDAO {
 
-		this.donnees = new ArrayList<Client>();
-		
-		this.donnees.add(new Client(1, "hugo", "reina", "10", "voie1", "57535", "marange", "france"));
-		this.donnees.add(new Client(2, "luca", "vila", "11", "voie2", "57535", "marange", "france"));
+    public static ListeMemoireClientDAO Instance;
+    private List<Client> donnees;
 
-		
-		
-	}
 
-	
-	@Override
-	public Client getById(int id) throws Exception {
-		int idx = this.donnees.indexOf(new Client(id, null, null, null, null, null, null, null));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-		} else {
-			return this.donnees.get(idx);
-		}
-	}
-	
-	@Override
-	public boolean create(Client objet) throws Exception {
-		objet.setIdCl(3);
-		// Ne fonctionne que si l'objet métier est bien fait...
-		while (this.donnees.contains(objet)) {
+    public static ListeMemoireClientDAO getInstance() {
 
-			objet.setIdCl(objet.getIdCl() + 1);
-		}
-		boolean ok = this.donnees.add(objet);
-		
-		return ok;	}
+        if (Instance == null) {
+            Instance = new ListeMemoireClientDAO();
+        }
+        return Instance;
+    }
 
-	@Override
-	public boolean update(Client objet) throws Exception {
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-		} else {
-			
-			this.donnees.set(idx, objet);
-		}
-		
-		return true;
-	}
+    private ListeMemoireClientDAO() {
 
-	@Override
-	public boolean delete(Client objet) throws Exception {
-		Client supprime;
-		
-		// Ne fonctionne que si l'objet métier est bien fait...
-		int idx = this.donnees.indexOf(objet);
-		if (idx == -1) {
-			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-		} else {
-			supprime = this.donnees.remove(idx);
-		}
-		
-		return objet.equals(supprime);
-	}
+        this.donnees = new ArrayList<Client>();
 
-	@Override
-	public List<Client> getByNom(Client client) {
-		@SuppressWarnings("null")
-		int idx = this.donnees.indexOf(new Client((Integer) null, null, null, null, null, null, null, null));
-		if (idx == -1) {
-			throw new IllegalArgumentException("Aucun objet ne possède ce nom");
-		} else {	
-			return (ArrayList<Client>) this.donnees;
-	}
-	}
+        this.donnees.add(new Client(1, "hugo", "reina", "10", "voie1", "57535", "marange", "france"));
+        this.donnees.add(new Client(2, "luca", "vila", "11", "voie2", "57535", "marange", "france"));
 
-	
 
-	@Override
-	public ArrayList<Client> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	}
+    }
+
+
+    @Override
+    public Client getById(int id) throws Exception {
+        int idx = this.donnees.indexOf(new Client(id, null, null, null, null, null, null, null));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+        } else {
+            return this.donnees.get(idx);
+        }
+    }
+
+    @Override
+    public boolean create(Client objet) throws Exception {
+        objet.setIdCl(3);
+        // Ne fonctionne que si l'objet métier est bien fait...
+        while (this.donnees.contains(objet)) {
+
+            objet.setIdCl(objet.getIdCl() + 1);
+        }
+        boolean ok = this.donnees.add(objet);
+
+        return ok;
+    }
+
+    @Override
+    public boolean update(Client objet) throws Exception {
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+        } else {
+
+            this.donnees.set(idx, objet);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean delete(Client objet) throws Exception {
+        Client supprime;
+
+        // Ne fonctionne que si l'objet métier est bien fait...
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+        } else {
+            supprime = this.donnees.remove(idx);
+        }
+
+        return objet.equals(supprime);
+    }
+
+    @Override
+    public List<Client> getByNom(Client client) {
+        @SuppressWarnings("null")
+        int idx = this.donnees.indexOf(new Client((Integer) null, null, null, null, null, null, null, null));
+        if (idx == -1) {
+            throw new IllegalArgumentException("Aucun objet ne possède ce nom");
+        } else {
+            return (ArrayList<Client>) this.donnees;
+        }
+    }
+
+
+    @Override
+    public ArrayList<Client> findAll() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+}
 

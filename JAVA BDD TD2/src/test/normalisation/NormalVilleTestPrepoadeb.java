@@ -1,18 +1,14 @@
 package test.normalisation;
 
-import org.junit.Test;
-
-
 import normalisation.NormalisationVille;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class NormalVilleTestPrepoadeb {
-	@Test
-	public void TestNormalVillePrepoadeb() 
-	
-	{
-		assertEquals("À-Marange",NormalisationVille.NormalVilledeba("A Marange"));
-	}
+    @Test
+    public void TestNormalVillePrepoadeb() {
+        assertEquals("ï¿½-Marange", NormalisationVille.NormalVilledeba("A Marange"));
+    }
 
 }

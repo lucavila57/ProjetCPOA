@@ -1,44 +1,40 @@
 package test.normalisation;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
 
 import normalisation.NormalisationNomVoie;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class NormalNomVoieTestFaubourg {
-	
-@Test
-	
-	public void TestNormalVoieFaubourgDeb()
-	{
-		
-		assertEquals("faubourg de la libéartion",NormalisationNomVoie.NormalVoieFaubourg("faub. de la libéartion"));
-	}
 
-	@Test
+    @Test
 
-	public void TestNormalVoieFaubourg()
-	{
-		
-		assertEquals("le faubourg de la libéartion",NormalisationNomVoie.NormalVoieFaubourg("le faub. de la libéartion"));
-	}
-	
-@Test
-	
-	public void TestNormalVoieFaubourg2Deb()
-	{
-		
-		assertEquals("faubourg de la libération",NormalisationNomVoie.NormalVoieFaubourg("fg de la libération"));
-	}
+    public void TestNormalVoieFaubourgDeb() {
 
-	@Test
+        assertEquals("faubourg de la libï¿½artion", NormalisationNomVoie.NormalVoieFaubourg("faub. de la libï¿½artion"));
+    }
 
-	public void TestNormalVoieFaubourg2()
-	{
-	
-		assertEquals("le faubourg de la libération",NormalisationNomVoie.NormalVoieFaubourg("le fg de la libération"));
-	}
+    @Test
+
+    public void TestNormalVoieFaubourg() {
+
+        assertEquals("le faubourg de la libï¿½artion", NormalisationNomVoie.NormalVoieFaubourg("le faub. de la libï¿½artion"));
+    }
+
+    @Test
+
+    public void TestNormalVoieFaubourg2Deb() {
+
+        assertEquals("faubourg de la libï¿½ration", NormalisationNomVoie.NormalVoieFaubourg("fg de la libï¿½ration"));
+    }
+
+    @Test
+
+    public void TestNormalVoieFaubourg2() {
+
+        assertEquals("le faubourg de la libï¿½ration", NormalisationNomVoie.NormalVoieFaubourg("le fg de la libï¿½ration"));
+    }
 }
 
 

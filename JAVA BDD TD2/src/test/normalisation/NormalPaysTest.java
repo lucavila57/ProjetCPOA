@@ -1,46 +1,48 @@
 package test.normalisation;
 
-import static org.junit.Assert.*;
-
-
+import normalisation.NormalisationPays;
 import org.junit.Test;
 
-import normalisation.*;
+import static org.junit.Assert.assertEquals;
 
 public class NormalPaysTest {
 
-	@Test
-	public void TestNormalPaysLuxembourg() {
+    @Test
+    public void TestNormalPaysLuxembourg() {
 
-		assertEquals("Luxembourg", NormalisationPays.NormalPays("letzebuerg"));
-		assertEquals("Luxembourg", NormalisationPays.NormalPays("Letzebuerg"));
+        assertEquals("Luxembourg", NormalisationPays.NormalPays("letzebuerg"));
+        assertEquals("Luxembourg", NormalisationPays.NormalPays("Letzebuerg"));
 
-	}
-	@Test
-	public void TestNormalPaysBelgique() {
+    }
 
-		assertEquals("Belgique", NormalisationPays.NormalPays("belgium"));
-		assertEquals("Belgique", NormalisationPays.NormalPays("Belgium"));
+    @Test
+    public void TestNormalPaysBelgique() {
 
-	}
-	@Test
-	public void TestNormalPaysSuisse() {
+        assertEquals("Belgique", NormalisationPays.NormalPays("belgium"));
+        assertEquals("Belgique", NormalisationPays.NormalPays("Belgium"));
 
-		assertEquals("Suisse", NormalisationPays.NormalPays("switzerland"));
-		assertEquals("Suisse", NormalisationPays.NormalPays("Switzerland"));
+    }
 
-	}
-	@Test
-	public void TestNormalPaysSuisse2() {
+    @Test
+    public void TestNormalPaysSuisse() {
 
-		assertEquals("Suisse", NormalisationPays.NormalPays("schweiz"));
-		assertEquals("Suisse", NormalisationPays.NormalPays("Schweiz"));
+        assertEquals("Suisse", NormalisationPays.NormalPays("switzerland"));
+        assertEquals("Suisse", NormalisationPays.NormalPays("Switzerland"));
 
-	}
-	@Test
-	public void TestNormalPaysOK() {
-		
-		assertEquals("Bonjour", NormalisationPays.NormalPays("Bonjour"));
-	}
+    }
+
+    @Test
+    public void TestNormalPaysSuisse2() {
+
+        assertEquals("Suisse", NormalisationPays.NormalPays("schweiz"));
+        assertEquals("Suisse", NormalisationPays.NormalPays("Schweiz"));
+
+    }
+
+    @Test
+    public void TestNormalPaysOK() {
+
+        assertEquals("Bonjour", NormalisationPays.NormalPays("Bonjour"));
+    }
 
 }

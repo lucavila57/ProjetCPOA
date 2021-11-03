@@ -1,25 +1,23 @@
 package test.normalisation;
 
+import normalisation.NormalisationNomVoie;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
-import normalisation.NormalisationNomVoie;
-
 public class NormalNomVoieTestAvenue {
-	
-	
-    @Test    
-	public void TestNormalVoieAvenueDeb()
-	{
-		
-		assertEquals("avenue de la libération",NormalisationNomVoie.NormalVoieAvenue("av. de la libération"));
-	}
 
-	@Test
-	public void TestNormalVoieAvenue()
-	{
-		assertEquals("l'avenue de la libération",NormalisationNomVoie.NormalVoieAvenue("l'av. de la libération"));
-	
-	}
+
+    @Test
+    public void TestNormalVoieAvenueDeb() {
+
+        assertEquals("avenue de la libï¿½ration", NormalisationNomVoie.NormalVoieAvenue("av. de la libï¿½ration"));
+    }
+
+    @Test
+    public void TestNormalVoieAvenue() {
+        assertEquals("l'avenue de la libï¿½ration", NormalisationNomVoie.NormalVoieAvenue("l'av. de la libï¿½ration"));
+
+    }
 
 }

@@ -1,28 +1,26 @@
 package test.normalisation;
 
-import static org.junit.Assert.assertEquals;
-
-
+import normalisation.NormalisationVille;
 import org.junit.Test;
 
-import normalisation.NormalisationVille;
+import static org.junit.Assert.assertEquals;
 
 public class NormalVilleTestPrepoLes {
 
-	@Test
-	public void TestNormalVillePrepoMin() {
+    @Test
+    public void TestNormalVillePrepoMin() {
 
-		assertEquals("Marange-lès-grand-lès-haut", NormalisationVille.NormalVilleles("Marange lès grand lès haut"));
-		
+        assertEquals("Marange-lï¿½s-grand-lï¿½s-haut", NormalisationVille.NormalVilleles("Marange lï¿½s grand lï¿½s haut"));
 
-	}
-	
-	@Test
-	public void TestNormalVillePrepoMaj() {
 
-		assertEquals("Marange-lès-grand-lès-haut", NormalisationVille.NormalVilleles("Marange Lès grand Lès haut"));
-		
+    }
 
-	}
+    @Test
+    public void TestNormalVillePrepoMaj() {
+
+        assertEquals("Marange-lï¿½s-grand-lï¿½s-haut", NormalisationVille.NormalVilleles("Marange Lï¿½s grand Lï¿½s haut"));
+
+
+    }
 
 }

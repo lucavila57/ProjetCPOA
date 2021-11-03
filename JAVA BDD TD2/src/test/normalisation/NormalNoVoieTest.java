@@ -1,27 +1,26 @@
 package test.normalisation;
 
-import static org.junit.Assert.*;
-
-
+import normalisation.NormalisationNoVoie;
 import org.junit.Test;
 
-import normalisation.*;
+import static org.junit.Assert.assertEquals;
 
 public class NormalNoVoieTest {
-	
-		@Test
-		public void TestNormalNoVoieVirgule() {
 
-			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3 rue des alouettes"));
+    @Test
+    public void TestNormalNoVoieVirgule() {
 
-		
-	}
-		@Test
-		public void TestNormalNoVoieOk() {
-			
-			assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3, rue des alouettes"));
+        assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3 rue des alouettes"));
 
-			
-		}
+
+    }
+
+    @Test
+    public void TestNormalNoVoieOk() {
+
+        assertEquals("3, rue des alouettes", NormalisationNoVoie.NormalNum("3, rue des alouettes"));
+
+
+    }
 
 }

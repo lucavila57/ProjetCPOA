@@ -1,17 +1,23 @@
 package application;
 
+import java.net.URL;
+
+import java.util.ResourceBundle;
+
 import dao.DAOFactory;
 import dao.Persistance;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class controller implements Initializable {
 
@@ -43,7 +49,12 @@ public class controller implements Initializable {
         DAOFactory dao = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);
 
 
-        this.txt_periodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+        try {
+			this.txt_periodicite.setItems(FXCollections.observableArrayList(dao.getPeriodiciteDAO().findAll()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     }
 

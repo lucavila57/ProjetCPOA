@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlURL=getClass().getResource("vuecreerevue.fxml");
+            URL fxmlURL=getClass().getResource("Main2.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root,640,400);

@@ -6,93 +6,94 @@ import modele.metier.Periodicite;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 
-    public static PeriodiciteDAO Instance;
+	public static PeriodiciteDAO Instance;
 
-    private MySQLDAOPeriodicite() {
-    }
+	private MySQLDAOPeriodicite() {
+	}
 
-    public static PeriodiciteDAO getInstance() {
+	public static PeriodiciteDAO getInstance() {
 
-        if (Instance == null) {
-            Instance = new MySQLDAOPeriodicite();
-        }
-        return Instance;
+		if (Instance == null) {
+			Instance = new MySQLDAOPeriodicite();
+		}
+		return Instance;
 
-    }
+	}
 
-    @Override
-    public Periodicite getById(int id) throws Exception {
-        // TODO Auto-generated method stub
-        Periodicite perio = null;
-        try {
-            Connection laConnexion = Connexion.getInstance().creeConnexion();
-            PreparedStatement requete = laConnexion.prepareStatement("select * from periodicite where id=?");
-            requete.setInt(1, id);
-            ResultSet res = requete.executeQuery();
-            if (res.next()) {
-                perio = new Periodicite(res.getInt(1), res.getString(2));
-            }
+	@Override
+	public Periodicite getById(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		Periodicite perio = null;
 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement("select * from Periodicite where id=?");
+		requete.setInt(1, id);
+		ResultSet res = requete.executeQuery();
+		if (res.next()) {
+			perio = new Periodicite(id, res.getString("libelle"));
+		}
 
-        } catch (SQLException sqle) {
-            System.out.println("pb dans insert" + sqle.getMessage());
-        }
-        return perio;
+		return perio;
 
-    }
+	}
 
-    @Override
-    public boolean create(Periodicite objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Periodicite (libelle) values(?)",
-                Statement.RETURN_GENERATED_KEYS);
+	@Override
+	public boolean create(Periodicite objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("Insert into Periodicite (libelle) value(?)",
+				Statement.RETURN_GENERATED_KEYS);
 
-        req.setString(1, objet.getLibelle());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdPerio(re.getInt(1));
-        }
-        return res == 1;
-    }
+		req.setString(1, objet.getLibelle());
+		int nbLignes = req.executeUpdate();
+		ResultSet res = req.getGeneratedKeys();
+		if (res.next()) {
+			objet.setIdPerio(res.getInt(1));
+		}
+		return nbLignes == 1;
+	}
 
-    @Override
-    public boolean update(Periodicite objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("update Periodicite set id=? where id=?");
+	@Override
+	public boolean update(Periodicite objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set libelle=? where id=?");
+		req.setString(1, objet.getLibelle());
+		req.setInt(2, objet.getIdPerio());
+		int nbLignes = req.executeUpdate();
 
-        req.setInt(1, objet.getIdPerio());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdPerio(re.getInt(1));
-            objet.setLibelle(re.getString(2));
-        }
-        return res == 1;
-    }
+		return nbLignes == 1;
+	}
 
-    @Override
-    public boolean delete(Periodicite objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
-        req.setString(1, objet.getLibelle());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdPerio(re.getInt(1));
-        }
-        return res == 1;
-    }
+	@Override
+	public boolean delete(Periodicite objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
+		req.setInt(1, objet.getIdPerio());
+		int nbLignes = req.executeUpdate();
 
-    @Override
-    public ArrayList<Periodicite> findAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+		return nbLignes == 1;
+	}
+
+	@Override
+	public ArrayList<Periodicite> findAll() throws SQLException {
+		// TODO Auto-generated method stub
+		ArrayList<Periodicite> listePeriodicite = new ArrayList<>();
+
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+
+		PreparedStatement requete = laConnexion.prepareStatement("select * from Periodicite");
+
+		ResultSet res = requete.executeQuery();
+
+		if (res.next()) {
+			listePeriodicite.add(new Periodicite(res.getInt("id_periodicite"), res.getString("libelle")));
+		}
+
+		return listePeriodicite;
+
+	}
 }

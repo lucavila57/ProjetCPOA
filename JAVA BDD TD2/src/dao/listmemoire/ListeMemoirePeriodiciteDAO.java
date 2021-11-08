@@ -8,87 +8,84 @@ import java.util.List;
 
 public class ListeMemoirePeriodiciteDAO implements PeriodiciteDAO {
 
-    private static ListeMemoirePeriodiciteDAO instance;
+	private static ListeMemoirePeriodiciteDAO instance;
 
-    private List<Periodicite> donnees;
+	private List<Periodicite> donnees;
 
+	public static ListeMemoirePeriodiciteDAO getInstance() {
 
-    public static ListeMemoirePeriodiciteDAO getInstance() {
+		if (instance == null) {
+			instance = new ListeMemoirePeriodiciteDAO();
+		}
 
-        if (instance == null) {
-            instance = new ListeMemoirePeriodiciteDAO();
-        }
+		return instance;
+	}
 
-        return instance;
-    }
+	private ListeMemoirePeriodiciteDAO() {
 
-    private ListeMemoirePeriodiciteDAO() {
+		this.donnees = new ArrayList<Periodicite>();
 
-        this.donnees = new ArrayList<Periodicite>();
+		this.donnees.add(new Periodicite(1, "Mensuel"));
+		this.donnees.add(new Periodicite(2, "Quotidien"));
+	}
 
-        this.donnees.add(new Periodicite(1, "Mensuel"));
-        this.donnees.add(new Periodicite(2, "Quotidien"));
-    }
+	@Override
+	public boolean create(Periodicite objet) {
 
+		objet.setIdPerio(3);
+		while (this.donnees.contains(objet)) {
 
-    @Override
-    public boolean create(Periodicite objet) {
+			objet.setIdPerio(objet.getIdPerio() + 1);
+		}
+		boolean ok = this.donnees.add(objet);
 
-        objet.setIdPerio(3);
-        while (this.donnees.contains(objet)) {
+		return ok;
+	}
 
-            objet.setIdPerio(objet.getIdPerio() + 1);
-        }
-        boolean ok = this.donnees.add(objet);
+	@Override
+	public boolean update(Periodicite objet) {
 
-        return ok;
-    }
+		// Ne fonctionne que si l'objet métier est bien fait...
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+		} else {
 
-    @Override
-    public boolean update(Periodicite objet) {
+			this.donnees.set(idx, objet);
+		}
 
-        // Ne fonctionne que si l'objet métier est bien fait...
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-        } else {
+		return true;
+	}
 
-            this.donnees.set(idx, objet);
-        }
+	@Override
+	public boolean delete(Periodicite objet) {
 
-        return true;
-    }
+		Periodicite supprime;
 
-    @Override
-    public boolean delete(Periodicite objet) {
+		// Ne fonctionne que si l'objet métier est bien fait...
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		} else {
+			supprime = this.donnees.remove(idx);
+		}
 
-        Periodicite supprime;
+		return objet.equals(supprime);
+	}
 
-        // Ne fonctionne que si l'objet métier est bien fait...
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-        } else {
-            supprime = this.donnees.remove(idx);
-        }
+	@Override
+	public Periodicite getById(int id) {
+		// Ne fonctionne que si l'objet métier est bien fait...
+		int idx = this.donnees.indexOf(new Periodicite(id, "test"));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+		} else {
+			return this.donnees.get(idx);
+		}
+	}
 
-        return objet.equals(supprime);
-    }
-
-    @Override
-    public Periodicite getById(int id) {
-        // Ne fonctionne que si l'objet métier est bien fait...
-        int idx = this.donnees.indexOf(new Periodicite(id, "test"));
-        if (idx == -1) {
-            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-        } else {
-            return this.donnees.get(idx);
-        }
-    }
-
-    @Override
-    public ArrayList<Periodicite> findAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public ArrayList<Periodicite> findAll() {
+		return (ArrayList<Periodicite>) this.donnees;
+	}
 }

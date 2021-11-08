@@ -1,57 +1,90 @@
 package main;
 
-import dao.listmemoire.ListeMemoirePeriodiciteDAO;
-import dao.mysql.Connexion;
-import dao.mysql.MySQLDAOPeriodicite;
+import java.util.Scanner;
+
+import dao.DAOFactory;
+import dao.Persistance;
 import modele.metier.Periodicite;
 
+
+
 public class Main {
-    public static void main(String[] arg) throws Exception {
+	static Scanner sc = new Scanner(System.in);
+	
+	static Boolean b_per=false;
+	static Boolean b_abo=false;
+	static Boolean b_cli=false;
+	static Boolean b_rev=false;
+	
+	static Boolean create=false;
+	static Boolean delete=false;
+	static Boolean update=false;
+	
 
-
-        System.out.println("Voici la liste des Periodicites de la classe Liste memoire : ");
-        System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(1));
-        System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(2));
-
-        Periodicite perio1 = new Periodicite(3, "Anuelle");
-        ListeMemoirePeriodiciteDAO.getInstance().create(perio1);
-        System.out.println("Je cree un objet periodicite et je l'affiche : ");
-        System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(3));
-
-
-        System.out.println("Je modifie un objet periodicite et je l'affiche : ");
-        Periodicite perio2 = new Periodicite(3, "Tous les jours");
-        ListeMemoirePeriodiciteDAO.getInstance().update(perio2);
-        System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(3));
-
-
-        System.out.println("Je supprime un objet periodicite : ");
-        ListeMemoirePeriodiciteDAO.getInstance().delete(perio2);
-        //System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(3));//affiche une erreur car l'id 3 est supprimer
-        System.out.println("Aucun objet ne possede l'ID 3 donc l'objet a bien etait supprime ");
-
-
-        System.out.println("====================================================================");
-
-        Connexion laConnexion = new Connexion();
-        //Connexion.creeConnexion();
-        System.out.println("Voici la liste des Periodicites du MY SQL : ");
-        Periodicite perio3 = new Periodicite(1, "Mensuelle");
-        MySQLDAOPeriodicite.getInstance().create(perio3);
-        System.out.println(MySQLDAOPeriodicite.getInstance().getById(1));
-
-
-        System.out.println("Je modifie un objet periodicite et je l'affiche : ");
-        Periodicite perio4 = new Periodicite(1, "Tous les jours");
-        MySQLDAOPeriodicite.getInstance().update(perio4);
-        System.out.println(MySQLDAOPeriodicite.getInstance().getById(1));
-
-        System.out.println("Je supprime un objet periodicite : ");
-        MySQLDAOPeriodicite.getInstance().delete(perio4);
-        //System.out.println(ListeMemoirePeriodiciteDAO.getInstance().getById(3));//affiche une erreur car l'id 3 est supprimer
-        System.out.println("Aucun objet ne possede l'ID 3 donc l'objet a bien etait supprime  ");
-
-    }
-
-
+	public static void main(String[] args) throws Exception {
+																//Debut du programmme
+		DAOFactory daos = null;
+		System.out.println(
+				 "1.MySQL "
+				+ "2.ListeMemoire ");
+		int i = sc.nextInt();
+		if(i ==1)
+		{
+			daos = DAOFactory.getDAOFactory(Persistance.MYSQL);
+		}
+		else if (i == 2)
+		{
+			 daos = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);	
+		}
+		
+		//recuperation de la table voulue
+		System.out.println("operation sur quel table? "
+				+ "1.Periodicite "
+				+ "2.Abonnement "
+				+ "3.Client "
+				+ "4.Revue ");
+		int table = sc.nextInt();
+		switch(table)
+		{
+		case 1 : b_per=true;
+		case 2 : b_abo=true;
+		case 3 : b_cli=true;
+		case 4 : b_rev=true;
+		}
+		
+		//recuperation de l'operation desire
+		System.out.println("quel operation? "
+				+ "1.Ajouter une ligne "
+				+ "2.Supprimer une ligne "
+				+ "3.Modifier un ligne ");
+		int op = sc.nextInt();
+		switch(op)
+		{
+		case 1 : create=true;
+		case 2 : delete=true;
+		case 3 : update=true;
+		}
+		//table Periodicite, methode d'ajout
+				if(b_per&&create) {
+					System.out.println("quel id_periode?");
+					int idPerio = sc.nextInt();
+					System.out.println("quel libelle?");
+					sc.nextLine();
+					String libelle = sc.nextLine();
+					
+					Periodicite per = new Periodicite(idPerio, libelle);			
+					daos.getPeriodiciteDAO().create(per);
+					Init();
+				}
+	}
+	public static void Init() {
+		b_per=false;
+		b_abo=false;
+		b_cli=false;
+		b_rev=false;
+		
+		create=false;
+		delete=false;
+		update=false;
+	}
 }

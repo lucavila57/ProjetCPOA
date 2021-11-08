@@ -6,6 +6,7 @@ package application;
 import java.net.URL;
 
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -23,7 +24,6 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root,640,400);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Ma première fenêtre JavaFX");
             primaryStage.show();

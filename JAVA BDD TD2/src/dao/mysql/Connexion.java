@@ -3,6 +3,7 @@ package dao.mysql;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,21 +22,20 @@ public class Connexion {
     private Connection maConnexion;
 
 
-    public Connection creeConnexion() {
-        Properties accesBdd = new Properties();
-        File fBdd = new File("properties");
+    public Connection creeConnexion(){
+		Properties accesBdd = new Properties();
         try {
-            FileInputStream source = new FileInputStream(fBdd);
+            InputStream source = getClass().getResourceAsStream("properties");
             accesBdd.loadFromXML(source);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try {
-            if (maConnexion == null || maConnexion.isClosed()) {
-                maConnexion = DriverManager.getConnection(accesBdd.getProperty("url"),
-                        accesBdd.getProperty("login"), accesBdd.getProperty("pass"));
-            }
+        	maConnexion = DriverManager.getConnection(accesBdd.getProperty("url"), accesBdd.getProperty("login"),
+                    accesBdd.getProperty("pass"));
+            
         } catch (SQLException sqle) {
             System.out.println("Erreur connexion" +
                     sqle.getMessage());

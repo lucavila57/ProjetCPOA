@@ -8,140 +8,132 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MySQLDAOClient implements ClientDAO {
 
-    public static ClientDAO Instance;
+	public static ClientDAO Instance;
 
-    private MySQLDAOClient() {
-    }
+	private MySQLDAOClient() {
+	}
 
-    public static ClientDAO getInstance() {
+	public static ClientDAO getInstance() {
 
-        if (Instance == null) {
-            Instance = new MySQLDAOClient();
-        }
-        return Instance;
+		if (Instance == null) {
+			Instance = new MySQLDAOClient();
+		}
+		return Instance;
 
-    }
+	}
 
-    @Override
-    public Client getById(int id_cl) throws Exception {
-        Client cl = null;
-        try {
-            Connection laConnexion = Connexion.getInstance().creeConnexion();
-            PreparedStatement requete = laConnexion.prepareStatement("select * from Client where id_client = ? ");
-            requete.setInt(1, id_cl);
-            ResultSet res = requete.executeQuery();
-            if (res.next()) {
-                cl = new Client(res.getInt(1), res.getString("nom"), res.getString("prenom"), res.getString("no_rue"), res.getString("voie"), res.getString("code_postal"), res.getString("ville"), res.getString("pays"));
-            }
+	@Override
+	public Client getById(int id_cl) throws SQLException {
+		Client cl = null;
 
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement requete = laConnexion.prepareStatement("select * from Client where id_client = ? ");
+		requete.setInt(1, id_cl);
+		ResultSet res = requete.executeQuery();
+		if (res.next()) {
+			cl = new Client(id_cl, res.getString("nom"), res.getString("prenom"), res.getString("no_rue"),
+					res.getString("voie"), res.getString("code_postal"), res.getString("ville"), res.getString("pays"));
+		}
 
-        } catch (SQLException sqle) {
-            System.out.println("pb dans insert" + sqle.getMessage());
-        }
-        return cl;
-    }
+		return cl;
+	}
 
-    @Override
-    public boolean create(Client objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("insert into Client(id_client,nom,prenom,no_rue,voie,code_postal,ville,pays) values(?,?,?,?,?,?,?,?)",
-                Statement.RETURN_GENERATED_KEYS);
+	@Override
+	public boolean create(Client objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement(
+				"insert into Client(nom, prenom, no_rue, voie, code_postal, ville, pays) values(?,?,?,?,?,?,?)",
+				Statement.RETURN_GENERATED_KEYS);
 
-        req.setInt(1, objet.getIdCl());
-        req.setString(2, objet.getNom());
-        req.setString(3, objet.getPrenom());
-        req.setString(4, objet.getNoRue());
-        req.setString(5, objet.getVoie());
-        req.setString(6, objet.getCodePostal());
-        req.setString(7, objet.getVille());
-        req.setString(8, objet.getPays());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdCl(re.getInt(1));
-            objet.setNom(re.getString(2));
-            objet.setPrenom(re.getString(3));
-            objet.setNoRue(re.getString(4));
-            objet.setVoie(re.getString(5));
-            objet.setCodePostal(re.getString(6));
-            objet.setVille(re.getString(7));
-            objet.setPays(re.getString(8));
-        }
-        return res == 1;
-    }
+	
+		req.setString(1, objet.getNom());
+		req.setString(2, objet.getPrenom());
+		req.setString(3, objet.getNoRue());
+		req.setString(4, objet.getVoie());
+		req.setString(5, objet.getCodePostal());
+		req.setString(6, objet.getVille());
+		req.setString(7, objet.getPays());
+		int nbLignes = req.executeUpdate();
+		ResultSet res = req.getGeneratedKeys();
+		if (res.next()) {
+			objet.setIdCl(res.getInt(1));
 
-    @Override
-    public boolean update(Client objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
+		}
+		return nbLignes == 1;
+	}
 
-        req.setInt(1, objet.getIdCl());
-        req.setString(2, objet.getNom());
-        req.setString(3, objet.getPrenom());
-        req.setString(4, objet.getNoRue());
-        req.setString(5, objet.getVoie());
-        req.setString(6, objet.getCodePostal());
-        req.setString(7, objet.getVille());
-        req.setString(8, objet.getPays());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdCl(re.getInt(1));
-            objet.setNom(re.getString(2));
-            objet.setPrenom(re.getString(3));
-            objet.setNoRue(re.getString(4));
-            objet.setVoie(re.getString(5));
-            objet.setCodePostal(re.getString(6));
-            objet.setVille(re.getString(7));
-            objet.setPays(re.getString(8));
-        }
-        return res == 1;
-    }
+	@Override
+	public boolean update(Client objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement(
+				"Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
 
-    @Override
-    public boolean delete(Client objet) throws Exception {
-        // TODO Auto-generated method stub
-        Connection laConnexion = Connexion.getInstance().creeConnexion();
-        PreparedStatement req = laConnexion.prepareStatement("delete from Client where id_client=?");
-        req.setInt(1, objet.getIdCl());
-        int res = req.executeUpdate();
-        ResultSet re = req.getGeneratedKeys();
-        if (re.next()) {
-            objet.setIdCl(re.getInt(1));
-        }
-        return res == 1;
-    }
+		req.setInt(1, objet.getIdCl());
+		req.setString(2, objet.getNom());
+		req.setString(3, objet.getPrenom());
+		req.setString(4, objet.getNoRue());
+		req.setString(5, objet.getVoie());
+		req.setString(6, objet.getCodePostal());
+		req.setString(7, objet.getVille());
+		req.setString(8, objet.getPays());
+		int nbLignes = req.executeUpdate();
 
-    @Override
-    public List<Client> getByNom(Client client) throws Exception {
-        // TODO Auto-generated method stub
-        ArrayList<Client> resultat = new ArrayList<Client>();
-        try {
-            Connection laConnexion = Connexion.getInstance().creeConnexion();
-            PreparedStatement req = laConnexion.prepareStatement("select * from client where nom = ?");
-            req.setString(1, client.getNom());
-            ResultSet res = req.executeQuery();
-            if (res.next()) {
-                client = new Client(res.getInt(1), res.getString("nom"), res.getString("prenom"), res.getString("no_rue"), res.getString("voie"), res.getString("code_postal"), res.getString("ville"), res.getString("pays"));
-            }
+		return nbLignes == 1;
+	}
 
+	@Override
+	public boolean delete(Client objet) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("delete from Client where id_client=?");
+		req.setInt(1, objet.getIdCl());
+		int nbLignes = req.executeUpdate();
 
-        } catch (SQLException sqle) {
-            System.out.println("pb dans insert" + sqle.getMessage());
-        }
-        return resultat;
+		return nbLignes == 1;
+	}
 
-    }
+	@Override
+	public List<Client> getByNom(Client client) throws SQLException {
+		// TODO Auto-generated method stub
+		ArrayList<Client> listeClient = new ArrayList<Client>();
 
-    @Override
-    public ArrayList<Client> findAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("select * from client where nom = ?");
+		req.setString(1, client.getNom());
+		ResultSet res = req.executeQuery();
+		if (res.next()) {
+			client = new Client(res.getInt("id_client"), res.getString("nom"), res.getString("prenom"),
+					res.getString("no_rue"), res.getString("voie"), res.getString("code_postal"),
+					res.getString("ville"), res.getString("pays"));
+		}
+
+		return listeClient;
+
+	}
+
+	@Override
+	public ArrayList<Client> findAll() throws SQLException {
+		// TODO Auto-generated method stub
+		ArrayList<Client> listeClient = new ArrayList<>();
+
+		Connection laConnexion = Connexion.getInstance().creeConnexion();
+
+		PreparedStatement requete = laConnexion.prepareStatement("select * from Client");
+
+		ResultSet res = requete.executeQuery();
+
+		if (res.next()) {
+			listeClient.add(new Client(res.getInt("id_client"), res.getString("nom"), res.getString("prenom"),
+					res.getString("no_rue"), res.getString("voie"), res.getString("code_postal"),
+					res.getString("ville"), res.getString("pays")));
+		}
+
+		return listeClient;
+
+	}
 
 }

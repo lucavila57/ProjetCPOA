@@ -2,10 +2,10 @@
 <!DOCTYPE properties SYSTEM
         "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="bdd">reina7u_java</entry>
-    <entry key="login">reian7u_appli</entry>
-    <entry key="pass">32015391</entry>
+    <entry key="bdd">vila2u_base</entry>
+    <entry key="login">vila2u_appli</entry>
+    <entry key="pass">32019694</entry>
     <entry key="port">3306</entry>
-    <entry key="adresse_ip">jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/reina7u_java?serverTimezone=Europe/Paris
+    <entry key="url">jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/vila2u_base?serverTimezone=Europe/Paris
     </entry>
 </properties>

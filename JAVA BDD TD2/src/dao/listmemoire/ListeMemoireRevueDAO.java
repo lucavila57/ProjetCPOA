@@ -1,6 +1,7 @@
 package dao.listmemoire;
 
 import dao.RevueDAO;
+
 import modele.metier.Revue;
 
 import java.util.ArrayList;
@@ -8,81 +9,78 @@ import java.util.List;
 
 public class ListeMemoireRevueDAO implements RevueDAO {
 
+	public static ListeMemoireRevueDAO Instance;
 
-    public static ListeMemoireRevueDAO Instance;
+	private List<Revue> donnees;
 
-    private List<Revue> donnees;
+	public static ListeMemoireRevueDAO getInstance() {
 
-    public static ListeMemoireRevueDAO getInstance() {
+		if (Instance == null) {
+			Instance = new ListeMemoireRevueDAO();
+		}
+		return Instance;
+	}
 
-        if (Instance == null) {
-            Instance = new ListeMemoireRevueDAO();
-        }
-        return Instance;
-    }
+	private ListeMemoireRevueDAO() {
 
-    private ListeMemoireRevueDAO() {
+		this.donnees = new ArrayList<Revue>();
 
-        this.donnees = new ArrayList<Revue>();
+		this.donnees.add(new Revue(1, "Les miserables", "Livre des miserables", 5, "neuf", 1));
+		this.donnees.add(new Revue(2, "Dora", "Livre de Dora l'exploratrice ", 3, "bon etat", 2));
 
-        this.donnees.add(new Revue(1, "Les miserables", "Livre des miserables", 5, "neuf", 0));
-        this.donnees.add(new Revue(2, "Dora", "Livre de Dora l'exploratrice ", 3, "bon etat", 0));
+	}
 
+	@Override
+	public Revue getById(int id) {
 
-    }
+		int idx = this.donnees.indexOf(new Revue(id, "Test", "Test", 0, "Test", 0));
+		if (idx == -1) {
+			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
+		} else {
+			return this.donnees.get(idx);
+		}
+	}
 
+	@Override
+	public boolean create(Revue objet) {
+		objet.setIdRevue(3);
+		while (this.donnees.contains(objet)) {
 
-    @Override
-    public Revue getById(int id) throws Exception {
-        @SuppressWarnings("null")
-        int idx = this.donnees.indexOf(new Revue(id, "Test", "Test", 0, "Test", 0));
-        if (idx == -1) {
-            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
-        } else {
-            return this.donnees.get(idx);
-        }
-    }
+			objet.setIdRevue(objet.getIdRevue() + 1);
+		}
+		boolean ok = this.donnees.add(objet);
 
-    @Override
-    public boolean create(Revue objet) throws Exception {
-        objet.setIdRevue(3);
-        while (this.donnees.contains(objet)) {
+		return ok;
+	}
 
-            objet.setIdRevue(objet.getIdRevue() + 1);
-        }
-        boolean ok = this.donnees.add(objet);
+	@Override
+	public boolean update(Revue objet) {
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+		} else {
 
-        return ok;
-    }
+			this.donnees.set(idx, objet);
+		}
 
-    @Override
-    public boolean update(Revue objet) throws Exception {
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
-        } else {
+		return true;
+	}
 
-            this.donnees.set(idx, objet);
-        }
+	@Override
+	public boolean delete(Revue objet) {
+		Revue supprime;
 
-        return true;
-    }
+		int idx = this.donnees.indexOf(objet);
+		if (idx == -1) {
+			throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+		} else {
+			supprime = this.donnees.remove(idx);
+		}
 
-    @Override
-    public boolean delete(Revue objet) throws Exception {
-        Revue supprime;
+		return objet.equals(supprime);
+	}
 
-        int idx = this.donnees.indexOf(objet);
-        if (idx == -1) {
-            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
-        } else {
-            supprime = this.donnees.remove(idx);
-        }
-
-        return objet.equals(supprime);
-    }
-
-    public ArrayList<Revue> findAll() {
-        return (ArrayList<Revue>) this.donnees;
-    }
+	public ArrayList<Revue> findAll() {
+		return (ArrayList<Revue>) this.donnees;
+	}
 }

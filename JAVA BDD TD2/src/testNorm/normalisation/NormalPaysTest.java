@@ -1,4 +1,4 @@
-package test.normalisation;
+package testNorm.normalisation;
 
 import normalisation.NormalisationPays;
 import org.junit.Test;

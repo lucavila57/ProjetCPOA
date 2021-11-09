@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Revue {
-    private int idRevue;
+    private int id_revue;
     private String titre;
     private String description;
     private double tarifNumero;
@@ -12,20 +12,20 @@ public class Revue {
     private int id_perio;
 
     //constructeur
-    public Revue(int idRevue, String titre, String description, double tarifNumero, String visuel, int id_perio) {
+    public Revue(int id_revue, String titre, String description, double tarifNumero, String visuel, int id_perio) {
         super();
-        this.setIdRevue(idRevue);
+        this.setId_revue(id_revue);
         this.setTitre(titre);
         this.setDescription(description);
         this.setTarifNumero(tarifNumero);
         this.setVisuel(visuel);
-        this.setId_Perio(id_perio);
+        this.setId_perio(id_perio);
     }
 
     //constructeur sans id
     public Revue(String titre, String description, double tarifNumero, String visuel, int id_perio) {
         super();
-        this.idRevue = -1;
+        this.id_revue = -1;
         this.titre = titre;
         this.description = description;
         this.tarifNumero = tarifNumero;
@@ -34,12 +34,12 @@ public class Revue {
     }
 
     //debut getter setter
-    public int getIdRevue() {
-        return idRevue;
+    public int getId_revue() {
+        return id_revue;
     }
 
-    public void setIdRevue(int idRevue) {
-        this.idRevue = idRevue;
+    public void setId_revue(int id_revue) {
+        this.id_revue = id_revue;
     }
 
     public String getTitre() {
@@ -47,40 +47,22 @@ public class Revue {
     }
 
     public void setTitre(String titre) {
-        Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
-        Matcher matcherTitre = pattern.matcher(this.getTitre());
-
-        if (this.getTitre() == null) {
-            throw new IllegalArgumentException("Titre ne peut etre null");
-        } else if ("".equals(this.getTitre())) {
-            throw new IllegalArgumentException("Titre non valide");
-        } else if (!matcherTitre.find()) {
-            throw new IllegalArgumentException("Titre non valide");
-        } else {
+       
             this.titre = titre;
 
         }
-    }
+    
 
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
-        Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
-        Matcher matcherDescription = pattern.matcher(this.getDescription());
-
-        if (this.getDescription() == null) {
-            throw new IllegalArgumentException("Description ne peut etre null");
-        } else if ("".equals(this.getDescription())) {
-            throw new IllegalArgumentException("Description non valide");
-        } else if (!matcherDescription.find()) {
-            throw new IllegalArgumentException("Description non valide");
-        } else {
+       
             this.description = description;
 
         }
-    }
+    
 
     public double getTarifNumero() {
         return tarifNumero;
@@ -95,33 +77,24 @@ public class Revue {
     }
 
     public void setVisuel(String visuel) {
-        Pattern pattern = Pattern.compile("^[A-Za-z-]+$");
-        Matcher matcherVisuel = pattern.matcher(this.getVisuel());
-
-        if (this.getVisuel() == null) {
-            throw new IllegalArgumentException("Visuel ne peut etre null");
-        } else if ("".equals(this.getVisuel())) {
-            throw new IllegalArgumentException("Visuel non valide");
-        } else if (!matcherVisuel.find()) {
-            throw new IllegalArgumentException("Visuel non valide");
-        } else {
+        
             this.visuel = visuel;
 
         }
 
-    }
+    
 
-    public int getId_Perio() {
+    public int getId_perio() {
         return id_perio;
     }
 
-    public void setId_Perio(int id_perio) {
+    public void setId_perio(int id_perio) {
         this.id_perio = id_perio;
     }
 
     @Override
     public String toString() {
-        return "Revue [idRevue=" + idRevue + ", titre=" + titre + ", description=" + description + ", tarifNumero="
+        return "Revue [id_revue=" + id_revue + ", titre=" + titre + ", description=" + description + ", tarifNumero="
                 + tarifNumero + ", visuel=" + visuel + ", id_perio=" + id_perio + "]";
     }
 
@@ -134,7 +107,7 @@ public class Revue {
         if (getClass() != obj.getClass())
             return false;
         Revue other = (Revue) obj;
-        if (idRevue != other.idRevue)
+        if (id_revue != other.id_revue)
             return false;
         return true;
     }

@@ -2,8 +2,10 @@ package application;
 
 
 
+import java.io.IOException;
 
 import java.net.URL;
+
 
 
 
@@ -16,11 +18,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 
-public class Main extends Application {
+public class Main extends Application  {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)throws IOException {
         try {
-            URL fxmlURL=getClass().getResource("Main2.fxml");
+            URL fxmlURL=getClass().getResource("vue/fenetre.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root,640,400);
@@ -36,3 +38,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

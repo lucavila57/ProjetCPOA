@@ -10,13 +10,13 @@ public interface AbonnementDAO extends DAO<Abonnement>{
 	Abonnement getById(int idCl, int idRevue) throws Exception;
 
 	@Override
-	boolean create(Abonnement abonnement) throws Exception;
+	boolean create(Abonnement objet) throws Exception;
 
 	@Override
-	boolean delete(Abonnement abonnement) throws Exception;
+	boolean delete(Abonnement objet) throws Exception;
 
 	@Override
-	boolean update(Abonnement abonnement) throws Exception;
+	boolean update(Abonnement objet) throws Exception;
 	
 	@Override
 	Abonnement getById(int id)throws Exception;

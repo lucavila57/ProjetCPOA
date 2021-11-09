@@ -1,10 +1,15 @@
 package main;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import dao.DAOFactory;
 import dao.Persistance;
+import modele.metier.Abonnement;
+import modele.metier.Client;
 import modele.metier.Periodicite;
+import modele.metier.Revue;
 
 
 
@@ -76,7 +81,196 @@ public class Main {
 					daos.getPeriodiciteDAO().create(per);
 					Init();
 				}
-	}
+				//table Periodicite, methode de suppression
+				else if(b_per&&delete) {			
+					System.out.println("supprimer quelle ligne?");
+					int id_periodicite = sc.nextInt();
+					
+					Periodicite per = new Periodicite(id_periodicite, "");
+					daos.getPeriodiciteDAO().delete(per);
+					Init();
+					
+				}
+
+				//table Periodicite, methode de modification
+				else if(b_per&&update) {
+					System.out.println("modifier quelle ligne?");
+					int id_periodicite = sc.nextInt();
+					System.out.println("quel libelle?");
+					sc.nextLine();
+					String libelle = sc.nextLine();
+					
+					Periodicite per = new Periodicite(id_periodicite, libelle);
+					daos.getPeriodiciteDAO().update(per);
+					Init();
+				}
+
+				//table Abonnement, methode d'ajout
+				else if(b_abo&&create) {
+					DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					System.out.println("quel id_client?");
+					int id_client = sc.nextInt();
+					System.out.println("quel id_revue?");
+					int id_revue = sc.nextInt();
+					System.out.println("quelle date de debut?");
+					sc.nextLine();
+					LocalDate date_debut = LocalDate.parse(sc.nextLine(), formatage);
+					System.out.println("quelle date de fin?");
+					LocalDate date_fin = LocalDate.parse(sc.nextLine(), formatage);
+					
+					Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );
+					daos.getAbonnementDAO().create(abo);
+					Init();
+				}
+
+				//table Abonnement, methode de suppression
+				else if(b_abo&&delete) {
+					System.out.println("supprimer quel client?");
+					int id_client = sc.nextInt();
+					System.out.println("supprimer pour quelle revue?");
+					int id_revue = sc.nextInt();
+					
+					Abonnement abo = new Abonnement(null,null,id_client, id_revue);
+					daos.getAbonnementDAO().delete(abo);
+					Init();
+				}
+
+				//table Abonnement, methode de modification
+				else if(b_abo&&update) {
+					DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					System.out.println("modifier quelle ligne?");
+					int id_client = sc.nextInt();
+					System.out.println("quel id_revue?");
+					int id_revue = sc.nextInt();
+					System.out.println("quelle date de debut?");
+					sc.nextLine();
+					LocalDate date_debut = LocalDate.parse(sc.nextLine(), formatage);
+					System.out.println("quelle date de fin?");
+					LocalDate date_fin = LocalDate.parse(sc.nextLine(), formatage);
+					
+					Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
+					daos.getAbonnementDAO().update(abo);
+					Init();
+				}
+
+				//table Client, methode d'ajout
+				else if(b_cli&&create) {
+					System.out.println("quel id_client?");
+					int id_client = sc.nextInt();
+					System.out.println("quel nom?");
+					sc.nextLine();
+					String nom = sc.nextLine();
+					System.out.println("quel prenom?");
+					String prenom = sc.nextLine();
+					System.out.println("quelle no de rue?");
+					String no_rue = sc.nextLine();
+					System.out.println("quelle voie?");
+					String voie = sc.nextLine();
+					System.out.println("quel code postal?");
+					String code_postal = sc.nextLine();
+					System.out.println("quelle ville?");
+					String ville = sc.nextLine();
+					System.out.println("quel pays?");
+					String pays = sc.nextLine();
+					
+					Client cli = new Client(id_client, nom, prenom, no_rue, voie, code_postal, ville, pays);
+					daos.getClientDAO().create(cli);
+					Init();
+				}
+
+				//table Client, methode de suppression
+				else if(b_cli&&delete) {
+					System.out.println("supprimer quelle ligne?");
+					int id_client = sc.nextInt();
+					
+					Client cli = new Client(id_client, "", "", "", "", "", "", "");
+					daos.getClientDAO().delete(cli);
+					Init();
+				}
+
+				//table Client, methode de modif
+				else if(b_cli&&update) {
+					System.out.println("modifier quelle ligne?");
+					int id_client = sc.nextInt();
+					System.out.println("quel nom?");
+					sc.nextLine();
+					String nom = sc.nextLine();
+					System.out.println("quel prenom?");
+					String prenom = sc.nextLine();
+					System.out.println("quelle rue?");
+					String no_rue = sc.nextLine();
+					System.out.println("quelle voie?");
+					String voie = sc.nextLine();
+					System.out.println("quel code postal?");
+					String code_postal = sc.nextLine();
+					System.out.println("quelle ville?");
+					String ville = sc.nextLine();
+					System.out.println("quel pays?");
+					String pays = sc.nextLine();
+					
+					Client cli = new Client(id_client, nom, prenom, no_rue, voie, code_postal, ville, pays);
+					daos.getClientDAO().update(cli);
+					Init();
+				}
+
+				//table Revue, methode d'ajout
+				else if(b_rev&&create) {
+					System.out.println("quel id_revue?");
+					int id_revue = sc.nextInt();
+					System.out.println("quel titre?");
+					sc.nextLine();
+					String titre = sc.nextLine();
+					System.out.println("quelle description?");
+					String description = sc.nextLine();
+					System.out.println("quel tarif?");
+					Double tarif_numero = sc.nextDouble();
+					System.out.println("quel visuel?");
+					sc.nextLine();
+					String visuel = sc.nextLine();
+					System.out.println("quel id_periode?");
+					int id_periodicite = sc.nextInt();
+					
+					Revue rev = new Revue(id_revue, titre, description, tarif_numero, visuel, id_periodicite);
+					daos.getRevueDAO().create(rev);
+					Init();
+				}
+
+				//table Revue, methode de suppression
+				else if(b_rev&&delete) {
+					System.out.println("supprimer quelle ligne?");
+					int id_revue = sc.nextInt();
+					
+					Revue rev = new Revue(id_revue, "", "", 0, "", 1);
+					daos.getRevueDAO().delete(rev);
+					Init();
+				}
+
+				//table Revue, methode de modif
+				else if(b_rev&&update) {
+					System.out.println("modifier quelle ligne?");
+					int id_revue = sc.nextInt();
+					System.out.println("quel titre?");
+					sc.nextLine();
+					String titre = sc.nextLine();
+					System.out.println("quelle description?");
+					String description = sc.nextLine();
+					System.out.println("quel tarif?");
+					Double tarif_numero = sc.nextDouble();
+					System.out.println("quel visuel?");
+					sc.nextLine();
+					String visuel = sc.nextLine();
+					System.out.println("quel id_periode?");
+					int id_periodicite = sc.nextInt();
+								
+					Revue rev = new Revue(id_revue, titre, description, tarif_numero, visuel, id_periodicite);
+					daos.getRevueDAO().update(rev);
+					Init();
+				}
+				
+				
+				
+			}
+	
 	public static void Init() {
 		b_per=false;
 		b_abo=false;

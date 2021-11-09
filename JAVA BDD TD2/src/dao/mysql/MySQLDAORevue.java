@@ -51,12 +51,12 @@ public class MySQLDAORevue implements RevueDAO {
 		req.setString(2, objet.getDescription());
 		req.setDouble(3, objet.getTarifNumero());
 		req.setString(4, objet.getVisuel());
-		req.setInt(5, objet.getId_Perio());
+		req.setInt(5, objet.getId_perio());
 
 		int nbLignes = req.executeUpdate();
 		ResultSet res = req.getGeneratedKeys();
 		if (res.next()) {
-			objet.setIdRevue(res.getInt(1));
+			objet.setId_revue(res.getInt(1));
 		}
 		return nbLignes == 1;
 	}
@@ -66,14 +66,14 @@ public class MySQLDAORevue implements RevueDAO {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement(
-				"Update Revue set titre=?, description=?, tarif_numero=?,visuel=?, periodicite=? where id_revue=?");
+				"Update Revue set titre=?, description=?, tarif_numero=?,visuel=?, id_periodicite=? where id_revue=?");
 
-		req.setInt(1, objet.getIdRevue());
+		req.setInt(1, objet.getId_revue());
 		req.setString(2, objet.getTitre());
 		req.setString(3, objet.getDescription());
 		req.setDouble(4, objet.getTarifNumero());
 		req.setString(5, objet.getVisuel());
-		req.setInt(6, objet.getId_Perio());
+		req.setInt(6, objet.getId_perio());
 
 		int nbLignes = req.executeUpdate();
 		return nbLignes == 1;
@@ -84,7 +84,7 @@ public class MySQLDAORevue implements RevueDAO {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement("delete from Revue where id_revue=?");
-		req.setInt(1, objet.getIdRevue());
+		req.setInt(1, objet.getId_revue());
 		int nbLignes = req.executeUpdate();
 
 		return nbLignes == 1;

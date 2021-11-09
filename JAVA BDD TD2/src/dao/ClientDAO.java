@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface ClientDAO extends DAO<Client> {
 
-    public List<Client> getByNom(Client client) throws Exception;
+    public List<Client> getByNom(Client objet) throws Exception;
 
     @Override
-	boolean create(Client client) throws Exception;
+	boolean create(Client objet) throws Exception;
 
 	@Override
-	boolean delete(Client client) throws Exception;
+	boolean delete(Client objet) throws Exception;
 
 	@Override
-	boolean update(Client client) throws Exception;
+	boolean update(Client objet) throws Exception;
 	
 	@Override
 	Client getById(int id) throws Exception;

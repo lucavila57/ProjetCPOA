@@ -57,7 +57,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		req.setDate(1, java.sql.Date.valueOf(objet.getDateDeb()));
 		req.setDate(2, java.sql.Date.valueOf(objet.getDateFin()));
 		req.setInt(3, objet.getIdCl());
-		req.setInt(4, objet.getIdRevue());
+		req.setInt(4, objet.getId_revue());
 
 		int nbLignes = req.executeUpdate();
 		ResultSet res = req.getGeneratedKeys();
@@ -78,7 +78,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		req.setDate(1, java.sql.Date.valueOf(objet.getDateDeb()));
 		req.setDate(2, java.sql.Date.valueOf(objet.getDateFin()));
 		req.setInt(3, objet.getIdCl());
-		req.setInt(4, objet.getIdRevue());
+		req.setInt(4, objet.getId_revue());
 
 		int nbLignes = req.executeUpdate();
 
@@ -93,7 +93,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		PreparedStatement req = laConnexion
 				.prepareStatement("delete from Abonnement where id_client = ? and id_revue = ?");
 		req.setInt(1, objet.getIdCl());
-		req.setInt(2, objet.getIdRevue());
+		req.setInt(2, objet.getId_revue());
 		int nbLignes = req.executeUpdate();
 
 		return nbLignes == 1;

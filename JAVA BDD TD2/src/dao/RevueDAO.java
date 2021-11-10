@@ -15,7 +15,7 @@ public interface RevueDAO extends DAO<Revue> {
 	boolean update(Revue objet) throws Exception;
 	
 	@Override
-	Revue getById(int id) throws Exception;
+	Revue getById(int id_revue) throws Exception;
 	
 	@Override
 	ArrayList<Revue> findAll() throws Exception;

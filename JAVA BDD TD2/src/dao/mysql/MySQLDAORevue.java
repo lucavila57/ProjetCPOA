@@ -23,16 +23,16 @@ public class MySQLDAORevue implements RevueDAO {
 	}
 
 	@Override
-	public Revue getById(int idRevue) throws SQLException {
+	public Revue getById(int id_revue) throws SQLException {
 		// TODO Auto-generated method stub
 		Revue rev = null;
 
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement("select * from Revue where id_revue=?");
-		requete.setInt(1, idRevue);
+		requete.setInt(1, id_revue);
 		ResultSet res = requete.executeQuery();
 		if (res.next()) {
-			rev = new Revue(idRevue, res.getString("titre"), res.getString("description"),
+			rev = new Revue(id_revue, res.getString("titre"), res.getString("description"),
 					res.getDouble("tarif_numero"), res.getString("visuel"), res.getInt("id_periodicite"));
 		}
 

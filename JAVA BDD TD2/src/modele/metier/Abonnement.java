@@ -9,12 +9,12 @@ public class Abonnement {
     private LocalDate dateDeb;
     private LocalDate dateFin;
     private int idCl;
-    private int idRevue;
+    private int id_revue;
 
     
 
     //constructeur
-    public Abonnement(int idAbo, LocalDate dateDeb, LocalDate dateFin, int idCl, int idRevue) {
+    public Abonnement(int idAbo, LocalDate dateDeb, LocalDate dateFin, int idCl, int id_revue) {
         super();
         
         this.setIdAbo(idAbo);
@@ -22,11 +22,11 @@ public class Abonnement {
         this.setDateDeb(dateDeb);
         this.setDateFin(dateFin);
         this.setIdCl(idCl);
-        this.setIdRevue(idRevue);
+        this.setIdRevue(id_revue);
     }
     //constructeur sans id
-    public Abonnement(LocalDate dateDeb, LocalDate dateFin, int idCl, int idRevue) {
-        this(-1, dateDeb, dateFin, idCl, idRevue);
+    public Abonnement(LocalDate dateDeb, LocalDate dateFin, int idCl, int id_revue) {
+        this(-1, dateDeb, dateFin, idCl, id_revue);
     }
     
 
@@ -57,16 +57,16 @@ public class Abonnement {
     public void setIdCl(int idCl) {
         this.idCl = idCl;
     }
-    public int getIdRevue() {
-        return idRevue;
+    public int getId_revue() {
+        return id_revue;
     }
     public void setIdRevue(int idRevue) {
-        this.idRevue = idRevue;
+        this.id_revue = idRevue;
     }
     @Override
     public String toString() {
         return "Abonnement [idAbo=" + idAbo + ", dateDeb=" + dateDeb + ", dateFin=" + dateFin + ", Cl=" + idCl
-                + ", Revue=" + idRevue + "]";
+                + ", Revue=" + id_revue + "]";
     }
     //fin getter setter
     
@@ -81,7 +81,7 @@ public class Abonnement {
             return false;
         Abonnement other = (Abonnement) obj;
         return Objects.equals(dateDeb, other.dateDeb) && Objects.equals(dateFin, other.dateFin) && idAbo == other.idAbo
-                && idCl == other.idCl && idRevue == other.idRevue;
+                && idCl == other.idCl && id_revue == other.id_revue;
     }
     
     

@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -191,6 +192,7 @@ public class controlAccueil implements Initializable {
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des revues");
 			stage1.show();
+			
 		}					
 	}
 }

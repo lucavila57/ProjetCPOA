@@ -74,7 +74,7 @@ public class controlRevue implements Initializable {
 		colIdRevue.setCellValueFactory(new PropertyValueFactory<Revue, String>("id_revue"));
 		colTitre.setCellValueFactory(new PropertyValueFactory<Revue, String>("titre"));
 		colDescription.setCellValueFactory(new PropertyValueFactory<Revue, String>("description"));
-		colTarif.setCellValueFactory(new PropertyValueFactory<Revue, String>("tarif_numero"));
+		colTarif.setCellValueFactory(new PropertyValueFactory<Revue, String>("tarifNumero"));
 		colPeriodicite.setCellValueFactory(new PropertyValueFactory<Revue, String>("id_perio"));
 		colVisuel.setCellValueFactory(new PropertyValueFactory<Revue, String>("visuel"));
 

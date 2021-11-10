@@ -109,7 +109,7 @@ public class controlAccueil implements Initializable {
 			stage.close();
 			Stage stage1 = new Stage();
 			
-			URL fxmlURL = getClass().getResource("fenetres/fenetre_ajout_abonnement.fxml");
+			URL fxmlURL = getClass().getResource("vue.vueAbonnement.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 705.0, 600.0);
@@ -146,7 +146,7 @@ public class controlAccueil implements Initializable {
 			stage.close();
 			Stage stage1 = new Stage();
 			
-			URL fxmlURL = getClass().getResource("fenetres/fenetre_ajout_client.fxml");
+			URL fxmlURL = getClass().getResource("vue/vueClient.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 758.0, 636.0);

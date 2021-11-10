@@ -1,28 +1,23 @@
 package application;
 
-import java.awt.Label;
-
-import java.awt.TextField;
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import modele.metier.Periodicite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import modele.metier.Periodicite;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 
 public class controlPeriodicite implements Initializable{
 	
@@ -32,7 +27,7 @@ public class controlPeriodicite implements Initializable{
 	@FXML
 	private TextField txt_libelle;
 	@FXML
-	private Label affichage;
+	private Label lbl_recap;
 	@FXML
 	private Button btn_creer;
 	@FXML
@@ -90,7 +85,7 @@ public class controlPeriodicite implements Initializable{
 	@FXML
 	public void valider() throws Exception{
 		if (txt_libelle.getText().trim().isEmpty()) {			
-			affichage.setText("Les champs ne sont pas tous valides");
+			lbl_recap.setText("Les champs ne sont pas tous valides");
 
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
@@ -102,11 +97,11 @@ public class controlPeriodicite implements Initializable{
 		else if(b_create) {
 			try {
 				String libelle = txt_libelle.getText().trim();
-				affichage.setText(toString());
+				lbl_recap.setText(toString());
 
 				controlAccueil.daoper.create(new Periodicite(libelle));
 			} catch (Exception e) {
-				affichage.setText("");
+				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La creation a echouee");
@@ -119,11 +114,11 @@ public class controlPeriodicite implements Initializable{
 		else if(b_update) {
 			try {
 				String libelle = txt_libelle.getText().trim();
-				affichage.setText(toString());
+				lbl_recap.setText(toString());
 
 				controlAccueil.daoper.update(new Periodicite(tblPeriodicite.getSelectionModel().getSelectedItem().getId_perio(), libelle));
 			} catch (Exception e) {
-				affichage.setText("");
+				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La modification a echouee");
@@ -163,7 +158,7 @@ public class controlPeriodicite implements Initializable{
 	        tblPeriodicite.getItems().addAll(period);			
 		}
 		catch (Exception e) {
-			affichage.setText("");
+			lbl_recap.setText("");
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la suppression de votre Periode");
@@ -189,7 +184,7 @@ public class controlPeriodicite implements Initializable{
 			
 		}
 		catch (Exception e) {
-			affichage.setText("");
+			lbl_recap.setText("");
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la modification de votre Periode");

@@ -45,7 +45,7 @@ public class controlClient implements Initializable{
 	@FXML
 	private TextField txt_pays;
 	@FXML
-	private Label affichage;
+	private Label lbl_recap;
 	@FXML
 	private Button btn_creer;
 	@FXML
@@ -119,7 +119,7 @@ public class controlClient implements Initializable{
 		if ((txt_nom.getText().trim().isEmpty()) || (txt_prenom.getText().trim().isEmpty())
 				|| (txt_no_rue.getText().trim().isEmpty()) || (txt_voie.getText().trim().isEmpty()) || (txt_codePostal.getText().trim().isEmpty()) || 
 				(txt_ville.getText().trim().isEmpty()) || (txt_pays.getText().trim().isEmpty())) {			
-			affichage.setText("Les champs ne sont pas tous valides");
+			lbl_recap.setText("Les champs ne sont pas tous valides");
 
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
@@ -139,11 +139,11 @@ public class controlClient implements Initializable{
 				String pays = txt_pays.getText().trim();
 
 			    controlAccueil.daocli.create(new Client(nom, prenom, no_rue, voie, codePostal, ville, pays ));
-				affichage.setText(toString());
+				lbl_recap.setText(toString());
 
 			} 
 			catch (Exception e) {
-				affichage.setText("");
+				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La creation a echouee");
@@ -164,10 +164,10 @@ public class controlClient implements Initializable{
 				String pays = txt_pays.getText().trim();
 
 				controlAccueil.daocli.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),nom, prenom, no_rue, voie, codePostal,ville,pays ));
-				affichage.setText(toString());
+				lbl_recap.setText(toString());
 			} 
 			catch (Exception e) {
-				affichage.setText("");
+				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La modification a echouee");
@@ -212,7 +212,7 @@ public class controlClient implements Initializable{
 	        tblClient.getItems().addAll(clients);
 		} 
 		catch (Exception e) {
-			affichage.setText("");
+			lbl_recap.setText("");
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la suppression de votre client");
@@ -242,7 +242,7 @@ public class controlClient implements Initializable{
 			b_update=true;
 		}
 		catch (Exception e) {
-			affichage.setText("");
+			lbl_recap.setText("");
 			Alert alert=new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la modification de votre Client");

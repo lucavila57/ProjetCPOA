@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="636.0" prefWidth="758.0" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlClient">
+<VBox alignment="CENTER" prefHeight="636.0" prefWidth="758.0" styleClass="background"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlClient">
    <children>
       <GridPane fx:id="form" alignment="CENTER" disable="true" prefHeight="363.0" prefWidth="705.0" styleClass="background">
         <columnConstraints>
@@ -37,7 +37,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></Label>
-            <Label text="Numéro de rue :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label text="No de rue :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></Label>
@@ -59,9 +59,9 @@
                </GridPane.margin></Label>
             <TextField fx:id="txt_nom" maxWidth="150.0" GridPane.columnIndex="1" />
             <TextField fx:id="txt_prenom" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txt_noRue" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txt_no_rue" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txt_voie" maxWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txt_codePostal" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txt_cde" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="txt_ville" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="txt_pays" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
@@ -76,14 +76,14 @@
       </FlowPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="25.0" prefWidth="600.0">
          <children>
-            <Label fx:id="label_recap" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
+            <Label fx:id="lbl_recap" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
          </children>
       </FlowPane>
       <VBox alignment="CENTER" prefHeight="161.0" prefWidth="793.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="151.0" prefWidth="705.0">
                <children>
-                  <TableView fx:id="tblClient" prefHeight="146.0" prefWidth="662.0" styleClass="tableau">
+                  <TableView fx:id="tblClient" prefHeight="146.0" prefWidth="670.0" styleClass="tableau">
                      <opaqueInsets>
                         <Insets left="10.0" />
                      </opaqueInsets>
@@ -94,16 +94,22 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <VBox alignment="CENTER" prefHeight="151.0" prefWidth="122.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
             </HBox>
          </children>
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" />
             <Button fx:id="btn_creer" mnemonicParsing="false" onAction="#create" prefWidth="90.0" text="Creer" />
-            <Button fx:id="btn_modifier" mnemonicParsing="false" onAction="#update" prefWidth="90.0" text="Modifier" />
-            <Button fx:id="btn_supprimer" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="90.0" text="Supprimer" />
-            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retour" prefWidth="90.0" text="Retour" />
+            <Button fx:id="modifier" mnemonicParsing="false" onAction="#update" prefWidth="90.0" text="Modifier" />
+            <Button fx:id="supprimer" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="90.0" text="Supprimer" />
+            <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" prefWidth="90.0" text="Retour" />
          </children>
       </HBox>
    </children>

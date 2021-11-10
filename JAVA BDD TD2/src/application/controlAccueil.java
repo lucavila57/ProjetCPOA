@@ -72,7 +72,7 @@ public class controlAccueil implements Initializable {
 			stage.close();
 			Stage stage1 = new Stage();
 			
-			URL fxmlURL = getClass().getResource("fenetres/fenetre_ajout_periodicite.fxml");
+			URL fxmlURL = getClass().getResource("vue/vuePeriodicite.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 625.0, 322.0);

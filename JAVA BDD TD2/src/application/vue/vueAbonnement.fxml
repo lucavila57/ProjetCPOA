@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="705.0" styleClass="background" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlAbonnement">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="705.0" styleClass="background"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlAbonnement">
    <children>
       <GridPane fx:id="form" alignment="CENTER" disable="true" maxWidth="850.0" prefHeight="270.0" prefWidth="962.0" styleClass="background">
         <columnConstraints>
@@ -45,8 +45,8 @@
                </GridPane.margin></Label>
             <DatePicker fx:id="date_fin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <DatePicker fx:id="date_deb" GridPane.columnIndex="1" />
-            <ComboBox fx:id="txt_idRevue" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="txt_idClient" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cbx_idRevue" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="cbx_idClient" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <VBox.margin>
             <Insets />

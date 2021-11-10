@@ -40,7 +40,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		requete.setInt(2, idRevue);
 		ResultSet res = requete.executeQuery();
 		if (res.next()) {
-			abo = new Abonnement(null, null, idCl, idCl);
+			abo = new Abonnement(null,null, idCl, idCl);
 		}
 
 		return abo;

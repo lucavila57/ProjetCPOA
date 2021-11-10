@@ -1,7 +1,8 @@
 package application;
 
-import java.awt.Label;
-import java.awt.TextField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+
 import java.io.IOException;
 
 import java.net.URL;

@@ -75,7 +75,7 @@ public class controlAccueil implements Initializable {
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 625.0, 322.0);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
 			
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des Periodicite");
@@ -112,7 +112,7 @@ public class controlAccueil implements Initializable {
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 705.0, 600.0);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
 			
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des Abonnements");
@@ -149,7 +149,7 @@ public class controlAccueil implements Initializable {
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 758.0, 636.0);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
 			
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des Clients");
@@ -182,7 +182,7 @@ public class controlAccueil implements Initializable {
 			stage.close();
 			Stage stage1 = new Stage();
 			
-			URL fxmlURL = getClass().getResource("/vue/Main3.fxml");
+			URL fxmlURL = getClass().getResource("vue/Main3.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 900.0, 623.0);

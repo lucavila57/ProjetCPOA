@@ -53,13 +53,13 @@ public class controlRevue implements Initializable {
 	@FXML
 	private Button btn_valider;
 	@FXML
-	private Button retour;
+	private Button btn_retour;
 	@FXML
 	private GridPane form;
 	@FXML
 	private TableView<Revue> tblRevue;
 	@FXML
-	private Window vue;
+	private Window vue1;
 	
 	@SuppressWarnings("unchecked")
 	public TableView<Revue> tblRevue() throws Exception {
@@ -103,7 +103,7 @@ public class controlRevue implements Initializable {
 		} 
 		catch (Exception e) {
 			Alert alert=new Alert(Alert.AlertType.ERROR);
-			alert.initOwner(vue);
+			alert.initOwner(vue1);
 			alert.setTitle("Probleme a l'initialisation");
 			alert.setHeaderText("Un probleme est survenue lors de l'initialisation de vos Revues");
 			alert.setContentText(e.toString());
@@ -119,7 +119,7 @@ public class controlRevue implements Initializable {
 		if ((txt_titre.getText().trim().isEmpty()) || (txt_description.getText().trim().isEmpty()) || (txt_tarif.getText().trim().isEmpty())
 				|| (txt_visuel.getText().trim().isEmpty()) || (period == null)) {
 			Alert alert=new Alert(Alert.AlertType.ERROR);
-			alert.initOwner(vue);
+			alert.initOwner(vue1);
 			alert.setTitle("Erreur lors de la saisie");
 			alert.setHeaderText("Un ou plusieurs champs sont mal remplis.");
 			alert.showAndWait();
@@ -137,7 +137,7 @@ public class controlRevue implements Initializable {
 						new Revue(titre, description, tarif, visuel, period.getId_perio()));
 			} catch (Exception e) {
 				Alert alert=new Alert(Alert.AlertType.ERROR);
-				alert.initOwner(vue);
+				alert.initOwner(vue1);
 				alert.setTitle("La creation a echouee");
 				alert.setHeaderText("Un probleme est survenue lors de la creation de votre Revue");
 				alert.setContentText(e.toString());
@@ -157,7 +157,7 @@ public class controlRevue implements Initializable {
 			}
 			catch (Exception e) {
 				Alert alert=new Alert(Alert.AlertType.ERROR);
-				alert.initOwner(vue);
+				alert.initOwner(vue1);
 				alert.setTitle("La modification a echouee");
 				alert.setHeaderText("Un probleme est survenue lors de la modification de votre Revue");
 				alert.setContentText(e.toString());
@@ -201,7 +201,7 @@ public class controlRevue implements Initializable {
 		} 
 		catch (Exception e) {
 			Alert alert=new Alert(Alert.AlertType.ERROR);
-			alert.initOwner(vue);
+			alert.initOwner(vue1);
 			alert.setTitle("Un probleme est survenue lors de la suppression de votre Revue");
 			alert.setHeaderText("Aucune Revue selectionnee");
 			alert.setContentText(e.toString());
@@ -228,7 +228,7 @@ public class controlRevue implements Initializable {
 		}
 		catch (Exception e) {
 			Alert alert=new Alert(Alert.AlertType.ERROR);
-			alert.initOwner(vue);
+			alert.initOwner(vue1);
 			alert.setTitle("Un probleme est survenue lors de la modification de votre Revue");
 			alert.setHeaderText("Aucune Revue selectionnee");
 			alert.setContentText(e.toString());
@@ -243,15 +243,15 @@ public class controlRevue implements Initializable {
 		controlAccueil.daorev=null;
 		controlAccueil.daoper=null;
 		
-		Stage stage =(Stage) retour.getScene().getWindow();
+		Stage stage =(Stage) btn_retour.getScene().getWindow();
 		stage.close();
 		Stage stage1 = new Stage();
 		
-		URL fxmlURL = getClass().getResource("/vue/fenetre.fxml");
+		URL fxmlURL = getClass().getResource("vue/fenetre.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 		Node root = fxmlLoader.load();
 		Scene scene = new Scene((VBox) root, 498.0, 112.0);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
 		
 		stage1.setScene(scene);
 		stage1.setTitle("Accueil");

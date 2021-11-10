@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxWidth="900.0" prefHeight="623.0" prefWidth="900.0" styleClass="background" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlRevue">
+<VBox alignment="CENTER" maxWidth="900.0" prefHeight="623.0" prefWidth="900.0" styleClass="background"  xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlRevue">
    <children>
       <GridPane fx:id="form" alignment="CENTER_RIGHT" disable="true" maxWidth="850.0" prefHeight="320.0" prefWidth="962.0">
         <columnConstraints>
@@ -67,7 +67,7 @@
       </GridPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" maxWidth="850.0" prefHeight="32.0" prefWidth="994.0" rowValignment="BASELINE">
          <children>
-            <Button fx:id="txt_valider" disable="true" mnemonicParsing="false" onAction="#valider" prefWidth="70.0" text="Valider" />
+            <Button fx:id="btn_valider" disable="true" mnemonicParsing="false" onAction="#valider" prefWidth="70.0" text="Valider" />
          </children>
       </FlowPane>
       <FlowPane alignment="CENTER" maxWidth="850.0" prefHeight="36.0" prefWidth="829.0">

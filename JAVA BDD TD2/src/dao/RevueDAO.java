@@ -6,13 +6,13 @@ import modele.metier.Revue;
 
 public interface RevueDAO extends DAO<Revue> {
 	@Override
-	boolean create(Revue revue) throws Exception;
+	boolean create(Revue objet) throws Exception;
 
 	@Override
-	boolean delete(Revue revue) throws Exception;
+	boolean delete(Revue objet) throws Exception;
 
 	@Override
-	boolean update(Revue revue) throws Exception;
+	boolean update(Revue objet) throws Exception;
 	
 	@Override
 	Revue getById(int id) throws Exception;

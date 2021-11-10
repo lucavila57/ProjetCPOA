@@ -50,7 +50,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		int nbLignes = req.executeUpdate();
 		ResultSet res = req.getGeneratedKeys();
 		if (res.next()) {
-			objet.setIdPerio(res.getInt(1));
+			objet.setId_perio(res.getInt(1));
 		}
 		return nbLignes == 1;
 	}
@@ -59,9 +59,9 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 	public boolean update(Periodicite objet) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set libelle=? where id=?");
+		PreparedStatement req = laConnexion.prepareStatement("update Periodicite set libelle=? where id_periodicite=?");
 		req.setString(1, objet.getLibelle());
-		req.setInt(2, objet.getIdPerio());
+		req.setInt(2, objet.getId_perio());
 		int nbLignes = req.executeUpdate();
 
 		return nbLignes == 1;
@@ -71,8 +71,8 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 	public boolean delete(Periodicite objet) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id=?");
-		req.setInt(1, objet.getIdPerio());
+		PreparedStatement req = laConnexion.prepareStatement("delete from Periodicite where id_periodicite=?");
+		req.setInt(1, objet.getId_perio());
 		int nbLignes = req.executeUpdate();
 
 		return nbLignes == 1;

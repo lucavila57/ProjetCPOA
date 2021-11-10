@@ -43,10 +43,10 @@ public class ListeMemoireRevueDAO implements RevueDAO {
 
 	@Override
 	public boolean create(Revue objet) {
-		objet.setIdRevue(3);
+		objet.setId_revue(3);
 		while (this.donnees.contains(objet)) {
 
-			objet.setIdRevue(objet.getIdRevue() + 1);
+			objet.setId_revue(objet.getId_revue() + 1);
 		}
 		boolean ok = this.donnees.add(objet);
 

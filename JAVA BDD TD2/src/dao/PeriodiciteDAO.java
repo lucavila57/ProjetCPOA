@@ -9,10 +9,10 @@ public interface PeriodiciteDAO extends DAO<Periodicite> {
 	boolean create(Periodicite objet) throws Exception;
 
 	@Override
-	boolean delete(Periodicite periodicite) throws Exception;
+	boolean delete(Periodicite objet) throws Exception;
 
 	@Override
-	boolean update(Periodicite periodicite) throws Exception;
+	boolean update(Periodicite objet) throws Exception;
 	
 	@Override
 	Periodicite getById(int id) throws Exception;

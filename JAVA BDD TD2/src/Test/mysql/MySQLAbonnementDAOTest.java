@@ -16,7 +16,7 @@ import modele.metier.Abonnement;
 
 
 class MySQLAbonnementDAOTest {
-	AbonnementDAO mabo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
+	AbonnementDAO testabo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
 
 	@Test
 	void testCreate() throws Exception {
@@ -26,56 +26,57 @@ class MySQLAbonnementDAOTest {
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
 		Abonnement abo = new Abonnement(date_debut, date_fin,id_client,id_revue);
-		if(!mabo.create(abo)) {
-			fail("Pas implemente");
+		if(!testabo.create(abo)) {
+			fail("non créer");
 		}
-		mabo.delete(abo);
+		testabo.delete(abo);
 	}
 	
-	@Test
-	void testDelete() throws Exception {
-		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-		int id_client = 33;
-		int  id_revue = 44;
-		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
-		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );
-		if(!mabo.delete(abo)) {
-			fail("Pas supprime");
-		}	
-	}
+	
 
 	@Test
 	void testUpdate() throws Exception {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		int id_client = 55;
-		int  id_revue = 66;
+		int id_client = 22;
+		int  id_revue = 33;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
 		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );
-		if(!mabo.update(abo)) {
-			fail("Pas modifie");
+		if(!testabo.update(abo)) {
+			fail("non modifie");
 		}	
-		mabo.delete(abo);
+		testabo.delete(abo);
 	}
 
+	@Test
+	void testDelete() throws Exception {
+		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		int id_client = 33;
+		int id_revue = 44;
+		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
+		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		if (!testabo.delete(abo)) {
+			fail("non supprime");
+		}
+	}
 	@Test
 	void testGetById() throws Exception {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		int id_client = 77;
-		int  id_revue = 88;
+		int id_client = 11;
+		int  id_revue = 22;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );		mabo.create(abo);
+		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );		testabo.create(abo);
 	 	
-		if(!mabo.getById(abo.getIdCl(), abo.getId_revue()).equals(abo)) {
-			mabo.delete(abo);
-			fail("Pas trouve");
+		if(!testabo.getById(abo.getIdCl(), abo.getId_revue()).equals(abo)) {
+			testabo.delete(abo);
+			fail("non trouve");
 		}
-		mabo.delete(abo);
+		testabo.delete(abo);
 
 	}
 	
@@ -88,13 +89,13 @@ class MySQLAbonnementDAOTest {
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);	
 		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue );
-		mabo.create(abo);
+		testabo.create(abo);
 		
-		if(mabo.findAll()==null) {
-			mabo.delete(abo);
-			fail("Pas trouve");
+		if(testabo.findAll()==null) {
+			testabo.delete(abo);
+			fail("non trouve");
 		}
-		mabo.delete(abo);
+		testabo.delete(abo);
 	}
 
 }

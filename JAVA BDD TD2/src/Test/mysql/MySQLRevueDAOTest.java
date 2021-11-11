@@ -9,92 +9,85 @@ import dao.Persistance;
 import dao.RevueDAO;
 import modele.metier.Revue;
 
-
-
 class MySQLRevueDAOTest {
-	
-	RevueDAO  mrev = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
-	
+
+	RevueDAO testrevue = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
+
 	@Test
 	void testCreate() throws Exception {
-		String titre ="test create";
-		String description="livre pour apprendre a coder en Java";
-		double tarif_numero= 3.4;
-		String visuel="logo.png";
-		int id_periodicite =19;
-		 
-		Revue rev = new Revue(titre, description, tarif_numero, visuel,
-				id_periodicite);
-		if(!mrev.create(rev)) {
-			fail("Pas encore implemente");
-		}
-		mrev.delete(rev);
-	}
+		String titre = "test";
+		String description = "test";
+		double tarif_numero = 2;
+		String visuel = "test";
+		int id_periodicite = 1;
 
-	@Test
-	void testDelete() throws Exception {
-		String titre ="test delete";
-		String description="livre pour apprendre a coder en Java";
-		double tarif_numero= 3.4;
-		String visuel="logo.png";
-		int id_periodicite =20;
-		 
-		Revue rev = new Revue(titre, description, tarif_numero, visuel,
-				id_periodicite);
-		if(!mrev.delete(rev)) {
-			fail("Pas encore supprime");
-		}		
+		Revue rev = new Revue(titre, description, tarif_numero, visuel, id_periodicite);
+		if (!testrevue.create(rev)) {
+			fail("non créer");
+		}
+		testrevue.delete(rev);
 	}
 
 	@Test
 	void testUpdate() throws Exception {
-		String titre ="test update";
-		String description="livre pour apprendre a coder en Java";
-		double tarif_numero= 3.4;
-		String visuel="logo.png";
-		int id_periodicite =21;
-		 
-		Revue rev = new Revue(titre, description, tarif_numero, visuel,
-				id_periodicite);
-		if(!mrev.update(rev)) {
+		String titre = "test";
+		String description = "test";
+		double tarif_numero = 2;
+		String visuel = "test";
+		int id_periodicite = 1;
+
+		Revue rev = new Revue(titre, description, tarif_numero, visuel, id_periodicite);
+		if (!testrevue.update(rev)) {
 			fail("Pas encore modifie");
 		}
-		mrev.delete(rev);
+		testrevue.delete(rev);
+	}
+
+	@Test
+	void testDelete() throws Exception {
+		String titre = "test";
+		String description = "test";
+		double tarif_numero = 2;
+		String visuel = "test";
+		int id_periodicite = 1;
+
+		Revue rev = new Revue(titre, description, tarif_numero, visuel, id_periodicite);
+		if (!testrevue.delete(rev)) {
+			fail("non supprimé");
+		}
 	}
 
 	@Test
 	void testGetById() throws Exception {
-		String titre ="test getbyid";
-		String description="livre pour apprendre a coder en Java";
-		double tarif_numero= 3.4;
-		String visuel="logo.png";
-		int id_periodicite =32;
-		 
-		Revue rev = new Revue(titre, description, tarif_numero, visuel,
-					id_periodicite);
-				
-		if(!mrev.getById(rev.getId_revue()).equals(rev)) {
-			mrev.delete(rev);
-			fail("Pas trouve");
+		String titre = "test";
+		String description = "test";
+		double tarif_numero = 2;
+		String visuel = "test";
+		int id_periodicite = 1;
+
+		Revue rev = new Revue(titre, description, tarif_numero, visuel, id_periodicite);
+
+		if (!testrevue.getById(rev.getId_revue()).equals(rev)) {
+			testrevue.delete(rev);
+			fail("non trouve");
 		}
-		mrev.delete(rev);
+		testrevue.delete(rev);
 	}
-	
+
 	@Test
 	void testFindAll() throws Exception {
-		String titre ="test findall";
-		String description="livre pour apprendre a coder en Java";
-		double tarif_numero= 3.4;
-		String visuel="logo.png";
-		int id_periodicite =21;
-		 
-		Revue rev = new Revue(titre, description, tarif_numero, visuel,
-					id_periodicite);
-		
-		if(mrev.findAll()==null) {
-			mrev.delete(rev);
-			fail("Pas trouve");
+		String titre = "test";
+		String description = "test";
+		double tarif_numero = 2;
+		String visuel = "test";
+		int id_periodicite = 1;
+
+		Revue rev = new Revue(titre, description, tarif_numero, visuel, id_periodicite);
+
+		if (testrevue.findAll() == null) {
+			testrevue.delete(rev);
+			fail("non trouvé");
 		}
-		mrev.delete(rev);
+		testrevue.delete(rev);
 	}
 }

@@ -12,26 +12,40 @@ import dao.DAOFactory;
 import dao.Persistance;
 import modele.metier.Abonnement;
 
-
-
 class ListeMemoireAboDAOTest {
-	
-	DAOFactory daos = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);
-	AbonnementDAO labo = daos.getAbonnementDAO();
+
+	DAOFactory daofac = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE);
+	AbonnementDAO lmabo = daofac.getAbonnementDAO();
 
 	@Test
 	void testCreate() throws Exception {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		int id_client = 11;
-		int  id_revue = 22;
+		int id_revue = 22;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
-		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);	
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
-		if(!labo.create(abo)) {
-			fail("Pas implemente");
+		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		if (!lmabo.create(abo)) {
+			fail("non créer");
 		}
-		labo.delete(abo);
+		lmabo.delete(abo);
+	}
+
+	@Test
+	void testUpdate() throws Exception {
+		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		int id_client = 55;
+		int id_revue = 66;
+		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
+		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		lmabo.create(abo);
+
+		if (!lmabo.update(abo)) {
+			fail("non modifié");
+		}
+		lmabo.delete(abo);
 	}
 
 	@Test
@@ -39,31 +53,15 @@ class ListeMemoireAboDAOTest {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		int id_client = 33;
-		int  id_revue = 44;
-		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
-		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);		
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
-		labo.create(abo);
-		
-		if(!labo.delete(abo)) {
-			fail("Pas supprime");
-		}	
-	}
-
-	@Test
-	void testUpdate() throws Exception {
-		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		int id_client = 55;
-		int  id_revue = 66;
+		int id_revue = 44;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
-		labo.create(abo);
-		
-		if(!labo.update(abo)) {
-			fail("Pas modifie");
-		}	
-		labo.delete(abo);
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		lmabo.create(abo);
+
+		if (!lmabo.delete(abo)) {
+			fail("Pas supprime");
+		}
 	}
 
 	@Test
@@ -71,17 +69,17 @@ class ListeMemoireAboDAOTest {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		int id_client = 77;
-		int  id_revue = 88;
+		int id_revue = 88;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
-		labo.create(abo);
-		
-		if(!labo.getById(abo.getIdCl(), abo.getId_revue()).equals(abo)) {
-			labo.delete(abo);
-			fail("Pas trouve");			
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		lmabo.create(abo);
+
+		if (!lmabo.getById(abo.getIdCl(), abo.getId_revue()).equals(abo)) {
+			lmabo.delete(abo);
+			fail("Pas trouve");
 		}
-		labo.delete(abo);
+		lmabo.delete(abo);
 	}
 
 	@Test
@@ -89,17 +87,17 @@ class ListeMemoireAboDAOTest {
 		DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		int id_client = 99;
-		int  id_revue = 111;
+		int id_revue = 111;
 		LocalDate date_debut = LocalDate.parse("18/09/2018", formatage);
 		LocalDate date_fin = LocalDate.parse("21/11/2021", formatage);
-		Abonnement abo = new Abonnement(date_debut, date_fin,id_client, id_revue);
-		labo.create(abo);
-		
-		if(labo.findAll()==null) {
-			labo.delete(abo);
-			fail("Pas trouve");
+		Abonnement abo = new Abonnement(date_debut, date_fin, id_client, id_revue);
+		lmabo.create(abo);
+
+		if (lmabo.findAll() == null) {
+			lmabo.delete(abo);
+			fail("non trouvé");
 		}
-		labo.delete(abo);
+		lmabo.delete(abo);
 	}
 
 }

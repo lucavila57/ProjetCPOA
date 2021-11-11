@@ -9,102 +9,98 @@ import dao.DAOFactory;
 import dao.Persistance;
 import modele.metier.Client;
 
-
-
 class MySQLClientDAOTest {
-	
-	ClientDAO mcli = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
+
+	ClientDAO testclient = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
 
 	@Test
 	void testCreate() throws Exception {
-		String nom = "test create";
-		String prenom = "Thomas";
+		String nom = "Vila";
+		String prenom = "Luca";
 		String no_rue = "4";
-		String voie ="rue paul doumer";
-		String code_postal= "10150";
-		String ville = "pont sainte marie";
+		String voie = "rue de la liberation";
+		String code_postal = "57535";
+		String ville = "Metz";
 		String pays = "France";
-		 
-		Client cli = new Client(nom, prenom, no_rue, voie, code_postal,
-			 ville,  pays);
-		
-		if(!mcli.create(cli)) {
-			fail("Pas encore implemente");
-		}
-		mcli.delete(cli);
-	}
 
-	@Test
-	void testDelete() throws Exception {
-		String nom = "test delete";
-		String prenom = "Thomas";
-		String no_rue = "4";
-		String voie ="rue paul doumer";
-		String code_postal= "10150";
-		String ville = "pont sainte marie";
-		String pays = "France";
-		 
 		Client cli = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
-		
-		if(!mcli.delete(cli)) {
-			fail("Pas encore supprime");
-		}		
+
+		if (!testclient.create(cli)) {
+			fail("non créer");
+		}
+		testclient.delete(cli);
 	}
 
 	@Test
 	void testUpdate() throws Exception {
-		String nom = "test updatetest ";
-		String prenom = "Thomas";
-		String no_rue = "5";
-		String voie ="rue paul doumer";
-		String code_postal= "10150";
-		String ville = "pont sainte marie";
+		String nom = "Vila";
+		String prenom = "Luca";
+		String no_rue = "4";
+		String voie = "rue de la liberation";
+		String code_postal = "57535";
+		String ville = "Metz";
 		String pays = "France";
-		 
+
 		Client cli = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
-		
-		if(!mcli.update(cli)) {
-			fail("Pas encore modifie");
+
+		if (!testclient.update(cli)) {
+			fail("non  modifie");
 		}
-		mcli.delete(cli);
+		testclient.delete(cli);
+	}
+
+	@Test
+	void testDelete() throws Exception {
+		String nom = "Vila";
+		String prenom = "Luca";
+		String no_rue = "4";
+		String voie = "rue de la liberation";
+		String code_postal = "57535";
+		String ville = "Metz";
+		String pays = "France";
+
+		Client cli = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
+
+		if (!testclient.delete(cli)) {
+			fail("non  supprime");
+		}
 	}
 
 	@Test
 	void testGetById() throws Exception {
-		String nom = "test getbyid";
-		String prenom = "Thomas";
-		String no_rue = "5";
-		String voie ="rue paul doumer";
-		String code_postal= "10150";
-		String ville = "pont sainte marie";
-		String pays = "France";		
+		String nom = "Vila";
+		String prenom = "Luca";
+		String no_rue = "4";
+		String voie = "rue de la liberation";
+		String code_postal = "57535";
+		String ville = "Metz";
+		String pays = "France";
 		Client cli = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
-		
-		if(!mcli.getById(cli.getIdCl()).equals(cli)) {
-			mcli.delete(cli);
-			fail("Pas trouve");
+
+		if (!testclient.getById(cli.getIdCl()).equals(cli)) {
+			testclient.delete(cli);
+			fail("non trouve");
 		}
-		mcli.delete(cli);
+		testclient.delete(cli);
 
 	}
-	
+
 	@Test
 	void testFindAll() throws Exception {
-		String nom = "test findall";
-		String prenom = "Thomas";
-		String no_rue = "5";
-		String voie ="rue paul doumer";
-		String code_postal= "10150";
-		String ville = "pont sainte marie";
-		String pays = "France";		
+		String nom = "Vila";
+		String prenom = "Luca";
+		String no_rue = "4";
+		String voie = "rue de la liberation";
+		String code_postal = "57535";
+		String ville = "Metz";
+		String pays = "France";
 		Client cli = new Client(nom, prenom, no_rue, voie, code_postal, ville, pays);
-		
-		if(mcli.findAll()==null) {
-			mcli.delete(cli);
-			fail("Pas trouve");
+
+		if (testclient.findAll() == null) {
+			testclient.delete(cli);
+			fail("non trouvé");
 		}
-		mcli.delete(cli);
+		testclient.delete(cli);
 	}
 
 }
-

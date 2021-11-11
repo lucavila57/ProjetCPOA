@@ -220,8 +220,8 @@ public class controlAbonnement implements Initializable{
 			
 			DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			
-			LocalDate date_d = LocalDate.parse(abo.getDateDeb(), formatage);
-			LocalDate date_f = LocalDate.parse(abo.getDateFin(), formatage);
+			LocalDate date_d = LocalDate.parse(abo.getDateDeb().toString(), formatage);
+			LocalDate date_f = LocalDate.parse(abo.getDateFin().toString(), formatage);
 
 			cbx_idClient.setValue(controlAccueil.daocli.getById(abo.getIdCl()));
 			cbx_idRevue.setValue(controlAccueil.daorev.getById(abo.getId_revue()));

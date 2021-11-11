@@ -163,9 +163,9 @@ public class controlClient implements Initializable{
 				String codePostal = txt_codePostal.getText().trim();
 				String ville = txt_ville.getText().trim();
 				String pays = txt_pays.getText().trim();
-
+lbl_recap.setText(toString());
 				controlAccueil.daocli.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),nom, prenom, noRue, voie, codePostal,ville,pays ));
-				lbl_recap.setText(toString());
+				
 			} 
 			catch (Exception e) {
 				lbl_recap.setText("");

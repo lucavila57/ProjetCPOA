@@ -1,8 +1,10 @@
 package application;
 
+<<<<<<< HEAD
 import java.awt.Label;
 
 import java.awt.TextField;
+
 import java.io.IOException;
 
 import java.net.URL;

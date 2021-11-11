@@ -76,7 +76,9 @@
       </FlowPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="25.0" prefWidth="600.0">
          <children>
+
             <Label fx:id="lbl_recap" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
+
          </children>
       </FlowPane>
       <VBox alignment="CENTER" prefHeight="161.0" prefWidth="793.0">

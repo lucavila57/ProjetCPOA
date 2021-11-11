@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="705.0" styleClass="background"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlAbonnement">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="705.0" styleClass="background"  xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlAbonnement">
    <children>
       <GridPane fx:id="form" alignment="CENTER" disable="true" maxWidth="850.0" prefHeight="270.0" prefWidth="962.0" styleClass="background">
         <columnConstraints>
@@ -59,7 +59,7 @@
       </FlowPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="25.0" prefWidth="600.0" styleClass="background">
          <children>
-            <Label fx:id="affichage" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
+            <Label fx:id="lbl_recap" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
          </children>
       </FlowPane>
       <VBox prefHeight="216.0" prefWidth="674.0" styleClass="background">

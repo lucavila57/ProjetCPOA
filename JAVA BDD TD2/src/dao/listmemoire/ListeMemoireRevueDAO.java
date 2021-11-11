@@ -2,6 +2,7 @@ package dao.listmemoire;
 
 import dao.RevueDAO;
 
+
 import modele.metier.Revue;
 
 import java.util.ArrayList;

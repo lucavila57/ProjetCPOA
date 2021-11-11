@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
+
 import modele.metier.Revue;
 
 public interface RevueDAO extends DAO<Revue> {
@@ -15,7 +16,7 @@ public interface RevueDAO extends DAO<Revue> {
 	boolean update(Revue objet) throws Exception;
 	
 	@Override
-	Revue getById(int id_revue) throws Exception;
+	Revue getById(int id) throws Exception;
 	
 	@Override
 	ArrayList<Revue> findAll() throws Exception;

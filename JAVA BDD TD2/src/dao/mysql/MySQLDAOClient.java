@@ -25,15 +25,15 @@ public class MySQLDAOClient implements ClientDAO {
 	}
 
 	@Override
-	public Client getById(int id_cl) throws SQLException {
+	public Client getById(int id) throws SQLException {
 		Client cl = null;
 
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
 		PreparedStatement requete = laConnexion.prepareStatement("select * from Client where id_client = ? ");
-		requete.setInt(1, id_cl);
+		requete.setInt(1, id);
 		ResultSet res = requete.executeQuery();
 		if (res.next()) {
-			cl = new Client(id_cl, res.getString("nom"), res.getString("prenom"), res.getString("no_rue"),
+			cl = new Client(id, res.getString("nom"), res.getString("prenom"), res.getString("no_rue"),
 					res.getString("voie"), res.getString("code_postal"), res.getString("ville"), res.getString("pays"));
 		}
 
@@ -70,7 +70,7 @@ public class MySQLDAOClient implements ClientDAO {
 		// TODO Auto-generated method stub
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
 		PreparedStatement req = laConnexion.prepareStatement(
-				"Update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
+				"update Client set nom=?, prenom=?, no_rue=?,voie=?,code_postal=?, ville=?, pays=? where id_client=?");
 
 		req.setInt(1, objet.getIdCl());
 		req.setString(2, objet.getNom());

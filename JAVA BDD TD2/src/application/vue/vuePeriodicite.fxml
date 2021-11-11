@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="625.0" styleClass="background"  xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlPeriodicite">
+<VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="625.0" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlPeriodicite">
    <children>
       <GridPane fx:id="form" alignment="CENTER" disable="true" maxWidth="850.0" prefHeight="45.0" prefWidth="625.0" style="-fx-alignment: center;" styleClass="background">
         <columnConstraints>

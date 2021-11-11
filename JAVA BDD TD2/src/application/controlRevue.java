@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 
+
 import java.net.URL;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -215,11 +216,11 @@ public class controlRevue implements Initializable {
 		try {			
 			Revue revue=tblRevue.getSelectionModel().getSelectedItem();
 						
-			txt_titre.setText(revue.getTitre());
-			txt_description.setText(revue.getDescription());
-			txt_tarif.setText(String.valueOf(revue.getTarifNumero()));
+			txt_titre.setText(revue.getTitre().trim());
+			txt_description.setText(revue.getDescription().trim());
+			txt_tarif.setText(String.valueOf(revue.getTarifNumero()).trim());
 			cbx_periodicite.setValue(controlAccueil.daoper.getById(revue.getId_perio()));
-			txt_visuel.setText(revue.getVisuel());
+			txt_visuel.setText(revue.getVisuel().trim());
 			
 			form.setDisable(false);
 			btn_valider.setDisable(false);

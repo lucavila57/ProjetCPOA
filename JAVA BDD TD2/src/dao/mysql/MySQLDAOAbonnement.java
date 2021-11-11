@@ -111,7 +111,7 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 		ResultSet res = requete.executeQuery();
 
 		if (res.next()) {
-			listeAbonnement.add(new Abonnement(null, null, res.getInt("idCl"), res.getInt("idRevue")));
+			listeAbonnement.add(new Abonnement(null, null, res.getInt("id_client"), res.getInt("id_revue")));
 		}
 
 		return listeAbonnement;

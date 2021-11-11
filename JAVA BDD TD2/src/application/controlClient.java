@@ -133,13 +133,13 @@ public class controlClient implements Initializable{
 			try {
 				String nom = txt_nom.getText().trim();
 				String prenom = txt_prenom.getText().trim();
-				String no_rue = txt_no_rue.getText().trim();
+				String noRue = txt_no_rue.getText().trim();
 				String voie = txt_voie.getText().trim();
 				String codePostal = txt_codePostal.getText().trim();
 				String ville = txt_ville.getText().trim();
 				String pays = txt_pays.getText().trim();
 
-			    controlAccueil.daocli.create(new Client(nom, prenom, no_rue, voie, codePostal, ville, pays ));
+			    controlAccueil.daocli.create(new Client(nom, prenom, noRue, voie, codePostal, ville, pays ));
 				lbl_recap.setText(toString());
 
 			} 
@@ -158,13 +158,13 @@ public class controlClient implements Initializable{
 			try {
 				String nom = txt_nom.getText().trim();
 				String prenom = txt_prenom.getText().trim();
-				String no_rue = txt_no_rue.getText().trim();
+				String noRue = txt_no_rue.getText().trim();
 				String voie = txt_voie.getText().trim();
 				String codePostal = txt_codePostal.getText().trim();
 				String ville = txt_ville.getText().trim();
 				String pays = txt_pays.getText().trim();
 
-				controlAccueil.daocli.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),nom, prenom, no_rue, voie, codePostal,ville,pays ));
+				controlAccueil.daocli.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),nom, prenom, noRue, voie, codePostal,ville,pays ));
 				lbl_recap.setText(toString());
 			} 
 			catch (Exception e) {
@@ -268,7 +268,7 @@ public class controlClient implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 		Node root = fxmlLoader.load();
 		Scene scene = new Scene((VBox) root, 498.0, 112.0);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
 		
 		stage1.setScene(scene);
 		stage1.setTitle("Accueil");

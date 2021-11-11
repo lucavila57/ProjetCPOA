@@ -75,9 +75,9 @@ public class controlAbonnement implements Initializable{
 	
 		
 	
-		colDate_Deb.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("date_debut"));
-		colDate_Fin.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("date_fin"));		
-	colIdClient.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("id_client"));
+		colDate_Deb.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("dateDeb"));
+		colDate_Fin.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("dateFin"));		
+	colIdClient.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("idCl"));
 		colIdRevue.setCellValueFactory(new PropertyValueFactory<Abonnement, String>("id_revue"));
 		tblAbonnement.getColumns().setAll(colIdClient, colIdRevue, colDate_Deb, colDate_Fin);
 
@@ -129,8 +129,9 @@ public class controlAbonnement implements Initializable{
 		else if(b_create) {
 			
 			try {
-				String txt_date_deb = date_deb.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).trim();
-				String txt_date_fin = date_fin.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).trim();
+			
+				LocalDate txt_date_deb = date_deb.getValue();
+				LocalDate txt_date_fin = date_fin.getValue();
 				
 				controlAccueil.daoabo.create(new Abonnement( txt_date_deb, txt_date_fin,idcli.getIdCl() ,idrev.getId_revue()));
 				lbl_recap.setText(toString());
@@ -148,8 +149,8 @@ public class controlAbonnement implements Initializable{
 		
 		else if(b_update) {
 			try {
-				String txt_date_deb = date_deb.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).trim();
-				String txt_date_fin = date_fin.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).trim();
+				LocalDate txt_date_deb = date_deb.getValue();
+				LocalDate txt_date_fin = date_fin.getValue();
 
 				controlAccueil.daoabo.update(
 						new Abonnement( txt_date_deb, txt_date_fin,idcli.getIdCl(), idrev.getId_revue()));
@@ -217,10 +218,10 @@ public class controlAbonnement implements Initializable{
 		try {			
 			Abonnement abo = tblAbonnement.getSelectionModel().getSelectedItem();
 			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			DateTimeFormatter formatage = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			
-			LocalDate date_d = LocalDate.parse(abo.getDateDeb(), formatter);
-			LocalDate date_f = LocalDate.parse(abo.getDateFin(), formatter);
+			LocalDate date_d = LocalDate.parse(abo.getDateDeb(), formatage);
+			LocalDate date_f = LocalDate.parse(abo.getDateFin(), formatage);
 
 			cbx_idClient.setValue(controlAccueil.daocli.getById(abo.getIdCl()));
 			cbx_idRevue.setValue(controlAccueil.daorev.getById(abo.getId_revue()));

@@ -28,7 +28,7 @@ public class MySQLDAOPeriodicite implements PeriodiciteDAO {
 		Periodicite perio = null;
 
 		Connection laConnexion = Connexion.getInstance().creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement("select * from Periodicite where id=?");
+		PreparedStatement requete = laConnexion.prepareStatement("select * from Periodicite where id_periodicite =?");
 		requete.setInt(1, id);
 		ResultSet res = requete.executeQuery();
 		if (res.next()) {

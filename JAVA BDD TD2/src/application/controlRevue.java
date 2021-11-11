@@ -6,13 +6,9 @@ import java.io.IOException;
 
 
 import java.net.URL;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import modele.metier.Abonnement;
 import modele.metier.Periodicite;
 import modele.metier.Revue;
 import javafx.collections.FXCollections;
@@ -31,8 +27,8 @@ import javafx.scene.control.*;
 
 public class controlRevue implements Initializable {
 	
-	private boolean b_create=false;
-	private boolean b_update=false;
+	private boolean creer=false;
+	private boolean maj=false;
 
 	@FXML
 	private TextField txt_titre;
@@ -82,7 +78,7 @@ public class controlRevue implements Initializable {
 
 		tblRevue.getColumns().setAll(colIdRevue, colTitre, colDescription, colTarif, colPeriodicite, colVisuel);
 
-		List<Revue> revues = controlAccueil.daorev.findAll();
+		List<Revue> revues = controlAccueil.daoRevue.findAll();
 		
 		tblRevue.getItems().addAll(revues);
 		return tblRevue;
@@ -91,15 +87,15 @@ public class controlRevue implements Initializable {
 
 	@Override
 	public String toString() {
-		if(b_create) return "Ajout de : " + txt_titre.getText().trim() + " (" + txt_tarif.getText().trim() + "€)";
-		else if(b_update) return "Modifiction de : " + txt_titre.getText().trim();
+		if(creer) return "Ajout de : " + txt_titre.getText().trim() + " (" + txt_tarif.getText().trim() + "ï¿½)";
+		else if(maj) return "Modifiction de : " + txt_titre.getText().trim();
 		else return "";
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
  	
 		try {
-			cbx_periodicite.setItems(FXCollections.observableArrayList(controlAccueil.daoper.findAll()));
+			cbx_periodicite.setItems(FXCollections.observableArrayList(controlAccueil.daoPerio.findAll()));
 			
 			tblRevue();
 		} 
@@ -127,7 +123,7 @@ public class controlRevue implements Initializable {
 			alert.showAndWait();
 		}
 
-		else if(b_create){
+		else if(creer){
 			try {
 				double tarif = Double.parseDouble(txt_tarif.getText().trim());
 				String titre = txt_titre.getText().trim();
@@ -135,7 +131,7 @@ public class controlRevue implements Initializable {
 				String visuel = txt_visuel.getText().trim();
 				lbl_recap.setText(toString());
 
-				controlAccueil.daorev.create(
+				controlAccueil.daoRevue.create(
 						new Revue(titre, description, tarif, visuel, period.getId_perio()));
 			} catch (Exception e) {
 				Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -146,7 +142,7 @@ public class controlRevue implements Initializable {
 				alert.showAndWait();
 			}
 		}
-		else if(b_update) {
+		else if(maj) {
 			try {
 				double tarif = Double.parseDouble(txt_tarif.getText().trim());
 				String titre = txt_titre.getText().trim();
@@ -154,7 +150,7 @@ public class controlRevue implements Initializable {
 				String visuel = txt_visuel.getText().trim();
 				lbl_recap.setText(toString());
 
-				controlAccueil.daorev.update(
+				controlAccueil.daoRevue.update(
 						new Revue(tblRevue.getSelectionModel().getSelectedItem().getId_revue(), titre, description, tarif, visuel, period.getId_perio()));				
 			}
 			catch (Exception e) {
@@ -167,10 +163,10 @@ public class controlRevue implements Initializable {
 			}
 			
 		}
-		b_create=false;
-		b_update=false;
+		creer=false;
+		maj=false;
 		
-		List<Revue> revues = controlAccueil.daorev.findAll();
+		List<Revue> revues = controlAccueil.daoRevue.findAll();
 		tblRevue.getItems().clear();
 		tblRevue.getItems().addAll(revues); 
 		
@@ -189,15 +185,15 @@ public class controlRevue implements Initializable {
 		cbx_periodicite.setValue(null);
 		txt_visuel.setText("");
 		
-		b_create=true;
-		b_update=false;
+		creer=true;
+		maj=false;
 	}	
 	
 	@FXML
 	public void delete() throws Exception{
 		try {
-			controlAccueil.daorev.delete(tblRevue.getSelectionModel().getSelectedItem()); 
-	        List<Revue> revues = controlAccueil.daorev.findAll();
+			controlAccueil.daoRevue.delete(tblRevue.getSelectionModel().getSelectedItem()); 
+	        List<Revue> revues = controlAccueil.daoRevue.findAll();
 			tblRevue.getItems().clear();
 			tblRevue.getItems().addAll(revues);
 		} 
@@ -219,14 +215,14 @@ public class controlRevue implements Initializable {
 			txt_titre.setText(revue.getTitre().trim());
 			txt_description.setText(revue.getDescription().trim());
 			txt_tarif.setText(String.valueOf(revue.getTarifNumero()).trim());
-			cbx_periodicite.setValue(controlAccueil.daoper.getById(revue.getId_perio()));
+			cbx_periodicite.setValue(controlAccueil.daoPerio.getById(revue.getId_perio()));
 			txt_visuel.setText(revue.getVisuel().trim());
 			
 			form.setDisable(false);
 			btn_valider.setDisable(false);
 			
-			b_create=false;
-			b_update=true;
+			creer=false;
+			maj=true;
 		}
 		catch (Exception e) {
 			Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -242,8 +238,8 @@ public class controlRevue implements Initializable {
 		
 	@FXML
 	public void retour() throws IOException{
-		controlAccueil.daorev=null;
-		controlAccueil.daoper=null;
+		controlAccueil.daoRevue=null;
+		controlAccueil.daoPerio=null;
 		
 		Stage stage =(Stage) btn_retour.getScene().getWindow();
 		stage.close();

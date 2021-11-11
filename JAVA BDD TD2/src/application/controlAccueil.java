@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,98 +24,58 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class controlAccueil implements Initializable {
-	
-	public static ClientDAO daocli;
-	public static PeriodiciteDAO daoper;
-	public static RevueDAO daorev;
-	public static AbonnementDAO daoabo;
-	
+
+	public static ClientDAO daoClient;
+	public static PeriodiciteDAO daoPerio;
+	public static RevueDAO daoRevue;
+	public static AbonnementDAO daoAbo;
+
 	@FXML
 	private RadioButton mysql;
 	@FXML
-	private RadioButton list;
+	private RadioButton listeMemoire;
 	@FXML
-	private Button Client;
+	private Button btn_client;
 	@FXML
-	private Button Abonnement;
+	private Button btn_abonnement;
 	@FXML
-	private Button Periodicite;
+	private Button btn_periodicite;
 	@FXML
-	private Button Revue;
+	private Button btn_revue;
 	@FXML
 	private Window vue;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
-	
+
 	@FXML
 	public void Periodicite() throws IOException {
 		if (mysql.isSelected()) {
-			daoper = DAOFactory.getDAOFactory(Persistance.MYSQL).getPeriodiciteDAO();
-		} 
-		else if (list.isSelected()) {
-			daoper = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getPeriodiciteDAO();
-		}
-		else {
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			daoPerio = DAOFactory.getDAOFactory(Persistance.MYSQL).getPeriodiciteDAO();
+		} else if (listeMemoire.isSelected()) {
+			daoPerio = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getPeriodiciteDAO();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Erreur lors de l'acces a Periode");
 			alert.setHeaderText("Aucune persistance selectionnee");
 			alert.showAndWait();
-		}		
-		
-		if (daoper!=null) {
-			Stage stage =(Stage) Periodicite.getScene().getWindow();
+		}
+
+		if (daoPerio != null) {
+			Stage stage = (Stage) btn_periodicite.getScene().getWindow();
 			stage.close();
 			Stage stage1 = new Stage();
-			
+
 			URL fxmlURL = getClass().getResource("vue/vuePeriodicite.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 625.0, 322.0);
-			
-			
+
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des Periodicite");
-			stage1.show();
-		}
-	}
-	
-	@FXML
-	public void Abonnement() throws IOException {
-		if (mysql.isSelected()) {
-			daoabo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
-			daocli = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
-			daorev = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
-		} 
-		else if (list.isSelected()) {
-			daoabo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
-			daocli = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getClientDAO();
-			daorev = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
-		}
-		else {
-			Alert alert=new Alert(Alert.AlertType.ERROR);
-			alert.initOwner(vue);
-			alert.setTitle("Erreur lors de l'acces a Abonnement");
-			alert.setHeaderText("Aucune persistance selectionnee");
-			alert.showAndWait();
-		}		
-		
-		if (daoabo!=null) {
-			Stage stage =(Stage) Abonnement.getScene().getWindow();
-			stage.close();
-			Stage stage1 = new Stage();
-			
-			URL fxmlURL = getClass().getResource("vue/vueAbonnement.fxml");
-			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-			Node root = fxmlLoader.load();
-			Scene scene = new Scene((VBox) root, 705.0, 600.0);
-			
-			
-			stage1.setScene(scene);
-			stage1.setTitle("Gestion des Abonnements");
 			stage1.show();
 		}
 	}
@@ -124,75 +83,103 @@ public class controlAccueil implements Initializable {
 	@FXML
 	public void Client() throws IOException {
 		if (mysql.isSelected()) {
-			daocli = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
-			daoabo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
-			daorev = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
-		} 
-		else if (list.isSelected()) {
-			daocli = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getClientDAO();
-			daoabo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
-			daorev = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
-		}
-		else {
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			daoClient = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
+			daoAbo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
+			daoRevue = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
+		} else if (listeMemoire.isSelected()) {
+			daoClient = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getClientDAO();
+			daoAbo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
+			daoRevue = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Erreur lors de l'acces a Client");
 			alert.setHeaderText("Aucune persistance selectionnee");
 			alert.showAndWait();
-		}	
-		
-		if (daocli!=null) {
-			Stage stage =(Stage) Client.getScene().getWindow();
+		}
+
+		if (daoClient != null) {
+			Stage stage = (Stage) btn_client.getScene().getWindow();
 			stage.close();
 			Stage stage1 = new Stage();
-			
+
 			URL fxmlURL = getClass().getResource("vue/vueClient.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 758.0, 636.0);
-		
-			
+
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des Clients");
 			stage1.show();
 		}
 	}
-	
+
+	@FXML
+	public void Abonnement() throws IOException {
+		if (mysql.isSelected()) {
+			daoAbo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
+			daoClient = DAOFactory.getDAOFactory(Persistance.MYSQL).getClientDAO();
+			daoRevue = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
+		} else if (listeMemoire.isSelected()) {
+			daoAbo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
+			daoClient = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getClientDAO();
+			daoRevue = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.initOwner(vue);
+			alert.setTitle("Erreur lors de l'acces a Abonnement");
+			alert.setHeaderText("Aucune persistance selectionnee");
+			alert.showAndWait();
+		}
+
+		if (daoAbo != null) {
+			Stage stage = (Stage) btn_abonnement.getScene().getWindow();
+			stage.close();
+			Stage stage1 = new Stage();
+
+			URL fxmlURL = getClass().getResource("vue/vueAbonnement.fxml");
+			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
+			Node root = fxmlLoader.load();
+			Scene scene = new Scene((VBox) root, 705.0, 600.0);
+
+			stage1.setScene(scene);
+			stage1.setTitle("Gestion des Abonnements");
+			stage1.show();
+		}
+	}
+
 	@FXML
 	public void Revue() throws IOException {
 		if (mysql.isSelected()) {
-			daorev = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
-			daoper = DAOFactory.getDAOFactory(Persistance.MYSQL).getPeriodiciteDAO();
-			daoabo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
-		} 
-		else if (list.isSelected()) {
-			daorev = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
-			daoper = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getPeriodiciteDAO();
-			daoabo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
-		}
-		else {
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			daoRevue = DAOFactory.getDAOFactory(Persistance.MYSQL).getRevueDAO();
+			daoPerio = DAOFactory.getDAOFactory(Persistance.MYSQL).getPeriodiciteDAO();
+			daoAbo = DAOFactory.getDAOFactory(Persistance.MYSQL).getAbonnementDAO();
+		} else if (listeMemoire.isSelected()) {
+			daoRevue = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getRevueDAO();
+			daoPerio = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getPeriodiciteDAO();
+			daoAbo = DAOFactory.getDAOFactory(Persistance.LISTE_MEMOIRE).getAbonnementDAO();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Erreur lors de l'acces a Revue");
 			alert.setHeaderText("Aucune persistance selectionnee");
 			alert.showAndWait();
-		}		
-		
-		if (daorev!=null) {
-			Stage stage =(Stage) Revue.getScene().getWindow();
+		}
+
+		if (daoRevue != null) {
+			Stage stage = (Stage) btn_revue.getScene().getWindow();
 			stage.close();
 			Stage stage1 = new Stage();
-			
+
 			URL fxmlURL = getClass().getResource("vue/Main3.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 900.0, 623.0);
-			
-			
+
 			stage1.setScene(scene);
 			stage1.setTitle("Gestion des revues");
 			stage1.show();
-			
-		}					
+
+		}
 	}
 }

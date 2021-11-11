@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,16 +20,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class controlClient implements Initializable{
+public class controlClient implements Initializable {
 
-	private boolean b_create;
-	private boolean b_update;
-	public static int id_cli;
-	
+	private boolean creer;
+	private boolean maj;
+	public static int idCl;
+
 	@FXML
 	private TextField txt_nom;
 	@FXML
@@ -63,7 +61,7 @@ public class controlClient implements Initializable{
 	private TableView<Client> tblClient;
 	@FXML
 	private Window vue;
-	
+
 	@SuppressWarnings("unchecked")
 	public TableView<Client> tblClient() throws Exception {
 
@@ -85,28 +83,31 @@ public class controlClient implements Initializable{
 		colVille.setCellValueFactory(new PropertyValueFactory<Client, String>("ville"));
 		colPays.setCellValueFactory(new PropertyValueFactory<Client, String>("pays"));
 
-		tblClient.getColumns().setAll(colIdClient, colNom, colPrenom, colNoRue, colVoie, colCdePostal, colVille, colPays );
+		tblClient.getColumns().setAll(colIdClient, colNom, colPrenom, colNoRue, colVoie, colCdePostal, colVille,
+				colPays);
 
-		List<Client> clients = controlAccueil.daocli.findAll();
-		
+		List<Client> clients = controlAccueil.daoClient.findAll();
+
 		tblClient.getItems().addAll(clients);
 		return tblClient;
 
 	}
-	
+
 	@Override
 	public String toString() {
-		if(b_create) return "Ajout de : " + txt_nom.getText().trim() +" "+ txt_prenom.getText().trim();
-		else if(b_update) return "Modifiction de : "+ txt_nom.getText().trim() +" "+ txt_prenom.getText().trim();
-		else return "";
-	}	
+		if (creer)
+			return "Ajout de : " + txt_nom.getText().trim() + " " + txt_prenom.getText().trim();
+		else if (maj)
+			return "Modifiction de : " + txt_nom.getText().trim() + " " + txt_prenom.getText().trim();
+		else
+			return "";
+	}
 
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			tblClient();
-		} 
-		catch (Exception e) {
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+		} catch (Exception e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Probleme a l'initialisation");
 			alert.setHeaderText("Un probleme est survenue lors de l'initialisation de vos Clients");
@@ -114,22 +115,23 @@ public class controlClient implements Initializable{
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
-	public void valider() throws Exception{
+	public void valider() throws Exception {
 		if ((txt_nom.getText().trim().isEmpty()) || (txt_prenom.getText().trim().isEmpty())
-				|| (txt_no_rue.getText().trim().isEmpty()) || (txt_voie.getText().trim().isEmpty()) || (txt_codePostal.getText().trim().isEmpty()) || 
-				(txt_ville.getText().trim().isEmpty()) || (txt_pays.getText().trim().isEmpty())) {			
+				|| (txt_no_rue.getText().trim().isEmpty()) || (txt_voie.getText().trim().isEmpty())
+				|| (txt_codePostal.getText().trim().isEmpty()) || (txt_ville.getText().trim().isEmpty())
+				|| (txt_pays.getText().trim().isEmpty())) {
 			lbl_recap.setText("Les champs ne sont pas tous valides");
 
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Erreur lors de la saisie");
 			alert.setHeaderText("Un ou plusieurs champs sont mal remplis.");
 			alert.showAndWait();
 		}
-		
-		else if(b_create) {
+
+		else if (creer) {
 			try {
 				String nom = txt_nom.getText().trim();
 				String prenom = txt_prenom.getText().trim();
@@ -139,22 +141,21 @@ public class controlClient implements Initializable{
 				String ville = txt_ville.getText().trim();
 				String pays = txt_pays.getText().trim();
 
-			    controlAccueil.daocli.create(new Client(nom, prenom, noRue, voie, codePostal, ville, pays ));
+				controlAccueil.daoClient.create(new Client(nom, prenom, noRue, voie, codePostal, ville, pays));
 				lbl_recap.setText(toString());
 
-			} 
-			catch (Exception e) {
+			} catch (Exception e) {
 				lbl_recap.setText("");
-				Alert alert=new Alert(Alert.AlertType.ERROR);
+				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La creation a echouee");
 				alert.setHeaderText("Un probleme est survenue lors de la creation de votre Periode");
 				alert.setContentText(e.toString());
 				alert.showAndWait();
-			}			
+			}
 		}
-		
-		else if(b_update) {
+
+		else if (maj) {
 			try {
 				String nom = txt_nom.getText().trim();
 				String prenom = txt_prenom.getText().trim();
@@ -163,13 +164,13 @@ public class controlClient implements Initializable{
 				String codePostal = txt_codePostal.getText().trim();
 				String ville = txt_ville.getText().trim();
 				String pays = txt_pays.getText().trim();
-lbl_recap.setText(toString());
-				controlAccueil.daocli.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),nom, prenom, noRue, voie, codePostal,ville,pays ));
-				
-			} 
-			catch (Exception e) {
+				lbl_recap.setText(toString());
+				controlAccueil.daoClient.update(new Client(tblClient.getSelectionModel().getSelectedItem().getIdCl(),
+						nom, prenom, noRue, voie, codePostal, ville, pays));
+
+			} catch (Exception e) {
 				lbl_recap.setText("");
-				Alert alert=new Alert(Alert.AlertType.ERROR);
+				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.initOwner(vue);
 				alert.setTitle("La modification a echouee");
 				alert.setHeaderText("Un probleme est survenue lors de la modification de votre Client");
@@ -177,21 +178,21 @@ lbl_recap.setText(toString());
 				alert.showAndWait();
 			}
 		}
-		b_create=false;
-		b_update=false;
-		List<Client> client = controlAccueil.daocli.findAll();
+		creer = false;
+		maj = false;
+		List<Client> client = controlAccueil.daoClient.findAll();
 		tblClient.getItems().clear();
-		tblClient.getItems().addAll(client); 
-		
+		tblClient.getItems().addAll(client);
+
 		form.setDisable(true);
-		btn_valider.setDisable(true);		
+		btn_valider.setDisable(true);
 	}
-	
+
 	@FXML
-	public void create() throws Exception{
+	public void create() throws Exception {
 		form.setDisable(false);
 		btn_valider.setDisable(false);
-		
+
 		txt_nom.setText("");
 		txt_prenom.setText("");
 		txt_no_rue.setText("");
@@ -199,35 +200,34 @@ lbl_recap.setText(toString());
 		txt_codePostal.setText("");
 		txt_ville.setText("");
 		txt_pays.setText("");
-		
-		b_create=true;
-		b_update=false;
+
+		creer = true;
+		maj = false;
 	}
-	
+
 	@FXML
-	public void delete() throws Exception{
+	public void delete() throws Exception {
 		try {
-			controlAccueil.daocli.delete(tblClient.getSelectionModel().getSelectedItem()); 
-			List<Client> clients = controlAccueil.daocli.findAll();
-	        tblClient.getItems().clear();
-	        tblClient.getItems().addAll(clients);
-		} 
-		catch (Exception e) {
+			controlAccueil.daoClient.delete(tblClient.getSelectionModel().getSelectedItem());
+			List<Client> clients = controlAccueil.daoClient.findAll();
+			tblClient.getItems().clear();
+			tblClient.getItems().addAll(clients);
+		} catch (Exception e) {
 			lbl_recap.setText("");
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la suppression de votre client");
 			alert.setHeaderText("Aucun Client selectionne");
 			alert.setContentText(e.toString());
 			alert.showAndWait();
-		}		
+		}
 	}
-	
+
 	@FXML
-	public void update() throws Exception{
-		try {			
-			Client client=tblClient.getSelectionModel().getSelectedItem();
-						
+	public void update() throws Exception {
+		try {
+			Client client = tblClient.getSelectionModel().getSelectedItem();
+
 			txt_nom.setText(client.getNom().trim());
 			txt_prenom.setText(client.getPrenom().trim());
 			txt_no_rue.setText(client.getNoRue().trim());
@@ -235,16 +235,15 @@ lbl_recap.setText(toString());
 			txt_codePostal.setText(client.getCodePostal().trim());
 			txt_ville.setText(client.getVille().trim());
 			txt_pays.setText(client.getPays().trim());
-			
+
 			form.setDisable(false);
 			btn_valider.setDisable(false);
-			
-			b_create=false;
-			b_update=true;
-		}
-		catch (Exception e) {
+
+			creer = false;
+			maj = true;
+		} catch (Exception e) {
 			lbl_recap.setText("");
-			Alert alert=new Alert(Alert.AlertType.ERROR);
+			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.initOwner(vue);
 			alert.setTitle("Un probleme est survenue lors de la modification de votre Client");
 			alert.setHeaderText("Aucun Client selectionne");
@@ -252,26 +251,24 @@ lbl_recap.setText(toString());
 			alert.showAndWait();
 		}
 	}
-	
-	
+
 	@FXML
-	public void retour() throws IOException{
-		controlAccueil.daocli=null;
-		controlAccueil.daoabo=null;
-		controlAccueil.daorev=null;
-		
-		Stage stage =(Stage) btn_retour.getScene().getWindow();
+	public void retour() throws IOException {
+		controlAccueil.daoClient = null;
+		controlAccueil.daoAbo = null;
+		controlAccueil.daoRevue = null;
+
+		Stage stage = (Stage) btn_retour.getScene().getWindow();
 		stage.close();
 		Stage stage1 = new Stage();
-		
+
 		URL fxmlURL = getClass().getResource("vue/fenetre.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 		Node root = fxmlLoader.load();
 		Scene scene = new Scene((VBox) root, 498.0, 112.0);
 
-		
 		stage1.setScene(scene);
 		stage1.setTitle("Accueil");
 		stage1.show();
-	}	
+	}
 }

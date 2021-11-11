@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.Node;
@@ -22,8 +21,8 @@ import javafx.scene.control.*;
 
 public class controlPeriodicite implements Initializable{
 	
-	private boolean b_create;
-	private boolean b_update;
+	private boolean creer;
+	private boolean maj;
 
 	@FXML
 	private TextField txt_libelle;
@@ -57,7 +56,7 @@ public class controlPeriodicite implements Initializable{
 		
 		tblPeriodicite.getColumns().setAll(colIdPeriodicite, colLibelle);
 		
-		List<Periodicite> periodes = controlAccueil.daoper.findAll();	
+		List<Periodicite> periodes = controlAccueil.daoPerio.findAll();	
 		
 		tblPeriodicite.getItems().addAll(periodes);
 		return tblPeriodicite;
@@ -65,8 +64,8 @@ public class controlPeriodicite implements Initializable{
 	
 	@Override
 	public String toString() {
-		if(b_create) return "Ajout de : " + txt_libelle.getText().trim();
-		else if(b_update) return "Modifiction de : " + txt_libelle.getText().trim();
+		if(creer) return "Ajout de : " + txt_libelle.getText().trim();
+		else if(maj) return "Modifiction de : " + txt_libelle.getText().trim();
 		else return "";
 	}
 
@@ -95,12 +94,12 @@ public class controlPeriodicite implements Initializable{
 			alert.showAndWait();
 		}
 		
-		else if(b_create) {
+		else if(creer) {
 			try {
 				String libelle = txt_libelle.getText().trim();
 				lbl_recap.setText(toString());
 
-				controlAccueil.daoper.create(new Periodicite(libelle));
+				controlAccueil.daoPerio.create(new Periodicite(libelle));
 			} catch (Exception e) {
 				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -112,12 +111,12 @@ public class controlPeriodicite implements Initializable{
 			}			
 		}
 		
-		else if(b_update) {
+		else if(maj) {
 			try {
 				String libelle = txt_libelle.getText().trim();
 				lbl_recap.setText(toString());
 
-				controlAccueil.daoper.update(new Periodicite(tblPeriodicite.getSelectionModel().getSelectedItem().getId_perio(), libelle));
+				controlAccueil.daoPerio.update(new Periodicite(tblPeriodicite.getSelectionModel().getSelectedItem().getId_perio(), libelle));
 			} catch (Exception e) {
 				lbl_recap.setText("");
 				Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -128,10 +127,10 @@ public class controlPeriodicite implements Initializable{
 				alert.showAndWait();
 			}
 		}
-		b_create=false;
-		b_update=false;
+		creer=false;
+		maj=false;
 		
-		List<Periodicite> period = controlAccueil.daoper.findAll();
+		List<Periodicite> period = controlAccueil.daoPerio.findAll();
 		tblPeriodicite.getItems().clear();
 		tblPeriodicite.getItems().addAll(period); 
 		
@@ -146,15 +145,15 @@ public class controlPeriodicite implements Initializable{
 		
 		txt_libelle.setText("");
 		
-		b_create=true;
-		b_update=false;
+		creer=true;
+		maj=false;
 	}
 	
 	@FXML
 	public void delete()throws Exception{
 		try {
-			controlAccueil.daoper.delete(tblPeriodicite.getSelectionModel().getSelectedItem());  
-	        List<Periodicite> period = controlAccueil.daoper.findAll();
+			controlAccueil.daoPerio.delete(tblPeriodicite.getSelectionModel().getSelectedItem());  
+	        List<Periodicite> period = controlAccueil.daoPerio.findAll();
 	        tblPeriodicite.getItems().clear();
 	        tblPeriodicite.getItems().addAll(period);			
 		}
@@ -180,8 +179,8 @@ public class controlPeriodicite implements Initializable{
 			form.setDisable(false);
 			btn_valider.setDisable(false);
 			
-			b_create=false;
-			b_update=true;
+			creer=false;
+			maj=true;
 			
 		}
 		catch (Exception e) {
@@ -198,7 +197,7 @@ public class controlPeriodicite implements Initializable{
 	
 	@FXML
 	public void retour() throws IOException{
-		controlAccueil.daoper=null;
+		controlAccueil.daoPerio=null;
 		
 		Stage stage =(Stage) btn_retour.getScene().getWindow();
 		stage.close();

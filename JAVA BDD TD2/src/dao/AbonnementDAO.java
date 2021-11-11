@@ -18,11 +18,6 @@ public interface AbonnementDAO extends DAO<Abonnement>{
 	@Override
 	boolean update(Abonnement objet) throws Exception;
 	
-	@Override
-	Abonnement getById(int id)throws Exception;
-	
-	
-	
 	
 	@Override
 	ArrayList<Abonnement> findAll() throws Exception;

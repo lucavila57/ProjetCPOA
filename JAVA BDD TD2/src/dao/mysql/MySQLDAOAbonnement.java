@@ -118,9 +118,8 @@ public class MySQLDAOAbonnement implements AbonnementDAO {
 	}
 
 	@Override
-	public Abonnement getById(int id) throws Exception {
+	public Abonnement getById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

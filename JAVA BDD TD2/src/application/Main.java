@@ -27,7 +27,7 @@ public class Main extends Application  {
             Node root = fxmlLoader.load();
             Scene scene = new Scene((VBox) root,640,400);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Ma première fenêtre JavaFX");
+            primaryStage.setTitle("RevuesOnLine");
             primaryStage.show();
         } catch(Exception e) {
             e.printStackTrace();

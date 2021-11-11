@@ -67,7 +67,7 @@ public class controlClient implements Initializable {
 
 		TableColumn<Client, String> colIdClient = new TableColumn<>("id_Client");
 		TableColumn<Client, String> colNom = new TableColumn<>("Nom");
-		TableColumn<Client, String> colPrenom = new TableColumn<>("Prénom");
+		TableColumn<Client, String> colPrenom = new TableColumn<>("Prenom");
 		TableColumn<Client, String> colNoRue = new TableColumn<>("No de rue");
 		TableColumn<Client, String> colVoie = new TableColumn<>("Voie");
 		TableColumn<Client, String> colCdePostal = new TableColumn<>("Code Postal");

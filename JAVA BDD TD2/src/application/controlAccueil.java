@@ -171,7 +171,7 @@ public class controlAccueil implements Initializable {
 			stage.close();
 			Stage stage1 = new Stage();
 
-			URL fxmlURL = getClass().getResource("vue/Main3.fxml");
+			URL fxmlURL = getClass().getResource("vue/vueRevue.fxml");
 			FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 			Node root = fxmlLoader.load();
 			Scene scene = new Scene((VBox) root, 900.0, 623.0);

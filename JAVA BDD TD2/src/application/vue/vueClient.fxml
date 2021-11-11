@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="636.0" prefWidth="758.0" styleClass="background"  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlClient">
+<VBox alignment="CENTER" prefHeight="636.0" prefWidth="758.0" styleClass="background"  xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlClient">
    <children>
       <GridPane fx:id="form" alignment="CENTER" disable="true" prefHeight="363.0" prefWidth="705.0" styleClass="background">
         <columnConstraints>
@@ -61,7 +61,7 @@
             <TextField fx:id="txt_prenom" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txt_no_rue" maxWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txt_voie" maxWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txt_cde" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txt_codePostal" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="txt_ville" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="txt_pays" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
@@ -109,9 +109,9 @@
          <children>
             <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" />
             <Button fx:id="btn_creer" mnemonicParsing="false" onAction="#create" prefWidth="90.0" text="Creer" />
-            <Button fx:id="modifier" mnemonicParsing="false" onAction="#update" prefWidth="90.0" text="Modifier" />
-            <Button fx:id="supprimer" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="90.0" text="Supprimer" />
-            <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" prefWidth="90.0" text="Retour" />
+            <Button fx:id="btn_modifier" mnemonicParsing="false" onAction="#update" prefWidth="90.0" text="Modifier" />
+            <Button fx:id="btn_supprimer" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="90.0" text="Supprimer" />
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retour" prefWidth="90.0" text="Retour" />
          </children>
       </HBox>
    </children>

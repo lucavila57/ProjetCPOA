@@ -1,14 +1,12 @@
 package application;
 
-import java.awt.Label;
-
-import java.awt.TextField;
-
 import java.io.IOException;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import modele.metier.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,15 +14,16 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import modele.metier.Client;
-
 
 public class controlClient implements Initializable{
 
@@ -77,12 +76,12 @@ public class controlClient implements Initializable{
 		TableColumn<Client, String> colVille = new TableColumn<>("Code Ville");
 		TableColumn<Client, String> colPays = new TableColumn<>("Code Pays");
 
-		colIdClient.setCellValueFactory(new PropertyValueFactory<Client, String>("id_client"));
+		colIdClient.setCellValueFactory(new PropertyValueFactory<Client, String>("idCl"));
 		colNom.setCellValueFactory(new PropertyValueFactory<Client, String>("nom"));
 		colPrenom.setCellValueFactory(new PropertyValueFactory<Client, String>("prenom"));
-		colNoRue.setCellValueFactory(new PropertyValueFactory<Client, String>("no_rue"));
+		colNoRue.setCellValueFactory(new PropertyValueFactory<Client, String>("noRue"));
 		colVoie.setCellValueFactory(new PropertyValueFactory<Client, String>("voie"));
-		colCdePostal.setCellValueFactory(new PropertyValueFactory<Client, String>("code_postal"));
+		colCdePostal.setCellValueFactory(new PropertyValueFactory<Client, String>("codePostal"));
 		colVille.setCellValueFactory(new PropertyValueFactory<Client, String>("ville"));
 		colPays.setCellValueFactory(new PropertyValueFactory<Client, String>("pays"));
 
@@ -265,7 +264,7 @@ public class controlClient implements Initializable{
 		stage.close();
 		Stage stage1 = new Stage();
 		
-		URL fxmlURL = getClass().getResource("fenetres/fenetre.fxml");
+		URL fxmlURL = getClass().getResource("vue/fenetre.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 		Node root = fxmlLoader.load();
 		Scene scene = new Scene((VBox) root, 498.0, 112.0);

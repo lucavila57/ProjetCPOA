@@ -51,7 +51,7 @@ public class controlPeriodicite implements Initializable{
 		TableColumn<Periodicite, String> colIdPeriodicite = new TableColumn<>("id_periodicite");
 		TableColumn<Periodicite, String> colLibelle = new TableColumn<>("libelle");
 		
-		colIdPeriodicite.setCellValueFactory(new PropertyValueFactory<Periodicite, String>("id_periodicite"));
+		colIdPeriodicite.setCellValueFactory(new PropertyValueFactory<Periodicite, String>("id_perio"));
 		colLibelle.setCellValueFactory(new PropertyValueFactory<Periodicite, String>("libelle"));
 		
 		tblPeriodicite.getColumns().setAll(colIdPeriodicite, colLibelle);
@@ -203,11 +203,11 @@ public class controlPeriodicite implements Initializable{
 		stage.close();
 		Stage stage1 = new Stage();
 		
-		URL fxmlURL = getClass().getResource("fenetres/fenetre.fxml");
+		URL fxmlURL = getClass().getResource("vue/fenetre.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
 		Node root = fxmlLoader.load();
 		Scene scene = new Scene((VBox) root, 498.0, 112.0);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
 		
 		stage1.setScene(scene);
 		stage1.setTitle("Accueil");
